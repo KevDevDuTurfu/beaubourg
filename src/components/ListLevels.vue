@@ -14,7 +14,7 @@ export default {
     <h1>{{ title }}</h1>
     <h2>{{subtitle}}</h2>
     <div class="block_lvl">
-      <div class="link_lvl"> <router-link to="/">Niveau 1</router-link></div>
+      <div class="link_lvl"> <router-link to="/niveau1">Niveau 1</router-link></div>
       <div class="link_lvl"> <router-link to="/">Niveau 2</router-link></div>
       <div class="link_lvl"> <router-link to="/">Niveau 3</router-link></div>
       <div class="link_lvl"> <router-link to="/">Niveau 4</router-link></div>
