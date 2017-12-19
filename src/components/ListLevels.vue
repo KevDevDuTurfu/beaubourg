@@ -10,28 +10,30 @@ export default {
       image3: "../assets/images/miniaturelvl3.png",
       image4: "../assets/images/miniaturelvl4.png",
       image5: "../assets/images/miniaturelvl5.png",
-      counter: 0,
-      name: 'Vue.js',
-      styleObject: {
-      color: 'red',
-      fontSize: '13px'
-    },
+      counter: 1,
     }
   },
   methods: {
-    warn: function (message, event) {
-    // maintenant nous avons accès à l'évènement natif
-    if (event) event.preventDefault()
-    alert(message)
+    compteurplus: function (counter, event) {
+        counter = this.counter
+        if (counter != 5) {
+          this.counter = counter++
+        }
+        else {
+          this.counter = 1
+        }
+        this.counter = counter
     },
-    greet: function (event) {
-      // `this` fait référence à l'instance de Vue à l'intérieur de `methods`
-      alert('Bonjour ' + this.name + ' !')
-      // `event` est l'évènement natif du DOM
-      if (event) {
-        alert(event.target.tagName)
-      }
-    }
+    compteurmoins: function (counter, event) {
+        counter = this.counter
+        if (counter != 1) {
+          this.counter = counter--
+        }
+        else {
+          this.counter = 5
+        }
+        this.counter = counter
+    },
 
   }
 }
@@ -40,22 +42,6 @@ export default {
 <template>
   <div class="menu">
     <h1>{{ title }}</h1>
-    <h2><div v-bind:style="styleObject">{{subtitle}}</div></h2>
-    <div id="example-1">
-      <button v-on:click="counter += 1">Add 1</button>
-      <p>Le bouton ci-dessus a été cliqué {{ counter }} fois.</p>
-    </div>
-    <div id="example-2">
-      <!-- `greet` est le nom de la méthode définie ci-dessous -->
-      <button v-on:click="greet">Greet</button>
-    </div>
-    <button v-on:click="warn('Le formulaire ne peut être soumis pour le moment.', $event)">
-      Soumettre
-    </button>
-    <div v-on:click>
-      <div v-bind:style="styleObject">dedededede
-      </div>
-    </div>
 
       <div class="lvlslider">
 
@@ -64,7 +50,6 @@ export default {
             <div class="bordermini">
               <img id="1" class="imgmini" src="../assets/images/miniaturelvl4.png"/>
             </div>
-            <span class="caption"><h2>Niveau 4</h2></span>
           </router-link>
         </div>
 
@@ -73,12 +58,12 @@ export default {
             <div class="bordermini">
               <img id="2" class="imgmini" src="../assets/images/miniaturelvl5.png"/>
             </div>
-            <span class="caption"><h2>Niveau 5</h2></span>
+            <span class="caption"><h2>Niveau {{ counter - 1}}</h2></span>
           </router-link>
         </div>
 
         <div class="itemmini">
-          <span class="arrow">&#9664;</span>
+          <span class="arrow" v-on:click="compteurmoins">&#9664;</span>
         </div>
 
         <div class="itemcentre">
@@ -86,12 +71,12 @@ export default {
             <div class="bordercentre">
               <img id="3" class="imgcentre" src="../assets/images/miniaturelvl1.png"/>
             </div>
-            <span class="caption"><h2>Niveau 1</h2></span>
+            <span class="caption"><h2>Niveau {{ counter }}</h2></span>
           </router-link>
         </div>
 
         <div class="itemmini">
-          <span class="arrow">&#9654;</span>
+          <span class="arrow" v-on:click="compteurplus()">&#9654;</span>
         </div>
 
         <div class="itemmini">
@@ -99,7 +84,7 @@ export default {
             <div class="bordermini">
               <img id="4" class="imgmini" src="../assets/images/miniaturelvl2.png"/>
             </div>
-            <span class="caption"><h2>Niveau 2</h2></span>
+            <span class="caption"><h2>Niveau {{ counter + 1}}</h2></span>
           </router-link>
         </div>
 
@@ -108,7 +93,6 @@ export default {
             <div class="bordermini">
               <img id="5" class="imgmini" src="../assets/images/miniaturelvl3.png"/>
             </div>
-            <span class="caption"><h2>Niveau 3</h2></span>
           </router-link>
         </div>
       </div>
