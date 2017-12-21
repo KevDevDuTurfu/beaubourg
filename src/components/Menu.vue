@@ -2,12 +2,12 @@
 <template>
   <div class="menu">
     <h1><img id="title_logo" src="../assets/images/logo_titre.png"/></h1>
-  
-  <div class="border">
-   
+
+    <div class="border">
+
     </div>
-   <router-link to="/niveau"><span id="play">&#9655;</span></router-link>  
-  
+    <router-link to="/niveau"><span id="play">&#9655;</span></router-link>
+
   </div>
 </template>
 <script>
@@ -32,11 +32,11 @@ h1 #title_logo{
 @media screen and (max-width:400px) {
   h1 #title_logo{
     min-width:300px;
-    left:10%!important; 
+    left:10%!important;
     }
   .border
   {
-    left:24%!important; 
+    left:24%!important;
     width: 9em;
     height:9em;
   }
@@ -95,7 +95,7 @@ a{
   -moz-animation: neonbox 15s linear  infinite ;
   -ms-animation: neonbox 15s linear  infinite ;
   animation: neonbox 15s linear  infinite ;
-  
+
 }
 @keyframes Rotate {
   from {
