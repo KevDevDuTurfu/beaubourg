@@ -1,5 +1,9 @@
 <template>
   <div class="lvl1">
+    <div class="bubble"  @click="showModal = true">?</div>
+    
+        <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
+        <victory class="showVictory"> </victory>
      <div class="tips">
      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
 color (couleur) et border (bordure) de la même manière...</p>
@@ -10,76 +14,92 @@ color (couleur) et border (bordure) de la même manière...</p>
     </div>
     <div class="command">
       <div id="position1">
-        <div class="btn " ref="btn1"  @click="show = !show" v-draggable="{color1:couleur,color2:couleur2 }">Background</div>
+        <div class="btn btn1 " ref="btn1"  v-draggable="{color1:couleur,color2:couleur2 }">Background</div>
       </div>
-      <transition name="slide-fade">
       <div class="value"  v-if="show">
         <div class="color">
           <h2 class="titleCss">Gradient</h2>
-          <div class="col colorGradient1"><div v-bind:style="{ 'background-color':gradientTop }"  class="codeColor" @click="getColorGradientTop()"></div><p class="option">top</p></div>
-          <div class="col colorGradient2"><div v-bind:style="{ 'background-color':gradientBottom }" class="codeColor" @click="getColorGradientBottom()"></div><p class="option">bottom</p></div>
+          <div class="col colorGradient1"><div v-bind:style="{ 'background-color':gradientTop }"  class="codeColor" @click="getColorGradientTop(gradientTop)"></div><p class="option">top</p></div>
+          <div class="col colorGradient2"><div v-bind:style="{ 'background-color':gradientBottom }" class="codeColor" @click="getColorGradientBottom(gradientBottom)"></div><p class="option">bottom</p></div>
         </div>
       </div>
-      </transition>
-      <div class="btn btn2" v-on:click="show2 = !show2">Border</div>
-       <transition name="slide-fade">
+      <div class="btn btn2" ref ="btn2"  v-draggable="{color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
         <div class="value" v-if="show2">
           <div class="style"><h2 class="titleCss">Style</h2>
-            <div class="sty style1"></div>
-            <div class="sty style2"></div>
+            <div class="sty style1" @click="getBorderStyle('solid')"></div>
+            <div class="sty style2" @click="getBorderStyle('dashed')"></div>
           </div>
           <div class="color"> 
             <h2 class="titleCss">Color</h2>
-            <div class="col color1"><div class="codeColor"></div></div>
-            <div class="col color2"><div class="codeColor"></div></div>
-            <div class="col color3"><div class="codeColor"></div></div>
+            <div class="col color1"><div class="codeColor" @click="getBorderColor('#18545e')"></div></div>
+            <div class="col color2"><div class="codeColor" @click="getBorderColor('royalblue')"></div></div>
+            <div class="col color3"><div class="codeColor" @click="getBorderColor('yellowgreen')"></div></div>
           </div>
           <div class="width">
             <h2 class="titleCss">Width</h2></div>
             <div class="rangeValue">
-              <input id="valueBorder" type="range" min="1" max="10" step="1">
+              <input id="valueBorder" type="range" min="10" max="60" step="5" @click="getWidthBorder()">
+              
             </div>
         </div>
-       </transition>
     </div>
   </div>
   
 </template>
 <script>
-
+import Modal from './Modal.vue'
 export default {
   name: 'Level1',
   data () {
     return {
+      oeuvre: 'src/assets/images/oeuvre1.png',
+      artist:'Louis CANE',
+      titre: 'Sol-Mur',
+      showModal: false,
       show: true,
       show2: true,
       gradientTop:'#288e99',
       gradientBottom:'#18545e',
       couleur:'transparent',
-      couleur2:'transparent'
-      
+      couleur2:'transparent',
+      couleur3:'red',
+      borderColor:'white',
+      borderWidth:1,
+      borderStyle:'solid'
     }
   }, 
+  components: {
+          'modal':  Modal
+        },
   methods:{
-    getColorGradientTop: function(){
-      //console.log(event.target) 
-    this.couleur=this.gradientTop;
-    this.$refs.btn1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
-        return this.couleur;
-      
-        
+    getColorGradientTop: function(value){
+    this.couleur=value;
+    this.gradient();
     },
-    getColorGradientBottom: function(){
-      this.couleur2=this.gradientBottom;
-      this.$refs.btn1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
-        return this.couleur2;
+    getColorGradientBottom: function(value){
+    this.couleur2=value;
+    this.gradient();
+    },
+    getBorderColor: function(value){
+        this.borderColor=value;
+        this.border();
+    },
+    getBorderStyle: function (value){
+      this.borderStyle=value;
+      this.border();
+    },
+    getWidthBorder: function (){
+      this.borderWidth=document.getElementById('valueBorder').value;
+      console.log(document.getElementById('valueBorder').value  )
+      this.border();
+    },
+    border:function(){
+      console.log(this.borderWidth+'px '+this.borderStyle+' '+this.borderColor);
+       this.$refs.btn2.style.border=this.borderWidth+'px '+this.borderStyle+' '+this.borderColor;
     },
     gradient:function(){
-      //console.log(  this.getColorGradientTop());
-      
        this.$refs.btn1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
-      //this.$forceUpdate()
-        
+       
     }
   },
 
@@ -102,9 +122,15 @@ export default {
       el.style='relative';
       document.removeEventListener('mousemove', mousemove);
       document.removeEventListener('mouseup', mouseup);
-      console.log(binding.value.color1);
      // this.$refs.artwork1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
-      document.getElementById("artwork1").style.background='linear-gradient('+binding.value.color1+','+binding.value.color2+')'
+      console.log(el.classList.contains('btn1'));
+      if (el.classList.contains('btn1')){
+          document.getElementById("artwork1").style.background='linear-gradient('+binding.value.color1+','+binding.value.color2+')';
+      }
+      else {
+         document.getElementById("artwork1").style.border=binding.value.width+'px '+binding.value.style+' '+binding.value.color;
+      }
+      
 
     }
 
@@ -125,32 +151,41 @@ export default {
   
 },
   created:function(){
-  console.log('coucou'+this.$refs.btn1);
   },
   mounted: function(){
-    console.log(this.$refs.btn1);
     this.gradient();
+    this.border();
   },
   beforeUpdate: function(){
     this.gradient();
+    this.border();
   },
   updated: function(){
     this.gradient();
+    this.border();
   }
 
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s ease;
-}
-.slide-fade-enter, .slide-fade-leave-to{
-  transform: translateY(-10px);
-  opacity: 0;
+.bubble{
+  cursor: pointer;
+  position : absolute;
+  bottom: 0;
+  left: 0;
+  padding:10px;
+  font-size: 25px;
+  color:white;
+  background: #1761b0;
+  background-image: -webkit-linear-gradient(top, #1761b0, #9421c2);
+  background-image: -moz-linear-gradient(top, #1761b0, #9421c2);
+  background-image: -ms-linear-gradient(top, #1761b0, #9421c2);
+  background-image: -o-linear-gradient(top, #1761b0, #9421c2);
+  background-image: linear-gradient(to bottom, #1761b0, #9421c2);
+  font-family: 'Play', sans-serif;
+  border-radius: 50%;
+  margin:1%;
 }
 .lvl1{
   background-image: url("../assets/images/img_stack.png"), linear-gradient(#eb01a5, #d13531);
@@ -198,7 +233,7 @@ export default {
   width:50%;
   padding:2%;
   margin-left:6%;
-  background: #66858e;
+  background: #544674;
   font-family: 'Play', sans-serif;
   border-radius:15px;
   color:white;
