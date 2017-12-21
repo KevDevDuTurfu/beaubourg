@@ -1,5 +1,5 @@
 <script>
-import Menu from '@/components/Menu'
+
 export default {
   name: 'app'
 }
@@ -8,7 +8,6 @@ export default {
 
 <template>
   <div id="app">
-      <Menu/>
       <router-view class="view"></router-view>
   </div>
 </template>
@@ -19,7 +18,9 @@ export default {
 *{
   margin:0;
   padding:0;
+}
 
+body{
   background-image: url("assets/images/background-menu.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
