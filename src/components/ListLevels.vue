@@ -41,27 +41,20 @@ export default {
         counter = 5
         this.counter = counter
     },
-
   }
 }
-
 </script>
 <template>
   <div class="menu">
     <h1>{{ title }}</h1>
-
       <div class="lvlslider">
-
-        <div class="itemmini" v-if="counter === 1">
-          <router-link to="/">
+        <div class="itemmini" v-if="counter === 1 " v-on:click="compteurreinit5">
             <div class="bordermini">
               <img class="imgmini" v-bind:src="image5">
             </div>
             <span class="caption"><h2>Niveau 5</h2></span>
-          </router-link>
         </div>
-        <div class="itemmini" v-else>
-          <router-link to="/">
+        <div class="itemmini" v-else v-on:click="compteurmoins">
             <div class="bordercentre" v-if="counter === 2">
               <img class="imgcentre" v-bind:src="image1">
             </div>
@@ -75,19 +68,15 @@ export default {
               <img class="imgcentre" v-bind:src="image4">
             </div>
             <span class="caption"><h2>Niveau {{ counter -1}}</h2></span>
-          </router-link>
         </div>
-
           <div class="itemmini" v-if="counter === 1">
             <span class="arrow" v-on:click="compteurreinit5">&#9664;</span>
           </div>
           <div class="itemmini" v-else>
             <span class="arrow" v-on:click="compteurmoins">&#9664;</span>
           </div>
-
-
         <div class="itemcentre">
-          <router-link to="/">
+          <router-link to="/niveau1">
             <div class="bordercentre" v-if="counter === 1">
               <img class="imgcentre" v-bind:src="image1">
             </div>
@@ -106,24 +95,19 @@ export default {
             <span class="caption"><h2>Niveau {{ counter }}</h2></span>
           </router-link>
         </div>
-
         <div class="itemmini" v-if="counter === 5">
           <span class="arrow" v-on:click="compteurreinit1">&#9654;</span>
         </div>
         <div class="itemmini" v-else>
           <span class="arrow" v-on:click="compteurplus">&#9654;</span>
         </div>
-
-        <div class="itemmini" v-if="counter === 5">
-          <router-link to="/">
+        <div class="itemmini" v-if="counter === 5" v-on:click="compteurreinit1">
             <div class="bordermini">
               <img class="imgmini" v-bind:src="image1">
             </div>
             <span class="caption"><h2>Niveau 1</h2></span>
-          </router-link>
         </div>
-        <div class="itemmini" v-else>
-          <router-link to="/">
+        <div class="itemmini" v-else v-on:click="compteurplus">
             <div class="bordercentre" v-if="counter === 1">
               <img class="imgcentre" v-bind:src="image2">
             </div>
@@ -137,17 +121,12 @@ export default {
               <img class="imgcentre" v-bind:src="image5">
             </div>
             <span class="caption"><h2>Niveau {{ counter + 1}}</h2></span>
-          </router-link>
         </div>
-
       </div>
     </div>
-
-
 </template>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 h1, h2 {
   width:100%;
   text-align: center!important;
@@ -155,7 +134,6 @@ h1, h2 {
   font-family: 'Play', sans-serif;
   color: white;
 }
-
 h3 {
   width:100%;
   font-weight: normal;
@@ -163,27 +141,25 @@ h3 {
   color: white;
   display: block;
 }
-
 ul {
   list-style-type: none;
   padding: 0;
 }
-
 li {
   display: inline-block;
   margin: 0 10px;
 }
-
 a {
   color: white;
 }
-
 .lvlslider
 {
   display: flex;
-  margin: 15% 2% 0 2%;
+  margin-right: auto;
+  margin-left:auto;
+  width: 66%;
+  margin-top:15%;
 }
-
 .arrow
 {
   color: white;
@@ -191,14 +167,12 @@ a {
   vertical-align: middle;
   padding-top: 2.5em;
 }
-
 div.itemcentre {
     vertical-align: middle;
     display: inline-block;
     text-align: center;
     width: 400px;
 }
-
 div.itemmini {
     vertical-align: middle;
     display: inline-block;
@@ -207,24 +181,20 @@ div.itemmini {
     position: static;
     padding-top: 7em;
 }
-
 .imgcentre {
     width: 100%;
     height: 100%;
     background: transparent;
 }
-
 .imgmini {
     width: 100%;
     height: 100%;
     background: transparent;
 }
-
 .caption {
     display: block;
     margin-top: 10%;
 }
-
 .bordercentre {
   border-radius: 50%;
   border: 12px dashed white;
@@ -239,7 +209,6 @@ div.itemmini {
   -ms-animation: neonbox 1500000000000000000000000000000000000000000000000000000s linear  infinite ;
   animation: neonbox 150000000000000000000000000000000000000000000000000000s linear  infinite ;
 }
-
 .bordermini {
   border-radius: 100%;
   border: 12px dashed white;
@@ -254,7 +223,6 @@ div.itemmini {
   -ms-animation: neonbox 1000000000000000000000000s linear  infinite ;
   animation: neonbox 100000000000000000000000000s linear  infinite ;
 }
-
 @keyframes Rotate {
   from {
     transform: rotate(0deg);
@@ -341,6 +309,4 @@ div.itemmini {
     box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
   }
 }
-
-
 </style>

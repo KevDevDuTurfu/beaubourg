@@ -1,29 +1,39 @@
+<!--ici html du code-->
 <template>
-  <div class="lvl1">
-    <div class="bubble"  @click="showModal = true">?</div>
-    
+  <div class="lvl1"><!-- contenu du niveau 1-->
+    <div class="bubble"  @click="showModal = true">?</div><!--contenu de la bulle info-->
+    <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
-        <victory class="showVictory"> </victory>
+    <!--fin du modal -->
+    <!--condition de victoire pas encore présente-->
+        <victory  v-if="showVictory"> </victory>
+        <!--debut de l'aide en bas de page-->
      <div class="tips">
      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
 color (couleur) et border (bordure) de la même manière...</p>
-     </div>
+     </div><!--fin de l'aide -->
+     <!--contenu de l'oeuvre à composer-->
     <div class="artwork" ref="artwork">
+      <!-- oeuvre en lui même -->
       <div class="artwork1" id="artwork1" ref="artwork1">
       </div>
     </div>
+    <!--debut du contenu des commandes (barre à droite) -->
     <div class="command">
-      <div id="position1">
+      <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
+      <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
         <div class="btn btn1 " ref="btn1"  v-draggable="{color1:couleur,color2:couleur2 }">Background</div>
-      </div>
-      <div class="value"  v-if="show">
-        <div class="color">
-          <h2 class="titleCss">Gradient</h2>
+      </div><!--les options -->
+      <div class="value"  v-if="show"><!--contenu de valeurs-->
+        <div class="color"><!--si les valeurs sont des couleurs=>utilisez class color-->
+          <h2 class="titleCss">Gradient</h2><!--titre de la valeur-->
+          <!--couleur 1=> valur bind par gradientTop, quand on clique dessus on utilise une fonction pour la récupérer-->
           <div class="col colorGradient1"><div v-bind:style="{ 'background-color':gradientTop }"  class="codeColor" @click="getColorGradientTop(gradientTop)"></div><p class="option">top</p></div>
+          <!--pareil pour la couleur 2 -->
           <div class="col colorGradient2"><div v-bind:style="{ 'background-color':gradientBottom }" class="codeColor" @click="getColorGradientBottom(gradientBottom)"></div><p class="option">bottom</p></div>
         </div>
       </div>
-      <div class="btn btn2" ref ="btn2"  v-draggable="{color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
+      <div class="btn btn2" ref ="btn2"  v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
         <div class="value" v-if="show2">
           <div class="style"><h2 class="titleCss">Style</h2>
             <div class="sty style1" @click="getBorderStyle('solid')"></div>
@@ -38,7 +48,7 @@ color (couleur) et border (bordure) de la même manière...</p>
           <div class="width">
             <h2 class="titleCss">Width</h2></div>
             <div class="rangeValue">
-              <input id="valueBorder" type="range" min="10" max="60" step="5" @click="getWidthBorder()">
+              <input id="valueBorder" type="range" min="1" max="7" step="1" @touchstart="getWidthBorder()">
               
             </div>
         </div>
@@ -47,12 +57,14 @@ color (couleur) et border (bordure) de la même manière...</p>
   
 </template>
 <script>
-import Modal from './Modal.vue'
+import Modal from './Modal.vue';
+import Victory from './Victory.vue'
 export default {
   name: 'Level1',
   data () {
     return {
       oeuvre: 'src/assets/images/oeuvre1.png',
+      showVictory:false,
       artist:'Louis CANE',
       titre: 'Sol-Mur',
       showModal: false,
@@ -64,7 +76,7 @@ export default {
       couleur2:'transparent',
       couleur3:'red',
       borderColor:'white',
-      borderWidth:1,
+      borderWidth:10,
       borderStyle:'solid'
     }
   }, 
@@ -72,6 +84,10 @@ export default {
           'modal':  Modal
         },
   methods:{
+    victory: function(){
+      this.showVictory=true;
+
+    },
     getColorGradientTop: function(value){
     this.couleur=value;
     this.gradient();
@@ -120,21 +136,22 @@ export default {
       el.style.left=initialBoxX;
       el.style.top=initialBoxY;
       el.style='relative';
-      document.removeEventListener('mousemove', mousemove);
-      document.removeEventListener('mouseup', mouseup);
+      let borderArt=parseInt(binding.value.width)*10;
+      document.removeEventListener('touchmove', mousemove);
+      document.removeEventListener('touchend', mouseup);
      // this.$refs.artwork1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
       console.log(el.classList.contains('btn1'));
       if (el.classList.contains('btn1')){
           document.getElementById("artwork1").style.background='linear-gradient('+binding.value.color1+','+binding.value.color2+')';
       }
       else {
-         document.getElementById("artwork1").style.border=binding.value.width+'px '+binding.value.style+' '+binding.value.color;
+         document.getElementById("artwork1").style.border=borderArt+'px '+binding.value.style+' '+binding.value.color;
       }
-      
+      this.showVictory=true;
 
     }
 
-    el.addEventListener('mousedown', function(e) {
+    el.addEventListener('touchstart', function(e) {
       el.style.position = 'absolute';
       el.style.margin=0;
       startX = el.offsetLeft;
@@ -143,8 +160,8 @@ export default {
       initialBoxY=startY;
       initialMouseX = e.clientX;
       initialMouseY = e.clientY;
-      document.addEventListener('mousemove', mousemove);
-      document.addEventListener('mouseup', mouseup);
+      document.addEventListener('touchmove', mousemove);
+      document.addEventListener('touchend', mouseup);
       return false;
     });
   }
@@ -169,6 +186,9 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+body{
+  overflow:hidden;
+}
 .bubble{
   cursor: pointer;
   position : absolute;
@@ -188,6 +208,7 @@ export default {
   margin:1%;
 }
 .lvl1{
+  
   background-image: url("../assets/images/img_stack.png"), linear-gradient(#eb01a5, #d13531);
   background-repeat: no-repeat;
   background-attachment: fixed;

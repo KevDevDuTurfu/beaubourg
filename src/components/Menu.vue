@@ -71,10 +71,10 @@ a{
   font-size:9em;
   color:white;
   background: transparent;
-   -webkit-animation: neon1 1.5s linear  infinite alternate;
-  -moz-animation: neon1 1.5s linear  infinite alternate;
-  -ms-animation: neon1 1.5s linear  infinite alternate;
-  animation: neon1 1.5s linear  infinite alternate;
+   -webkit-animation: neon1 1.500000000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite alternate;
+  -moz-animation: neon1 1.500000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite alternate;
+  -ms-animation: neon1 1.5000000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite alternate;
+  animation: neon1 1.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite alternate;
 }
 
 .border {
@@ -91,10 +91,10 @@ a{
  -webkit-animation:Rotate 5s linear 2s infinite ;
   -moz-animation: Rotate 5s linear 2s infinite ;
   -ms-animation: Rotate 5s linear 2s infinite;*/
-  -webkit-animation: neonbox 15s linear  infinite ;
-  -moz-animation: neonbox 15s linear  infinite ;
-  -ms-animation: neonbox 15s linear  infinite ;
-  animation: neonbox 15s linear  infinite ;
+ /* -webkit-animation: neonbox 15000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite ;
+  -moz-animation: neonbox 150000000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite ;
+  -ms-animation: neonbox 1500000000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite ;
+  animation: neonbox 15000000000000s linear  infinite ;*/
 
 }
 @keyframes Rotate {
