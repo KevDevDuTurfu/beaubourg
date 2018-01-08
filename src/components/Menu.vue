@@ -71,10 +71,10 @@ a{
   font-size:9em;
   color:white;
   background: transparent;
-   -webkit-animation: neon1 1.500000000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite alternate;
-  -moz-animation: neon1 1.500000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite alternate;
-  -ms-animation: neon1 1.5000000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite alternate;
-  animation: neon1 1.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000s linear  infinite alternate;
+   -webkit-animation: neon1 1.5s linear  infinite alternate;
+  -moz-animation: neon1 1.5s linear  infinite alternate;
+  -ms-animation: neon1 1.5s linear  infinite alternate;
+  animation: neon1 1.5s linear  infinite alternate;
 }
 
 .border {

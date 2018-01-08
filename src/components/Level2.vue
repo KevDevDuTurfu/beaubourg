@@ -30,11 +30,12 @@ color (couleur) et border (bordure) de la même manière...</p>
     </div>
     <!--debut du contenu des commandes (barre à droite) -->
     <div class="command">
-        <div class='btn-command'>
-           <!-- <i class="fa fa-caret-left" aria-hidden="true" v-on:click="show1"></i><i class="fa fa-caret-right" aria-hidden="true" v-on:click=" !show1"></i>
-        --></div>
        
-            <div class="page1-cmd" >
+          <transition name="fade">
+            <div class="page1-cmd" v-if="!cmd" >
+               <div class='btn-command'>
+                <i class="fa fa-caret-right" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
+                </div>
                 <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
                 <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
                     <div class="btn btn1 " ref="btn1"  v-draggable="{color:couleur}">Background</div>
@@ -68,7 +69,12 @@ color (couleur) et border (bordure) de la même manière...</p>
                         </div>
                     </div>
                 </div>
-                <div  class="page2-cmd" style="display:none">
+          </transition>
+          <transition name="fade">
+                <div  class="page2-cmd" v-if="cmd"  >
+                  <div class='btn-command'>
+                <i class="fa fa-caret-left" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
+                </div>
                 <div id="position3"><!-- emplacement du bouton permettant de la remettre à sa place-->
             <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
                 <div class="btn btn3 " ref="btn3"  >Transform</div>
@@ -111,6 +117,7 @@ color (couleur) et border (bordure) de la même manière...</p>
                         </ul>
                 </div>
                 </div>
+          </transition>
     </div>
     
   </div>
@@ -134,7 +141,8 @@ export default {
       couleur:'transparent',
       borderColor:'white',
       borderWidth:10,
-      borderStyle:'solid'
+      borderStyle:'solid',
+      cmd:false
     }
   }, 
   components: {
@@ -315,7 +323,48 @@ label {
   height:10vh;
   background:white;
   border: 5px solid white;
+  animation: rotating 10s linear infinite alternate; 
 }
+@keyframes translate
+	{
+	from
+		{
+		transform: translateY(10px);
+
+
+		}
+	to
+		{
+		transform: translateY(200px);
+		}
+	}
+  @keyframes rotating
+	{
+	from
+		{
+		transform: translateY(10px);
+
+
+		}
+	to
+		{
+		transform: translateY(100px);
+		}
+	}
+  @keyframes scale
+	{
+	from
+		{
+		transform: scale(0.5);
+
+
+		}
+	to
+		{
+		transform: scale(1);
+		}
+	}
+
 .command{
   width:30%;
   float:right;

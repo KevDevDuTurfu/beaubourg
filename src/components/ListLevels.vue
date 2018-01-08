@@ -52,7 +52,7 @@ export default {
             <div class="bordermini">
               <img class="imgmini" v-bind:src="image5">
             </div>
-            <span class="caption"><h2>Niveau 5</h2></span>
+            <span class="caption"><h2>Niveau 7</h2></span>
         </div>
         <div class="itemmini" v-else v-on:click="compteurmoins">
             <div class="bordercentre" v-if="counter === 2">
@@ -76,24 +76,34 @@ export default {
             <span class="arrow" v-on:click="compteurmoins">&#9664;</span>
           </div>
         <div class="itemcentre">
-          <router-link to="/niveau1">
+         
             <div class="bordercentre" v-if="counter === 1">
+              <router-link to="/niveau1">
               <img class="imgcentre" v-bind:src="image1">
+               </router-link>
             </div>
             <div class="bordercentre" v-else-if="counter === 2">
+              <router-link to="/niveau2">
               <img class="imgcentre" v-bind:src="image2">
+               </router-link>
             </div>
             <div class="bordercentre" v-else-if="counter === 3">
+              <router-link to="/niveau3">
               <img class="imgcentre" v-bind:src="image3">
+               </router-link>
             </div>
             <div class="bordercentre" v-else-if="counter === 4">
+              <router-link to="/niveau4">
               <img class="imgcentre" v-bind:src="image4">
+               </router-link>
             </div>
             <div class="bordercentre" v-else-if="counter === 5">
+              <router-link to="/niveau4">
               <img class="imgcentre" v-bind:src="image5">
+               </router-link>
             </div>
             <span class="caption"><h2>Niveau {{ counter }}</h2></span>
-          </router-link>
+          
         </div>
         <div class="itemmini" v-if="counter === 5">
           <span class="arrow" v-on:click="compteurreinit1">&#9654;</span>

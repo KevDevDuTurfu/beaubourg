@@ -1,6 +1,6 @@
 <!--ici html du code-->
 <template>
-  <div class="lvl2"><!-- contenu du niveau 2-->
+  <div class="lvl4"><!-- contenu du niveau 2-->
     <div class="bubble"  @click="showModal = true">?</div><!--contenu de la bulle info-->
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
@@ -10,22 +10,30 @@
         <!--debut de l'aide en bas de page-->
      <div class="tips">
      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
-color (couleur) et border (bordure) de la même manière...</p>
+color (backImg) et border (bordure) de la même manière...</p>
      </div><!--fin de l'aide -->
      <!--contenu de l'oeuvre à composer-->
     <div class="artwork" ref="artwork">
       <!-- oeuvre en lui même -->
-      <div class="artwork4img" id="artwork4img1"    ref="artwork4img1">
-          
+      <div id="img-block">
+            <div class="artwork4img" id="artwork4img1"  ref="artwork4img1">
+            </div>
+            <div class="artwork4img" id="artwork4img2" ref="artwork4img2">
+            </div>
       </div>
-      <div class="artwork4img" id="artwork4img2" ref="artwork4img2">
-          
-      </div>
-      <div class="artwork4desc" id="artwork4desc1" ref="artwork4desc1">
-          
-      </div>
-      <div class="artwork4desc" id="artwork4desc2" ref="artwork4desc2">
-          
+      <div id="desc-block">
+        <div class="artwork4desc" id="artwork4desc1" ref="artwork4desc1">
+            <p>En 1984, le ministère des Affaires étrangères m’a accordé une bourse d’étude de trois mois au Japon.</p>
+            <p>Je suis partie le 25 octobre 1984 sans savoir que cette date marquait le début d’un compte à rebours de 92 jours qui allait aboutir à une rupture, banale, mais que j’ai vécue alors comme le moment le plus douloureux de ma vie.</p>
+            <p>J’en ai tenu ce voyage pour responsable. De retour en France, le 28 janvier 1985, j’ai choisi, par conjuration, de raconter ma souffrance plutôt que mon périple.</p>
+
+        </div>
+        <div class="artwork4desc" id="artwork4desc2" ref="artwork4desc2">
+            <p>En contrepartie, j’ai demandé à mes interlocuteurs, amis ou rencontres de fortune : « Quand avez-vous le plus souffert ? » </p>
+            <p>Cet échange cesserait quand j’aurais épuisé ma propre histoire à force de la raconter, ou bien relativisé ma peine face à celle des autres.</p>
+            <p>La méthode a été radicale : en trois mois, j’étais guérie. </p>
+            <p>L’exorcisme réussi, dans la crainte d’une rechute, j’ai délaissé mon projet. Pour l’exhumer quinze ans plus tard </p>
+        </div>
       </div>
     </div>
     <!--debut du contenu des commandes (barre à droite) -->
@@ -35,11 +43,51 @@ color (couleur) et border (bordure) de la même manière...</p>
         --></div>
        
             <div class="page1-cmd" >
-                <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
-                <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
-                    <div class="btn btn1 " ref="btn1"  v-draggable="{color:couleur}">Background</div>
+                    <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
+                    <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
+                        <div class="btn btn1 " ref="btn1"  v-draggable="{image:backImg}">Background</div>
+                    </div><!--les options -->
+                    <div class="value"      ><!--contenu de valeurs-->
+                        <div class="color"><!--si les valeurs sont des backImgs=>utilisez class color-->
+                        <!--backImg 1=>  quand on clique dessus on utilise une fonction pour récupérer backImg-->
+                        <div class="col imgBackground1"><div  class="codeImage" @click="getImgBackground('imagedroite.png')"></div></div>
+                        <!--pareil pour la backImg 2 -->
+                        <div class="col imgBackground2"><div class="codeImage" @click="getImgBackground('imagegauche.png')"></div></div>
+                        </div>
+                        <div class="col imgBackground3"><div  class="codeImage" @click="getImgBackground('imagefake1.png')"></div></div>
+                        <!--pareil pour la backImg 2 -->
+                        <div class="col imgBackground4"><div class="codeImage" @click="getImgBackground('imagefake2.png')"></div></div>
+                        </div>
+                        
+                    <div class="btn btn2" ref ="btn2"  v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
+                        <div class="value" v-if="show2">
+                        <div class="style"><h2 class="titleCss">Style</h2>
+                            <div class="sty style1" @click="getBorderStyle('solid')"></div>
+                            <div class="sty style2" @click="getBorderStyle('dashed')"></div>
+                        </div>
+                        <div class="color"> 
+                            <h2 class="titleCss">Color</h2>
+                            <div class="col color1"><div class="codeColor" @click="getBorderColor('black')"></div></div>
+                            <div class="col color2"><div class="codeColor" @click="getBorderColor('grey')"></div></div>
+                            <div class="col color3"><div class="codeColor" @click="getBorderColor('rgb(50, 156, 205)')"></div></div>
+                        </div>
+                        <div class="width">
+                            <h2 class="titleCss">Width</h2>
+                            <div class="rangeValue">
+                            <input id="valueBorder" type="range" min="1" max="7" step="1" @touchstart="getWidthBorder()">
+                            
+                            </div>
+                        </div>
+                        
+                        </div>
+                    </div>
+                
+                <div  class="page2-cmd" style="display:none;">
+                <div id="position3"><!-- emplacement du bouton permettant de la remettre à sa place-->
+            <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
+                <div class="btn btn3 " ref="btn3"  v-draggable="{color:couleur}">Background</div>
                 </div><!--les options -->
-                <div class="value"  v-if="show"><!--contenu de valeurs-->
+                <div class="value" ><!--contenu de valeurs-->
                     <div class="color"><!--si les valeurs sont des couleurs=>utilisez class color-->
                     <h2 class="titleCss">Background-Color</h2><!--titre de la valeur-->
                     <!--couleur 1=>  quand on clique dessus on utilise une fonction pour récupérer couleur-->
@@ -48,74 +96,43 @@ color (couleur) et border (bordure) de la même manière...</p>
                     <div class="col colorBackground2"><div class="codeColor" @click="getColorBackground('#59a0f2')"></div></div>
                     </div>
                 </div>
-                <div class="btn btn2" ref ="btn2"  v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
-                    <div class="value" v-if="show2">
-                    <div class="style"><h2 class="titleCss">Style</h2>
-                        <div class="sty style1" @click="getBorderStyle('solid')"></div>
-                        <div class="sty style2" @click="getBorderStyle('dashed')"></div>
-                    </div>
-                    <div class="color"> 
-                        <h2 class="titleCss">Color</h2>
-                        <div class="col color1"><div class="codeColor" @click="getBorderColor('black')"></div></div>
-                        <div class="col color2"><div class="codeColor" @click="getBorderColor('rgb(167, 7, 42)')"></div></div>
-                        <div class="col color3"><div class="codeColor" @click="getBorderColor('rgb(50, 156, 205)')"></div></div>
-                    </div>
-                    <div class="width">
-                        <h2 class="titleCss">Width</h2></div>
-                        <div class="rangeValue">
-                        <input id="valueBorder" type="range" min="1" max="7" step="1" @touchstart="getWidthBorder()">
-                        
-                        </div>
+                <div class="btn btn4" ref ="btn4">Font-size</div>
+                <div class="value"  ><!--contenu de valeurs-->
+                   <div class="rangeValue">
+                        <input id="valueBorder" type="range" min="1" max="7" step="1" @touchstart="getWidthBorder()">        
                     </div>
                 </div>
-                <div  class="page2-cmd" style="display:none">
-                <div id="position3"><!-- emplacement du bouton permettant de la remettre à sa place-->
-            <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
-                <div class="btn btn3 " ref="btn3"  >Transform</div>
-                </div><!--les options -->
+                <div class="btn btn5" ref ="btn5">Font-family</div>
                 <div class="value"  ><!--contenu de valeurs-->
-                    <ul class="list-value">
-                        <li>
-                            <input type='radio' value='translate' class='value-transform' name='translate' id='radio1'/>
-                            <label for='radio1'>Translate</label>
-                        </li>
-                        <li>
-                            <input type='radio' value='rotate' class='value-transform' name='rotate'  id='radio2'/>
-                            <label for='radio2'>Rotate</label>
-                        </li>
-                        <li>
-                            <input type='radio' value='scale' class='value-transform' name='scale'  id='radio3'/>
-                            <label for='radio3'>Scale</label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="btn btn4" ref ="btn4">Duration</div>
-                <div class="value"  ><!--contenu de valeurs-->
-                    <ul class="list-value">
+                   <ul class="list-value">
                             <li>
                                 <input type='radio' value='infinite' class='value-duration' name='infinite' id='radio4'/>
-                                <label for='radio1'>Infinite</label>
+                                <label for='radio1'>Times New Roman</label>
                             </li>
                             <li>
                                 <input type='radio' value='1' class='value-duration' name='secone'  id='radio5'/>
-                                <label for='radio2'>1 sec</label>
+                                <label for='radio2'>Arial</label>
                             </li>
                             <li>
                                 <input type='radio' value='3' class='value-duration' name='secthree'  id='radio6'/>
-                                <label for='radio3'>3 sec</label>
+                                <label for='radio3'>Lucida</label>
                             </li>
-                            <li>
-                                <input type='radio' value='10' class='value-duration' name='secten'  id='radio7'/>
-                                <label for='radio3'>10 sec</label>
-                            </li>
+                            
                         </ul>
                 </div>
-                </div>
-    </div>
-    
+                <div class="btn btn6" ref ="btn6" >Color</div>
+                        <div class="value" v-if="show2">
+                        <div class="color"> 
+                            <h2 class="titleCss">Color</h2>
+                            <div class="col color1"><div class="codeColor" @click="getBorderColor('black')"></div></div>
+                            <div class="col color2"><div class="codeColor" @click="getBorderColor('grey')"></div></div>
+                            <div class="col color3"><div class="codeColor" @click="getBorderColor('rgb(50, 156, 205)')"></div></div>
+                        </div>
+                
+                    </div>
+                    </div>
+            </div>  
   </div>
-  
-  
 </template>
 <script>
 import Modal from './Modal.vue';
@@ -131,10 +148,11 @@ export default {
       showModal: false,
       show: true,
       show2: true,
-      couleur:'transparent',
+      backImg:'transparent',
       borderColor:'white',
       borderWidth:10,
-      borderStyle:'solid'
+      borderStyle:'solid',
+       couleur:'transparent'
     }
   }, 
   components: {
@@ -145,7 +163,11 @@ export default {
       this.showVictory=true;
 
     },
-    getColorBackground: function(value){
+    getImgBackground: function(value){
+    this.backImg=value;
+    this.backgroundImage();
+    },
+     getColorBackground: function(value){
     this.couleur=value;
     this.backgroundColor();
     },
@@ -167,6 +189,10 @@ export default {
     },
     backgroundColor:function(){
        this.$refs.btn1.style.background=this.couleur;
+       
+    },
+    backgroundImage:function(){
+       this.$refs.btn1.style.backgroundImage='url(src/assets/images/'+this.backImg+')';
        
     }
   },
@@ -194,13 +220,13 @@ export default {
       console.log(el.classList.contains('btn1'));
       if (el.classList.contains('btn1')){
         for (var i=0;i<4;i++){
-            document.getElementsByClassName("artwork4")[i].style.background=binding.value.color;
+            document.getElementsByClassName("artwork4img")[i].style.backgroundImage='url(src/assets/images/'+binding.value.image+')';
         }
-         
       }
       else {
           for (var i=0;i<4;i++){
-            document.getElementsByClassName("artwork4")[i].style.border=borderArt+'px '+binding.value.style+' '+binding.value.color;
+            document.getElementsByClassName("artwork4img")[i].style.border=borderArt+'px '+binding.value.style+' '+binding.value.color;
+            document.getElementsByClassName("artwork4desc")[i].style.border=borderArt+'px '+binding.value.style+' '+binding.value.color;
         }
          
       }
@@ -228,20 +254,20 @@ export default {
   },
   mounted: function(){
     if (document.getElementsByClassName('page-cmd1').style!='none'){
-        this.backgroundColor();
+        this.backgroundImage();
         this.border();
     }
 
   },
   beforeUpdate: function(){
     if (document.getElementsByClassName('page-cmd1').style!='none'){
-        this.backgroundColor();
+        this.backgroundImage();
         this.border();
     }
   },
   updated: function(){
     if (document.getElementsByClassName('page-cmd1').style!='none'){
-        this.backgroundColor();
+        this.backgroundImage();
         this.border();
     }
   }
@@ -267,10 +293,21 @@ label {
     cursor: pointer;
     font-size:29px;
 }
-.artwork4desc, .artwork4img
+
+.colorBackground1 .codeColor{
+    background:#f40e3c;
+}
+.colorBackground2 .codeColor{
+    background:#59a0f2;
+}
+.img-block, .desc-block
 {
+    display:block;
+}
+.artwork4desc, .artwork4img{
     display:inline-block;
 }
+
 .btn-command{
     color:white;
     font-size: 45px;
@@ -296,7 +333,7 @@ label {
   border-radius: 50%;
   margin:1%;
 }
-.lvl2{
+.lvl4{
   
   background-image: url("../assets/images/img_stack.png"), linear-gradient(#eb01a5, #d13531);
   background-repeat: no-repeat;
@@ -313,9 +350,19 @@ label {
 .artwork, .command{
   display:inline-block;
 }
-.artwork4{
-  margin: 2% 5% 8% 7%;
-  height:10vh;
+.artwork4desc{
+  margin:3%;
+  height:50vh;
+  width:30vh;
+  background:white;
+  border: 5px solid white;
+  vertical-align: bottom;
+}
+.artwork4img{
+  margin:3%;
+  margin-bottom: 3%;
+  width: 30vh;
+  height:20vh;
   background:white;
   border: 5px solid white;
 }
@@ -353,7 +400,7 @@ label {
   cursor: pointer;
   padding:2%;
   text-align: center;
-  margin:10%;
+  margin:5% 10% 5% 10%;
   border:5px solid white;
   border-radius:15px;
   font-size: 36px;
@@ -364,7 +411,11 @@ label {
 .titleCss{
   margin: 5%;
 }
-.codeColor{
+.codeImage{
+  width: 100px;
+  height: 100px;
+ }
+ .codeColor{
   width: 50px;
   height: 50px;
   border-radius: 50px;
@@ -375,17 +426,31 @@ label {
  font-size: 70px;
  margin:1%;
 }
-.colorBackground1 .codeColor{
-    background:#f40e3c;
+.imgBackground1 .codeImage{
+    background-image:url('../assets/images/imagedroite.png');
+        background-size:contain;
+    background-repeat: no-repeat;
 }
-.colorBackground2 .codeColor{
-    background:#59a0f2;
+.imgBackground2 .codeImage{
+   background-image:url('../assets/images/imagegauche.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+.imgBackground3 .codeImage{
+    background-image:url('../assets/images/imagefake1.png');
+        background-size:contain;
+    background-repeat: no-repeat;
+}
+.imgBackground4 .codeImage{
+   background-image:url('../assets/images/imagefake2.png');
+    background-size:contain;
+    background-repeat: no-repeat;
 }
 .color1 .codeColor{
   background-color:#000000;
 }
 .color2>.codeColor{
-  background-color:rgb(167, 7, 42);
+  background-color:grey;
 }
 .color3>.codeColor{
   background-color:rgb(50, 156, 205);
