@@ -6,7 +6,7 @@
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
     <!--condition de victoire pas encore présente-->
-        <victory  v-if="showVictory"> </victory>
+        <victory  v-if="showVictory" @close="showVictory=false"> </victory>
         <!--debut de l'aide en bas de page-->
      <div class="tips">
      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
@@ -58,7 +58,7 @@ color (couleur) et border (bordure) de la même manière...</p>
 </template>
 <script>
 import Modal from './Modal.vue';
-import Victory from './Victory.vue'
+import Victory from './Victory.vue';
 export default {
   name: 'Level1',
   data () {
@@ -81,7 +81,8 @@ export default {
     }
   }, 
   components: {
-          'modal':  Modal
+          'modal':  Modal,
+          'victory': Victory
         },
   methods:{
     victory: function(){
@@ -125,8 +126,9 @@ export default {
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY;
 
     function mousemove(e) {
-      var dx = e.clientX - initialMouseX;
-      var dy = e.clientY - initialMouseY;
+      var touch=event.touches[0];
+      var dx = touch.pageX - initialMouseX;
+      var dy = touch.pageY - initialMouseY;
       el.style.top = startY + dy + 'px';
       el.style.left = startX + dx + 'px';
       return false;
@@ -152,14 +154,16 @@ export default {
     }
 
     el.addEventListener('touchstart', function(e) {
+      
+      var touch=event.touches[0];
       el.style.position = 'absolute';
       el.style.margin=0;
       startX = el.offsetLeft;
       startY = el.offsetTop;
       initialBoxX=startX;
       initialBoxY=startY;
-      initialMouseX = e.clientX;
-      initialMouseY = e.clientY;
+      initialMouseX = touch.pageX;
+      initialMouseY = touch.pageY;
       document.addEventListener('touchmove', mousemove);
       document.addEventListener('touchend', mouseup);
       return false;
