@@ -6,7 +6,7 @@
 
           <div class="modal-header">
             <slot name="header">
-            <p> Une aide?</p>
+            <p> Oeuvre du niveau</p>
              <p>Nom de l'artiste {{nom}}</p>
              <p>Nom de l'oeuvre {{titre}}</p>
             </slot>
@@ -59,12 +59,17 @@ export default {
 .modal-container {
   width: 600px;
   margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
+  padding: 20px 30px;  background: -webkit-linear-gradient( left, mediumpurple , cornflowerblue);
+  background:    -moz-linear-gradient( left, mediumpurple, cornflowerblue);
+  background:     -ms-linear-gradient( left, mediumpurple, cornflowerblue);
+  background:      -o-linear-gradient( left, mediumpurple, cornflowerblue);
+  background:         linear-gradient( to right, mediumpurple,cornflowerblue);
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  box-shadow: 0px 30px 40px rgba(0,0,0,.1);
   transition: all .3s ease;
-  font-family: 'Play' sans-serif;
+  font-family: 'Play', Arial, Helvetica, sans-serif;
+  color:#ffffff;
+  font-size: px;
 }
 
 .modal-header h3 {
@@ -116,13 +121,5 @@ cursor: pointer;
   background-image: linear-gradient(to bottom, #5ebcf7, #f748c8);
 }
 
-.btn:hover {
-   background: #1761b0;
-  background-image: -webkit-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -moz-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -ms-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -o-linear-gradient(top, #1761b0, #9421c2);
-  background-image: linear-gradient(to bottom, #1761b0, #9421c2);
-  text-decoration: none;
-}
+
 </style>

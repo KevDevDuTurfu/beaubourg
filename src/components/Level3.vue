@@ -6,7 +6,7 @@
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
     <!--condition de victoire pas encore présente-->
-        <victory  v-if="showVictory"> </victory>
+        <victory  :niveau="niveauSuivant" v-if="showVictory" @close="showVictory=false"> </victory>
         <!--debut de l'aide en bas de page-->
      <div class="tips">
      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
@@ -30,11 +30,12 @@ color (couleur) et border (bordure) de la même manière...</p>
     </div>
     <!--debut du contenu des commandes (barre à droite) -->
     <div class="command">
-        <div class='btn-command'>
-           <!-- <i class="fa fa-caret-left" aria-hidden="true" v-on:click="show1"></i><i class="fa fa-caret-right" aria-hidden="true" v-on:click=" !show1"></i>
-        --></div>
-       
-            <div class="page1-cmd" style="display:none" >
+        
+       <transition name="fade" >
+            <div class="page1-cmd"  v-if="!cmd" >
+              <div class='btn-command'>
+                <i class="fa fa-caret-right" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
+                </div>
                 <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
                 <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
                     <div class="btn btn1 " ref="btn1"  v-draggable="{color:couleur}">Background</div>
@@ -71,12 +72,16 @@ color (couleur) et border (bordure) de la même manière...</p>
                             <div class="rangeValue">
                                 <h2 class="titleCss">Blur-radius</h2>
                             <input id="valueBorder" type="range" min="1" max="7" step="1" @touchstart="getWidthBorder()">
-                            
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="page2-cmd" >
+                </transition>
+                 <transition name="fade" >
+                <div class="page2-cmd"  v-if="cmd">
+                  <div class='btn-command'>
+                    <i class="fa fa-caret-left" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
+                </div>
                   <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
                   <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
                     <div class="btn btn1 " ref="btn1" >Animation</div>
@@ -122,6 +127,7 @@ color (couleur) et border (bordure) de la même manière...</p>
                   
                   
                     </div>
+                 </transition>
                 </div>
             </div>
             
@@ -136,10 +142,12 @@ export default {
   name: 'Level2',
   data () {
     return {
-      oeuvre: 'src/assets/images/oeuvre2.png',
+      niveauSuivant:'niveau4',
+      oeuvre: 'src/assets/images/danflavin.png',
+      cmd:false,
       showVictory:false,
-      artist:'Louis CANE',
-      titre: 'Sol-Mur',
+      artist:'Dan FLAVIN',
+      titre: 'Untitled (to Donna)',
       showModal: false,
       show: true,
       show2: true,
@@ -189,8 +197,9 @@ export default {
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY;
 
     function mousemove(e) {
-      var dx = e.clientX - initialMouseX;
-      var dy = e.clientY - initialMouseY;
+       var touch=event.touches[0];
+      var dx = touch.pageX - initialMouseX;
+      var dy = touch.pageY - initialMouseY;
       el.style.top = startY + dy + 'px';
       el.style.left = startX + dx + 'px';
       return false;
@@ -221,14 +230,15 @@ export default {
     }
 
     el.addEventListener('touchstart', function(e) {
+       var touch=event.touches[0];
       el.style.position = 'absolute';
       el.style.margin=0;
       startX = el.offsetLeft;
       startY = el.offsetTop;
       initialBoxX=startX;
       initialBoxY=startY;
-      initialMouseX = e.clientX;
-      initialMouseY = e.clientY;
+            initialMouseX = touch.pageX;
+      initialMouseY = touch.pageY;
       document.addEventListener('touchmove', mousemove);
       document.addEventListener('touchend', mouseup);
       return false;
@@ -239,20 +249,20 @@ export default {
   created:function(){
   },
   mounted: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
+    if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundColor();
         this.border();
     }
 
   },
   beforeUpdate: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
+    if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundColor();
         this.border();
     }
   },
   updated: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
+    if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundColor();
         this.border();
     }
@@ -262,6 +272,9 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+body{
+  overflow:hidden;
+}
 .select {
     position: relative;
     display: inline-block;
@@ -311,34 +324,10 @@ export default {
 .select select:disabled ~ .select_arrow {
     border-top-color: #CCCCCC;
 }
-.btn-command{
-    color:white;
-    font-size: 45px;
-}
-.btn-command i{
-    padding: 2%;
-}
-.bubble{
-  cursor: pointer;
-  position : absolute;
-  bottom: 0;
-  left: 0;
-  padding:10px;
-  font-size: 25px;
-  color:white;
-  background: #1761b0;
-  background-image: -webkit-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -moz-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -ms-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -o-linear-gradient(top, #1761b0, #9421c2);
-  background-image: linear-gradient(to bottom, #1761b0, #9421c2);
-  font-family: 'Play', sans-serif;
-  border-radius: 50%;
-  margin:1%;
-}
+
 .lvl3{
-  
-  background-image: url("../assets/images/img_stack.png"), linear-gradient(#eb01a5, #d13531);
+       background-image: url("../assets/images/img_stack.png");
+  background-image:url("../assets/images/fondniveau.png"), url("../assets/images/img_stack.png") ;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -351,9 +340,6 @@ export default {
   width:50%;
   margin-top:45px;
   
-}
-.artwork, .command{
-  display:inline-block;
 }
 
  .artwork3v {
@@ -392,56 +378,6 @@ export default {
     margin-left: 60vh;
     margin-top: 5vh;
 }
-.command{
-  width:30%;
-  float:right;
-  height: 100vh;
-  background: -webkit-linear-gradient( left, #c667f5 , #4852c7);
-  background:    -moz-linear-gradient( left, #c667f5, #4852c7);
-  background:     -ms-linear-gradient( left, #c667f5, #4852c7);
-  background:      -o-linear-gradient( left, #c667f5, #4852c7);
-  background:         linear-gradient( to right, #c667f5,#4852c7);
-  font-family: 'Play', sans-serif;
-  font-weight: bold;
-
-}
-.value {
-  margin-top: 4%;
-  color:white;
-}
-
-.tips p{
-  position: absolute;
-  bottom:0;
-  width:50%;
-  padding:2%;
-  margin-left:6%;
-  background: #544674;
-  font-family: 'Play', sans-serif;
-  border-radius:15px;
-  color:white;
-}
-
-.btn {
-  cursor: pointer;
-  padding:2%;
-  text-align: center;
-  margin:10%;
-  border:5px solid white;
-  border-radius:15px;
-  font-size: 36px;
-  color:white;
-  background:transparent;
-}
-
-.titleCss{
-  margin: 5%;
-}
-.codeColor{
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
- }
 .col{
  background-image: none;
  display: inline-block;
@@ -469,18 +405,7 @@ export default {
 .color3>.codeColor{
   background-color:#d3093c;
 }
-.option{
-  font-size:24px;
-  color:white;
-  font-family: 'Barlow Condensed',sans-serif;
-  font-weight: lighter;
-}
-.sty{
-  width:50px;
-  height: 50px;
-  display: inline-block;
-  margin:3%;
-}
+
 .style1{
   border:4px solid white;
   }

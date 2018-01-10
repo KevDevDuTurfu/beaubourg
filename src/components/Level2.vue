@@ -6,7 +6,7 @@
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
     <!--condition de victoire pas encore présente-->
-        <victory  v-if="showVictory"> </victory>
+        <victory  :niveau="niveauSuivant" v-if="showVictory" @close="showVictory=false"> </victory>
         <!--debut de l'aide en bas de page-->
      <div class="tips">
      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
@@ -15,23 +15,22 @@ color (couleur) et border (bordure) de la même manière...</p>
      <!--contenu de l'oeuvre à composer-->
     <div class="artwork" ref="artwork">
       <!-- oeuvre en lui même -->
-      <div class="artwork2" id="artwork2" ref="artwork2">
-          
+      <div   class=" artwork2" id="artwork2" ref="artwork2" >
       </div>
       <div class="artwork2" id="artwork2" ref="artwork2">
           
       </div>
-      <div class="artwork2" id="artwork2" ref="artwork2">
+      <div class="artwork2" id="artwork2" ref="artwork2" >
           
       </div>
-      <div class="artwork2" id="artwork2" ref="artwork2">
+      <div class="artwork2" id="artwork2" ref="artwork2" >
           
       </div>
     </div>
     <!--debut du contenu des commandes (barre à droite) -->
     <div class="command">
        
-          <transition name="fade">
+          <transition name="fade" mode="in-out">
             <div class="page1-cmd" v-if="!cmd" >
                <div class='btn-command'>
                 <i class="fa fa-caret-right" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
@@ -64,57 +63,36 @@ color (couleur) et border (bordure) de la même manière...</p>
                     <div class="width">
                         <h2 class="titleCss">Width</h2></div>
                         <div class="rangeValue">
-                        <input id="valueBorder" type="range" min="1" max="7" step="1" @touchstart="getWidthBorder()">
+                        <input id="valueBorder" type="range" min="1" max="7" step="1" @touchmove="getWidthBorder()">
                         
                         </div>
                     </div>
                 </div>
           </transition>
-          <transition name="fade">
+          <transition name="fade" mode="in-out">
                 <div  class="page2-cmd" v-if="cmd"  >
                   <div class='btn-command'>
                 <i class="fa fa-caret-left" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
                 </div>
                 <div id="position3"><!-- emplacement du bouton permettant de la remettre à sa place-->
             <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
-                <div class="btn btn3 " ref="btn3"  >Transform</div>
+                <div class="btn btn3 "   ref="btn3"  v-draggable="{transform:valueTransform, duration:valueDuration}">Transform</div>
                 </div><!--les options -->
                 <div class="value"  ><!--contenu de valeurs-->
-                    <ul class="list-value">
-                        <li>
-                            <input type='radio' value='translate' class='value-transform' name='translate' id='radio1'/>
-                            <label for='radio1'>Translate</label>
-                        </li>
-                        <li>
-                            <input type='radio' value='rotate' class='value-transform' name='rotate'  id='radio2'/>
-                            <label for='radio2'>Rotate</label>
-                        </li>
-                        <li>
-                            <input type='radio' value='scale' class='value-transform' name='scale'  id='radio3'/>
-                            <label for='radio3'>Scale</label>
-                        </li>
-                    </ul>
+                <h2 class="titleCss">Choose transform:</h2>
+                    <div class="tranform" >
+                            <div  @click="getTransform('translate')" class="valueTransform">Translate</div>
+                            <div  @click="getTransform('rotate')" class="valueTransform">Rotate</div>
+                            <div  @click="getTransform('scale')" class="valueTransform">Scale</div>
+                    </div>
                 </div>
-                <div class="btn btn4" ref ="btn4">Duration</div>
                 <div class="value"  ><!--contenu de valeurs-->
-                    <ul class="list-value">
-                            <li>
-                                <input type='radio' value='infinite' class='value-duration' name='infinite' id='radio4'/>
-                                <label for='radio1'>Infinite</label>
-                            </li>
-                            <li>
-                                <input type='radio' value='1' class='value-duration' name='secone'  id='radio5'/>
-                                <label for='radio2'>1 sec</label>
-                            </li>
-                            <li>
-                                <input type='radio' value='3' class='value-duration' name='secthree'  id='radio6'/>
-                                <label for='radio3'>3 sec</label>
-                            </li>
-                            <li>
-                                <input type='radio' value='10' class='value-duration' name='secten'  id='radio7'/>
-                                <label for='radio3'>10 sec</label>
-                            </li>
-                        </ul>
+                 <h2 class="titleCss">Choose duration:</h2>
+                     <div class="duree"  >
+                                <div @click="getDuration('1')" class="valueDuration">1 sec</div>
+                                <div @click="getDuration('3')" class="valueDuration">3 sec</div>
+                                <div @click="getDuration('10')" class="valueDuration">10 sec</div>
+                            </div>
                 </div>
                 </div>
           </transition>
@@ -131,10 +109,11 @@ export default {
   name: 'Level2',
   data () {
     return {
-      oeuvre: 'src/assets/images/oeuvre2.png',
+      oeuvre: 'src/assets/images/donaldjudd.png',
       showVictory:false,
-      artist:'Louis CANE',
-      titre: 'Sol-Mur',
+      artist:'Donald JUDD',
+      titre: 'Stack',
+      niveauSuivant:'niveau3',
       showModal: false,
       show: true,
       show2: true,
@@ -142,6 +121,8 @@ export default {
       borderColor:'white',
       borderWidth:10,
       borderStyle:'solid',
+      valueTransform:'',
+      valueDuration:'', 
       cmd:false
     }
   }, 
@@ -149,9 +130,16 @@ export default {
           'modal':  Modal
         },
   methods:{
-    victory: function(){
-      this.showVictory=true;
+    updateTextInput:function(val) {
+          document.getElementById('textInput').value=val; 
+        },
+    getTransform: function(value){
+      this.valueTransform=value;
 
+    },
+    getDuration: function(value){
+      this.valueDuration=value;
+       
     },
     getColorBackground: function(value){
     this.couleur=value;
@@ -173,10 +161,9 @@ export default {
     border:function(){
        this.$refs.btn2.style.border=this.borderWidth+'px '+this.borderStyle+' '+this.borderColor;
     },
-    backgroundColor:function(){
-       this.$refs.btn1.style.background=this.couleur;
-       
-    }
+      backgroundColor:function(){
+        this.$refs.btn1.style.background=this.couleur;
+      }
   },
 
   directives: {
@@ -185,8 +172,9 @@ export default {
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY;
 
     function mousemove(e) {
-      var dx = e.clientX - initialMouseX;
-      var dy = e.clientY - initialMouseY;
+       var touch=event.touches[0];
+      var dx = touch.pageX - initialMouseX;
+      var dy = touch.pageY - initialMouseY;
       el.style.top = startY + dy + 'px';
       el.style.left = startX + dx + 'px';
       return false;
@@ -199,32 +187,42 @@ export default {
       let borderArt=parseInt(binding.value.width)*2;
       document.removeEventListener('touchmove', mousemove);
       document.removeEventListener('touchend', mouseup);
-      console.log(el.classList.contains('btn1'));
       if (el.classList.contains('btn1')){
-        for (var i=0;i<4;i++){
+          for (var i=0;i<4;i++){
             document.getElementsByClassName("artwork2")[i].style.background=binding.value.color;
-        }
-         
+          }
       }
-      else {
+      else if (el.classList.contains('btn3')){
+         
+        for (var i=0;i<4;i++){
+
+           document.getElementsByClassName("artwork2")[i].className='artwork2';
+            document.getElementsByClassName("artwork2")[i].className +=" "+binding.value.transform+binding.value.duration;
+        }
+        
+      }
+      else  {
           for (var i=0;i<4;i++){
             document.getElementsByClassName("artwork2")[i].style.border=borderArt+'px '+binding.value.style+' '+binding.value.color;
-        }
-         
+
+         }
+        
       }
+     
       this.showVictory=true;
 
     }
 
     el.addEventListener('touchstart', function(e) {
+      var touch=event.touches[0];
       el.style.position = 'absolute';
       el.style.margin=0;
       startX = el.offsetLeft;
       startY = el.offsetTop;
       initialBoxX=startX;
       initialBoxY=startY;
-      initialMouseX = e.clientX;
-      initialMouseY = e.clientY;
+      initialMouseX = touch.pageX;
+      initialMouseY = touch.pageY;
       document.addEventListener('touchmove', mousemove);
       document.addEventListener('touchend', mouseup);
       return false;
@@ -235,20 +233,15 @@ export default {
   created:function(){
   },
   mounted: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
-        this.backgroundColor();
-        this.border();
-    }
-
   },
   beforeUpdate: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
+    if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundColor();
         this.border();
     }
   },
   updated: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
+    if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundColor();
         this.border();
     }
@@ -258,31 +251,22 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.focus {
+  background-color:aliceblue;
+}
+.lvl2 {
+   background-image: url("../assets/images/img_stack.png");
+  background-image:url("../assets/images/fondniveau.png"), url("../assets/images/img_stack.png") ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+}
 body{
   overflow:hidden;
 }
 
-ul {
-    list-style: none;
-}
-li {
-    margin-bottom:4%;
-}
-input.value-duration, input.value-transform {
-    visibility:hidden;
-}
-label {
-    cursor: pointer;
-    font-size:29px;
-}
-
-.btn-command{
-    color:white;
-    font-size: 45px;
-}
-.btn-command i{
-    padding: 2%;
-}
 .bubble{
   cursor: pointer;
   position : absolute;
@@ -301,37 +285,52 @@ label {
   border-radius: 50%;
   margin:1%;
 }
-.lvl2{
-  
-  background-image: url("../assets/images/img_stack.png"), linear-gradient(#eb01a5, #d13531);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  text-align: center;
-}
 
 .artwork{
   height: 100vh;
   width:70%;
-}
-.artwork, .command{
-  display:inline-block;
 }
 .artwork2{
   margin: 2% 5% 8% 7%;
   height:10vh;
   background:white;
   border: 5px solid white;
-  animation: rotating 10s linear infinite alternate; 
+ /* animation: rotating 10s linear infinite alternate; */
 }
+.rotate1{
+  animation: rotating 1s linear infinite alternate;
+}
+.rotate3{
+  animation: rotating 3s linear infinite alternate;
+}
+.rotate10{
+  animation: rotating 10s linear infinite alternate;
+}
+.translate1{
+  animation: translate 1s linear infinite alternate;
+}
+.translate3{
+  animation: translate 3s linear infinite alternate;
+}
+.translate10{
+  animation: translate 10s linear infinite alternate;
+}
+
+.scale1{
+  animation: scale 1s linear infinite alternate;
+}
+.scale3{
+  animation: scale 3s linear infinite alternate;
+}
+.scale10{
+  animation: scale 10s linear infinite alternate;
+}
+
 @keyframes translate
 	{
 	from
 		{
 		transform: translateY(10px);
-
-
 		}
 	to
 		{
@@ -342,13 +341,11 @@ label {
 	{
 	from
 		{
-		transform: translateY(10px);
-
-
+		transform:rotate(0deg);
 		}
 	to
 		{
-		transform: translateY(100px);
+		transform: rotate(360deg);
 		}
 	}
   @keyframes scale
@@ -356,71 +353,12 @@ label {
 	from
 		{
 		transform: scale(0.5);
-
-
 		}
 	to
 		{
 		transform: scale(1);
 		}
 	}
-
-.command{
-  width:30%;
-  float:right;
-  height: 100vh;
-  background: -webkit-linear-gradient( left, #c667f5 , #4852c7);
-  background:    -moz-linear-gradient( left, #c667f5, #4852c7);
-  background:     -ms-linear-gradient( left, #c667f5, #4852c7);
-  background:      -o-linear-gradient( left, #c667f5, #4852c7);
-  background:         linear-gradient( to right, #c667f5,#4852c7);
-  font-family: 'Play', sans-serif;
-  font-weight: bold;
-
-}
-.value {
-  margin-top: 4%;
-  color:white;
-}
-
-.tips p{
-  position: absolute;
-  bottom:0;
-  width:50%;
-  padding:2%;
-  margin-left:6%;
-  background: #544674;
-  font-family: 'Play', sans-serif;
-  border-radius:15px;
-  color:white;
-}
-
-.btn {
-  cursor: pointer;
-  padding:2%;
-  text-align: center;
-  margin:10%;
-  border:5px solid white;
-  border-radius:15px;
-  font-size: 36px;
-  color:white;
-  background:transparent;
-}
-
-.titleCss{
-  margin: 5%;
-}
-.codeColor{
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
- }
-.col{
- background-image: none;
- display: inline-block;
- font-size: 70px;
- margin:1%;
-}
 .colorBackground1 .codeColor{
     background:#f40e3c;
 }
@@ -436,18 +374,7 @@ label {
 .color3>.codeColor{
   background-color:rgb(50, 156, 205);
 }
-.option{
-  font-size:24px;
-  color:white;
-  font-family: 'Barlow Condensed',sans-serif;
-  font-weight: lighter;
-}
-.sty{
-  width:50px;
-  height: 50px;
-  display: inline-block;
-  margin:3%;
-}
+
 .style1{
   border:4px solid white;
   }
@@ -457,5 +384,8 @@ label {
   .rangeValue{
     margin-top: 10%;
   }  
+.valueTransform, .valueDuration {
+  font-size:2em;
+}
 
 </style>

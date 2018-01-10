@@ -1,12 +1,12 @@
 <!--ici html du code-->
 <template>
-  <div class="lvl1"><!-- contenu du niveau 1-->
-    <div class="bubble"  @click="showModal = true">?</div><!--contenu de la bulle info-->
+  <div class="lvl lvl1"><!-- contenu du niveau 1-->
+    <div class="bubble"  @click="showModal=true">?</div><!--contenu de la bulle info-->
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
     <!--condition de victoire pas encore présente-->
-        <victory  v-if="showVictory" @close="showVictory=false"> </victory>
+        <victory  :niveau="niveauSuivant" v-if="showVictory" @close="showVictory=false"> </victory>
         <!--debut de l'aide en bas de page-->
      <div class="tips">
      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
@@ -48,7 +48,7 @@ color (couleur) et border (bordure) de la même manière...</p>
           <div class="width">
             <h2 class="titleCss">Width</h2></div>
             <div class="rangeValue">
-              <input id="valueBorder" type="range" min="1" max="7" step="1" @touchstart="getWidthBorder()">
+              <input id="valueBorder" type="range" min="1" max="7" step="1" @touchmove="getWidthBorder()">
               
             </div>
         </div>
@@ -57,16 +57,18 @@ color (couleur) et border (bordure) de la même manière...</p>
   
 </template>
 <script>
+
 import Modal from './Modal.vue';
 import Victory from './Victory.vue';
 export default {
   name: 'Level1',
   data () {
     return {
-      oeuvre: 'src/assets/images/oeuvre1.png',
+      oeuvre: 'src/assets/images/louiscane.png',
       showVictory:false,
       artist:'Louis CANE',
       titre: 'Sol-Mur',
+      niveauSuivant:'niveau2',
       showModal: false,
       show: true,
       show2: true,
@@ -85,10 +87,7 @@ export default {
           'victory': Victory
         },
   methods:{
-    victory: function(){
-      this.showVictory=true;
-
-    },
+   
     getColorGradientTop: function(value){
     this.couleur=value;
     this.gradient();
@@ -117,11 +116,19 @@ export default {
     gradient:function(){
        this.$refs.btn1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
        
+    },
+    victory: function() {
+      if ((document.getElementById("artwork1").style.background=='linear-gradient(rgb(40, 142, 153), rgb(24, 84, 94))')
+      && (document.getElementById("artwork1").style.border=='70px solid rgb(24, 84, 94)')) {
+        console.log('ok');
+          this.showVictory=true;
+      }
     }
   },
 
   directives: {
-   draggable: function (el, binding) {
+    
+   draggable: function (el, binding, vnode) {
     
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY;
 
@@ -149,7 +156,7 @@ export default {
       else {
          document.getElementById("artwork1").style.border=borderArt+'px '+binding.value.style+' '+binding.value.color;
       }
-      this.showVictory=true;
+     vnode.context.victory();
 
     }
 
@@ -176,14 +183,17 @@ export default {
   mounted: function(){
     this.gradient();
     this.border();
+     
   },
   beforeUpdate: function(){
     this.gradient();
     this.border();
+    
   },
   updated: function(){
     this.gradient();
     this.border();
+    
   }
 
 }
@@ -193,27 +203,9 @@ export default {
 body{
   overflow:hidden;
 }
-.bubble{
-  cursor: pointer;
-  position : absolute;
-  bottom: 0;
-  left: 0;
-  padding:10px;
-  font-size: 25px;
-  color:white;
-  background: #1761b0;
-  background-image: -webkit-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -moz-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -ms-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -o-linear-gradient(top, #1761b0, #9421c2);
-  background-image: linear-gradient(to bottom, #1761b0, #9421c2);
-  font-family: 'Play', sans-serif;
-  border-radius: 50%;
-  margin:1%;
-}
-.lvl1{
-  
-  background-image: url("../assets/images/img_stack.png"), linear-gradient(#eb01a5, #d13531);
+.lvl1 {
+     background-image: url("../assets/images/img_stack.png");
+  background-image:url("../assets/images/fondniveau.png"), url("../assets/images/img_stack.png") ;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -225,72 +217,12 @@ body{
   height: 100vh;
   width:70%;
 }
-.artwork, .command{
-  display:inline-block;
-}
 .artwork1{
   margin: 8% 5% 8% 7%;
   height:70vh;
   background:white;
   border: 5px solid white;
 }
-.command{
-  width:30%;
-  float:right;
-  height: 100vh;
-  background: -webkit-linear-gradient( left, #c667f5 , #4852c7);
-  background:    -moz-linear-gradient( left, #c667f5, #4852c7);
-  background:     -ms-linear-gradient( left, #c667f5, #4852c7);
-  background:      -o-linear-gradient( left, #c667f5, #4852c7);
-  background:         linear-gradient( to right, #c667f5,#4852c7);
-  font-family: 'Play', sans-serif;
-  font-weight: bold;
-
-}
-.value {
-  margin-top: 4%;
-  color:white;
-}
-
-.tips p{
-  position: absolute;
-  bottom:0;
-  width:50%;
-  padding:2%;
-  margin-left:6%;
-  background: #544674;
-  font-family: 'Play', sans-serif;
-  border-radius:15px;
-  color:white;
-}
-
-.btn {
-  cursor: pointer;
-  padding:2%;
-  text-align: center;
-  margin:10%;
-  border:5px solid white;
-  border-radius:15px;
-  font-size: 36px;
-  color:white;
-  background:linear-gradient(transparent,transparent);
-}
-
-.titleCss{
-  margin: 5%;
-}
-.codeColor{
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
- }
-.col{
- background-image: none;
- display: inline-block;
- font-size: 70px;
- margin:1%;
-}
-
 .color1 .codeColor{
   background-color:#18545e;
 }
@@ -299,18 +231,6 @@ body{
 }
 .color3>.codeColor{
   background-color:yellowgreen;
-}
-.option{
-  font-size:24px;
-  color:white;
-  font-family: 'Barlow Condensed',sans-serif;
-  font-weight: lighter;
-}
-.sty{
-  width:50px;
-  height: 50px;
-  display: inline-block;
-  margin:3%;
 }
 .style1{
   border:4px solid white;

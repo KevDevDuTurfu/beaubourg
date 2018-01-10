@@ -6,7 +6,7 @@
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
     <!--condition de victoire pas encore présente-->
-        <victory  v-if="showVictory"> </victory>
+        <victory  :niveau="niveauSuivant" v-if="showVictory" @close="showVictory=false"> </victory>
         <!--debut de l'aide en bas de page-->
      <div class="tips">
      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
@@ -38,11 +38,11 @@ color (backImg) et border (bordure) de la même manière...</p>
     </div>
     <!--debut du contenu des commandes (barre à droite) -->
     <div class="command">
-        <div class='btn-command'>
-           <!-- <i class="fa fa-caret-left" aria-hidden="true" v-on:click="show1"></i><i class="fa fa-caret-right" aria-hidden="true" v-on:click=" !show1"></i>
-        --></div>
-       
-            <div class="page1-cmd" >
+        <transition name="fade">
+            <div class="page1-cmd" v-if="!cmd" >
+               <div class='btn-command'>
+                <i class="fa fa-caret-right" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
+                </div>
                     <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
                     <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
                         <div class="btn btn1 " ref="btn1"  v-draggable="{image:backImg}">Background</div>
@@ -81,8 +81,12 @@ color (backImg) et border (bordure) de la même manière...</p>
                         
                         </div>
                     </div>
-                
-                <div  class="page2-cmd" style="display:none;">
+        </transition>
+        <transition name="fade">
+                <div  class="page2-cmd" v-if="cmd"  >
+                  <div class='btn-command'>
+                <i class="fa fa-caret-left" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
+                </div>
                 <div id="position3"><!-- emplacement du bouton permettant de la remettre à sa place-->
             <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
                 <div class="btn btn3 " ref="btn3"  v-draggable="{color:couleur}">Background</div>
@@ -131,6 +135,7 @@ color (backImg) et border (bordure) de la même manière...</p>
                 
                     </div>
                     </div>
+        </transition>
             </div>  
   </div>
 </template>
@@ -141,10 +146,11 @@ export default {
   name: 'Level4',
   data () {
     return {
-      oeuvre: 'src/assets/images/oeuvre2.png',
+      niveauSuivant:'niveau1',
+      oeuvre: 'src/assets/images/sophiecale.png',
       showVictory:false,
-      artist:'Louis CANE',
-      titre: 'Sol-Mur',
+      artist:'Sophie CALLE',
+      titre: 'Douleur exquise',
       showModal: false,
       show: true,
       show2: true,
@@ -152,7 +158,8 @@ export default {
       borderColor:'white',
       borderWidth:10,
       borderStyle:'solid',
-       couleur:'transparent'
+       couleur:'transparent',
+       cmd:false
     }
   }, 
   components: {
@@ -202,9 +209,9 @@ export default {
     
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY;
 
-    function mousemove(e) {
-      var dx = e.clientX - initialMouseX;
-      var dy = e.clientY - initialMouseY;
+    function mousemove(e) { var touch=event.touches[0];
+      var dx = touch.pageX - initialMouseX;
+      var dy = touch.pageY - initialMouseY;
       el.style.top = startY + dy + 'px';
       el.style.left = startX + dx + 'px';
       return false;
@@ -235,14 +242,15 @@ export default {
     }
 
     el.addEventListener('touchstart', function(e) {
+             var touch=event.touches[0];
       el.style.position = 'absolute';
       el.style.margin=0;
       startX = el.offsetLeft;
       startY = el.offsetTop;
       initialBoxX=startX;
-      initialBoxY=startY;
-      initialMouseX = e.clientX;
-      initialMouseY = e.clientY;
+      initialBoxY=startY;      
+      initialMouseX = touch.pageX;
+      initialMouseY = touch.pageY;
       document.addEventListener('touchmove', mousemove);
       document.addEventListener('touchend', mouseup);
       return false;
@@ -253,20 +261,20 @@ export default {
   created:function(){
   },
   mounted: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
+    if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundImage();
         this.border();
     }
 
   },
   beforeUpdate: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
+    if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundImage();
         this.border();
     }
   },
   updated: function(){
-    if (document.getElementsByClassName('page-cmd1').style!='none'){
+    if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundImage();
         this.border();
     }
@@ -279,7 +287,10 @@ export default {
 body{
   overflow:hidden;
 }
-
+.value {
+  margin-top: -6%;
+  color:white;
+}
 ul {
     list-style: none;
 }
@@ -334,8 +345,8 @@ label {
   margin:1%;
 }
 .lvl4{
-  
-  background-image: url("../assets/images/img_stack.png"), linear-gradient(#eb01a5, #d13531);
+       background-image: url("../assets/images/img_stack.png");
+  background-image:url("../assets/images/fondniveau.png"), url("../assets/images/img_stack.png") ;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -366,50 +377,9 @@ label {
   background:white;
   border: 5px solid white;
 }
-.command{
-  width:30%;
-  float:right;
-  height: 100vh;
-  background: -webkit-linear-gradient( left, #c667f5 , #4852c7);
-  background:    -moz-linear-gradient( left, #c667f5, #4852c7);
-  background:     -ms-linear-gradient( left, #c667f5, #4852c7);
-  background:      -o-linear-gradient( left, #c667f5, #4852c7);
-  background:         linear-gradient( to right, #c667f5,#4852c7);
-  font-family: 'Play', sans-serif;
-  font-weight: bold;
-
-}
-.value {
-  margin-top: 4%;
-  color:white;
-}
-
-.tips p{
-  position: absolute;
-  bottom:0;
-  width:50%;
-  padding:2%;
-  margin-left:6%;
-  background: #544674;
-  font-family: 'Play', sans-serif;
-  border-radius:15px;
-  color:white;
-}
-
-.btn {
-  cursor: pointer;
-  padding:2%;
-  text-align: center;
-  margin:5% 10% 5% 10%;
-  border:5px solid white;
-  border-radius:15px;
-  font-size: 36px;
-  color:white;
-  background:transparent;
-}
 
 .titleCss{
-  margin: 5%;
+  margin: 2%;
 }
 .codeImage{
   width: 100px;

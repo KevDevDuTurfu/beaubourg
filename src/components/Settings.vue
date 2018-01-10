@@ -1,24 +1,37 @@
 <template>
- <transition name="victory">
-      <div class="victory-mask">
-      <div class="victory-wrapper">
-        <div class="victory-container">
+ <transition name="settings">
+      <div class="settings-mask">
+      <div class="settings-wrapper">
+        <div class="settings-container">
 
-          <div class="victory-header">
-            <p> Bravo! </p>
+          <div class="settings-header">
+            <p> Options </p>
           </div>
 
-          <div class="victory-body">
+          <div class="settings-body">
             <slot name="body">
-               <p>Tu as réussi le  niveau</p>
+                <div class="block">
+            <div class="labelIcones">Reprendre le jeu-----</div>
+            <div class="icones"><span class="icone" @click="$emit('close')"><i class="fa fa-play" aria-hidden="true"></i></span></div>
+               </div>
+               <div class="block">
+            <div class="labelIcones">Menu-----</div>
+            <div class="icones"><router-link to="/" @click="$emit('close')"><span class="icone"><i class="fa fa-home" aria-hidden="true"></i></span></router-link></div>
+            </div>
+               <div class="block">
+            <div class="labelIcones">Langues-----</div>
+            <div class="icones"><span class="icone"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/britain.png" alt=""> </span></div>
+               </div>
+               <div class="block">
+            <div class="labelIcones">Sons-----</div>
+            <div class="icones"><span class="icone"><i class="fa fa-volume-up" aria-hidden="true"></i></span></div>
+            </div>
             </slot>
           </div>
 
-          <div class="victory-footer">
+          <div class="settings-footer">
             <slot name="footer">
-              <div class="lvlNext">Niveau suivant-----</div>
-              <div class="closeNext"><router-link v-bind:to="niveau" @click="$emit('close')"><span id="play">&#9655;</span></router-link></div>
-            </slot>
+              </slot>
           </div>
         </div>
       </div>
@@ -28,33 +41,45 @@
 <script>
 
 export default {
-  name: 'victory',
+  name: 'settings',
   props:['niveau']
 }
 </script>
 <style>
-.lvlNext, .closeNext {
+.block {
+    text-align: right;
+    margin-bottom: 3%;
+}
+.labelIcones, .icones {
   display:inline-block;
 }
-.closeNext a{
+.icones a{
   color:#ffffff;
   text-decoration: none;
-  line-height: 12px;
   padding-left: 10px;
    text-shadow: 0 0 20px #fff;
+   
+
 }
-.closeNext {
+i{
+       padding-top: 10px;
+}
+.icones {
   border: 5px dashed white;
   border-radius: 50px;
-  font-size:45px;
+  font-size:30px;
   vertical-align: middle;
   width: 50px;
   height:50px;
   text-align: center;
-  
+  text-shadow: 0 0 20px #fff;
   box-shadow: 0 0 10px rgb(255, 255, 255);  
+} 
+.icones .fa-home {
+    margin-right:8px;
 }
-.victory-mask {
+
+.settings-mask {
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -67,12 +92,12 @@ export default {
   
 }
 
-.victory-wrapper {
+.settings-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 
-.victory-container {
+.settings-container {
   width: 600px;
   margin: 0px auto;
   padding: 20px 30px;  background: -webkit-linear-gradient( left, mediumpurple , cornflowerblue);
@@ -88,34 +113,34 @@ export default {
   font-size: 28px;
 }
 
-.victory-header h3 {
+.settings-header h3 {
   margin-top: 0;
   color: #42b983;
 }
 
-.victory-body {
+.settings-body {
   margin: 20px 0;
 }
 
 /*
  * The following styles are auto-applied to elements with
- * transition="victory" when their visibility is toggled
+ * transition="settings" when their visibility is toggled
  * by Vue.js.
  *
- * You can easily play with the victory transition by editing
+ * You can easily play with the settings transition by editing
  * these styles.
  */
 
-.victory-enter {
+.settings-enter {
   opacity: 0;
 }
 
-.victory-leave-active {
+.settings-leave-active {
   opacity: 0;
 }
 
-.victory-enter .victory-container,
-.victory-leave-active .victory-container {
+.settings-enter .settings-container,
+.settings-leave-active .settings-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }

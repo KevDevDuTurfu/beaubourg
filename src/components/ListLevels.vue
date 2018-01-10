@@ -49,10 +49,11 @@ export default {
     <h1>{{ title }}</h1>
       <div class="lvlslider">
         <div class="itemmini" v-if="counter === 1 " v-on:click="compteurreinit5">
+         
             <div class="bordermini">
-              <img class="imgmini" v-bind:src="image5">
+              <img class="imgmini" v-bind:src="image4">
             </div>
-            <span class="caption"><h2>Niveau 7</h2></span>
+            <span class="caption"><h2>Niveau 4</h2></span>
         </div>
         <div class="itemmini" v-else v-on:click="compteurmoins">
             <div class="bordercentre" v-if="counter === 2">
@@ -176,6 +177,8 @@ a {
   font-size:4em;
   vertical-align: middle;
   padding-top: 2.5em;
+  text-shadow: 0px 0px 10px rgb(255, 255, 255);
+  height: 0;
 }
 div.itemcentre {
     vertical-align: middle;
@@ -205,34 +208,30 @@ div.itemmini {
     display: block;
     margin-top: 10%;
 }
-.bordercentre {
-  border-radius: 50%;
-  border: 12px dashed white;
+.bordercentre:nth-child(0) {
+   border-radius: 50%;
+  border: 10px dashed white!important;
   padding: 15% 15% 15% 15%;
-  background: skyblue;
-  /*animation: Rotate 5s linear 2s infinite ;
- -webkit-animation:Rotate 5s linear 2s infinite ;
-  -moz-animation: Rotate 5s linear 2s infinite ;
-  -ms-animation: Rotate 5s linear 2s infinite;*/
-  -webkit-animation: neonbox 15000000000000000000000000000000000000000000s linear  infinite ;
-  -moz-animation: neonbox 1500000000000000000000000000000000000000000000000000s linear  infinite ;
-  -ms-animation: neonbox 1500000000000000000000000000000000000000000000000000000s linear  infinite ;
-  animation: neonbox 150000000000000000000000000000000000000000000000000000s linear  infinite ;
+  background: transparent;
+   box-shadow: 0 0 30px #fff;
+
+}
+.bordercentre{
+  border-radius: 50%;
+  border: 7px dashed white!important;
+  padding: 15% 15% 15% 15%;
+  background: transparent;
+   box-shadow: 0 0 30px #fff, inset 0 0 20px rgb(125, 235, 255);
+
 }
 .bordermini {
   border-radius: 100%;
-  border: 12px dashed white;
+  border: 7px dashed white;
   padding: 15% 15% 15% 15%;
-  background: skyblue;
-  /*animation: Rotate 5s linear 2s infinite ;
- -webkit-animation:Rotate 5s linear 2s infinite ;
-  -moz-animation: Rotate 5s linear 2s infinite ;
-  -ms-animation: Rotate 5s linear 2s infinite;*/
-  -webkit-animation: neonbox 100000000000000000000000000000s linear  infinite ;
-  -moz-animation: neonbox 100000000000000000000000000000000s linear  infinite ;
-  -ms-animation: neonbox 1000000000000000000000000s linear  infinite ;
-  animation: neonbox 100000000000000000000000000s linear  infinite ;
+  background: transparent;
+  box-shadow: 0 0 30px #fff, inset 0 0 20px rgb(125, 235, 255);
 }
+
 @keyframes Rotate {
   from {
     transform: rotate(0deg);
