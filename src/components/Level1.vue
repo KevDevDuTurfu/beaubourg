@@ -148,8 +148,6 @@ export default {
       let borderArt=parseInt(binding.value.width)*10;
       document.removeEventListener('touchmove', mousemove);
       document.removeEventListener('touchend', mouseup);
-     // this.$refs.artwork1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
-      console.log(el.classList.contains('btn1'));
       if (el.classList.contains('btn1')){
           document.getElementById("artwork1").style.background='linear-gradient('+binding.value.color1+','+binding.value.color2+')';
       }
@@ -204,7 +202,7 @@ body{
   overflow:hidden;
 }
 .lvl1 {
-     background-image: url("../assets/images/img_stack.png");
+  background-image: url("../assets/images/img_stack.png");
   background-image:url("../assets/images/fondniveau.png"), url("../assets/images/img_stack.png") ;
   background-repeat: no-repeat;
   background-attachment: fixed;

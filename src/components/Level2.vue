@@ -15,7 +15,7 @@ color (couleur) et border (bordure) de la même manière...</p>
      <!--contenu de l'oeuvre à composer-->
     <div class="artwork" ref="artwork">
       <!-- oeuvre en lui même -->
-      <div   class=" artwork2" id="artwork2" ref="artwork2" >
+      <div   class="artwork2" id="artwork2" ref="artwork2" >
       </div>
       <div class="artwork2" id="artwork2" ref="artwork2">
           
@@ -63,7 +63,7 @@ color (couleur) et border (bordure) de la même manière...</p>
                     <div class="width">
                         <h2 class="titleCss">Width</h2></div>
                         <div class="rangeValue">
-                        <input id="valueBorder" type="range" min="1" max="7" step="1" @touchmove="getWidthBorder()">
+                        <input id="valueBorder" type="range" min="1" max="7" step="1" @click="getWidthBorder()" @touchmove="getWidthBorder()">
                         
                         </div>
                     </div>
@@ -127,7 +127,8 @@ export default {
     }
   }, 
   components: {
-          'modal':  Modal
+          'modal':  Modal,
+          'victory': Victory
         },
   methods:{
     updateTextInput:function(val) {
@@ -161,13 +162,21 @@ export default {
     border:function(){
        this.$refs.btn2.style.border=this.borderWidth+'px '+this.borderStyle+' '+this.borderColor;
     },
-      backgroundColor:function(){
-        this.$refs.btn1.style.background=this.couleur;
+    backgroundColor:function(){
+      this.$refs.btn1.style.background=this.couleur;
+    },
+    victory: function() {
+      if ((document.getElementById("artwork2").style.background=='rgb(244, 14, 60)')
+      && (document.getElementById("artwork2").style.border=='20px solid black') 
+      && (document.getElementsByClassName("artwork2")[0].classList.contains('translate10'))) {
+          this.showVictory=true;
+        
       }
+    }
   },
 
   directives: {
-   draggable: function (el, binding) {
+   draggable: function (el, binding, vnode) {
     
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY;
 
@@ -184,7 +193,7 @@ export default {
       el.style.left=initialBoxX;
       el.style.top=initialBoxY;
       el.style='relative';
-      let borderArt=parseInt(binding.value.width)*2;
+      let borderArt=parseInt(binding.value.width)*10;
       document.removeEventListener('touchmove', mousemove);
       document.removeEventListener('touchend', mouseup);
       if (el.classList.contains('btn1')){
@@ -208,8 +217,7 @@ export default {
          }
         
       }
-     
-      this.showVictory=true;
+     vnode.context.victory();
 
     }
 
@@ -245,8 +253,8 @@ export default {
         this.backgroundColor();
         this.border();
     }
+  
   }
-
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -265,25 +273,6 @@ export default {
 }
 body{
   overflow:hidden;
-}
-
-.bubble{
-  cursor: pointer;
-  position : absolute;
-  bottom: 0;
-  left: 0;
-  padding:10px;
-  font-size: 25px;
-  color:white;
-  background: #1761b0;
-  background-image: -webkit-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -moz-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -ms-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -o-linear-gradient(top, #1761b0, #9421c2);
-  background-image: linear-gradient(to bottom, #1761b0, #9421c2);
-  font-family: 'Play', sans-serif;
-  border-radius: 50%;
-  margin:1%;
 }
 
 .artwork{

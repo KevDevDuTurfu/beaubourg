@@ -16,7 +16,7 @@
                </div>
                <div class="block">
             <div class="labelIcones">Menu-----</div>
-            <div class="icones"><router-link to="/" @click="$emit('close')"><span class="icone"><i class="fa fa-home" aria-hidden="true"></i></span></router-link></div>
+            <div class="icones"><router-link  @click="$emit('close')" to="/niveau"><span class="icone"><i class="fa fa-home" aria-hidden="true"></i></span></router-link></div>
             </div>
                <div class="block">
             <div class="labelIcones">Langues-----</div>
