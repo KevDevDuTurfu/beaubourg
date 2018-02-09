@@ -131,8 +131,8 @@ export default {
           'victory': Victory
         },
         computed: {
-  btnStyle: function() {
-    return 'border: ' + this.borderWidth+'px '+this.borderStyle+' '+this.borderColor;
+          btnStyle: function() {
+            return 'border: ' + this.borderWidth+'px '+this.borderStyle+' '+this.borderColor;
   }
 
   },

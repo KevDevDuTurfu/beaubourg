@@ -38,7 +38,12 @@ body {
 .selected {
   transform: scale(1.1);
 }
-
+.textField {
+  background-color: transparent;
+  color:white;
+  width:30%;
+  
+}
 .settings {
   position: absolute;
   top:0;

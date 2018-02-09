@@ -59,25 +59,9 @@ color (backImg) et border (bordure) de la même manière...</p>
                         <div class="col imgBackground4"><div class="codeImage" @click="getImgBackground('imagefake2.png')"></div></div>
                         </div>
                         
-                    <div class="btn btn2" ref ="btn2"  v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
+                    <div class="btn btn2" ref ="btn2" :style="btnStyle"  v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
                         <div class="value" v-if="show2">
-                        <div class="style"><h2 class="titleCss">Style</h2>
-                            <div class="sty style1" @click="getBorderStyle('solid')"></div>
-                            <div class="sty style2" @click="getBorderStyle('dashed')"></div>
-                        </div>
-                        <div class="color"> 
-                            <h2 class="titleCss">Color</h2>
-                            <div class="col color1"><div class="codeColor" @click="getBorderColor('black')"></div></div>
-                            <div class="col color2"><div class="codeColor" @click="getBorderColor('grey')"></div></div>
-                            <div class="col color3"><div class="codeColor" @click="getBorderColor('rgb(50, 156, 205)')"></div></div>
-                        </div>
-                        <div class="width">
-                            <h2 class="titleCss">Width</h2>
-                            <div class="rangeValue">
-                            <input id="valueBorder" type="range" min="1" max="7" step="1" @touchstart="getWidthBorder()">
-                            
-                            </div>
-                        </div>
+                        <input type="text" class="textField" placeholder="value" >
                         
                         </div>
                     </div>

@@ -17,17 +17,16 @@ color (couleur) et border (bordure) de la même manière...</p>
 
     <div class="artwork" ref="artwork">
       <!-- oeuvre en lui même -->
-      <div :class="['artwork3h artwork3', { selected: rightBarSelected }, rightBarShadow]" id="artwork3hd" ref="artwork3h" @click="rightBarSelected = !rightBarSelected">
+      <div :class="['artwork3h artwork3', { selected: rightBarSelected }, rightBarShadow]" id="artwork3hd" ref="artwork3h" @click="selectedTrigger('rightBarSelected')">
           
       </div>
-      <div :class="['artwork3v artwork3', { selected: topBarSelected }, topBarShadow]"  id="artwork3vh" ref="artwork3v" @click="topBarSelected = !topBarSelected">
+      <div :class="['artwork3v artwork3', { selected: topBarSelected }, topBarShadow]"  id="artwork3vh" ref="artwork3v" @click=" selectedTrigger('topBarSelected')">
           
       </div>
-      <div :class="['artwork3h artwork3', { selected: leftBarSelected }, leftBarShadow]" id="artwork3hg" ref="artwork3h" @click="leftBarSelected = !leftBarSelected">
+      <div :class="['artwork3h artwork3', { selected: leftBarSelected }, leftBarShadow]" id="artwork3hg" ref="artwork3h" @click="selectedTrigger('leftBarSelected')">
           
       </div>
-      <div :class="['artwork3v artwork3', { selected: bottomBarSelected }, bottomBarShadow]" id="artwork3vb" ref="artwork3v" @click="bottomBarSelected = !bottomBarSelected">
-          
+      <div :class="['artwork3v artwork3', { selected: bottomBarSelected }, bottomBarShadow]" id="artwork3vb" ref="artwork3v" @click=" selectedTrigger('bottomBarSelected')">         
       </div>
     </div>
     <!--debut du contenu des commandes (barre à droite) -->
@@ -151,9 +150,38 @@ export default {
           'modal':  Modal
         },
   methods:{
+    selectedTrigger(bar)  {
+        switch(bar) {
+          case 'rightBarSelected':
+              this.rightBarSelected=!this.rightBarSelected;
+              this.leftBarSelected=false;
+              this.topBarSelected=false;
+              this.bottomBarSelected=false;
+              break;
+          case 'leftBarSelected':
+              this.rightBarSelected=false;
+              this.leftBarSelected=!this.leftBarSelected;
+              this.topBarSelected=false;
+              this.bottomBarSelected=false;
+              break;
+          case 'topBarSelected':
+              this.rightBarSelected=false;
+              this.leftBarSelected=false;
+              this.topBarSelected=!this.topBarSelected;
+              this.bottomBarSelected=false;
+              break;
+          case 'bottomBarSelected':
+              this.rightBarSelected=false;
+              this.leftBarSelected=false;
+              this.topBarSelected=false;
+              this.bottomBarSelected=!this.bottomBarSelected;
+              break;
+          default:
+              break;
+      }
+    },
     victory: function(){
       this.showVictory=true;
-
     },
     getTransform: function(value){
       this.valueTransform=value;
@@ -232,10 +260,6 @@ export default {
         else {
           vnode.context.bottomBarShadow=binding.value.transform+binding.value.duration;
         }
-        
-
-
-
       }
     }
 
