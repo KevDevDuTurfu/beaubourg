@@ -1,7 +1,7 @@
 <!--ici html du code-->
 <template>
   <div class="lvl lvl1"><!-- contenu du niveau 1-->
-    <div class="bubble"  @click="showModal=true">?</div><!--contenu de la bulle info-->
+    <div class="bubble"  @click="showModal=true"><i class="fa fa-question-circle" aria-hidden="true"></i></div><!--contenu de la bulle info-->
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
@@ -48,7 +48,7 @@ color (couleur) et border (bordure) de la même manière...</p>
           <div class="width">
             <h2 class="titleCss">Width</h2></div>
             <div class="rangeValue">
-              <input id="valueBorder" type="range" min="1" max="7" step="1" @touchmove="getWidthBorder()">
+              <input id="valueBorder" type="range" min="1" max="7" step="1" @click="getWidthBorder()" @touchmove="getWidthBorder()">
               
             </div>
         </div>

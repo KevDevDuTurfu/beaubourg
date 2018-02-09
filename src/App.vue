@@ -30,17 +30,25 @@ export default {
 *{
   margin:0;
   padding:0;
+ 
 }
+body {
+   overflow:hidden;
+}
+.selected {
+  transform: scale(1.1);
+}
+
 .settings {
   position: absolute;
   top:0;
   right:0;
-color:#ffffff;
+  color:#ffffff;
   text-decoration: none;
   line-height: 12px;
   padding: 0.25em;
   font-size:45px;
-   text-shadow: 0 0 20px #fff;
+  text-shadow: 0 0 20px #fff;
 }
 body{
  background: royalblue;
@@ -74,17 +82,16 @@ fade-enter-active, .fade-leave-active {
   padding:10px;
   font-size: 25px;
   border-radius: 50%;
-  margin:1%;
+  margin-bottom:2%;
+  margin-left:1%; 
   width: 20px;
   height:20px;
-  font-family: 'Play';
-  color: #ffffff;
-  font-size: 20px;
+  color:#ffffff;
   text-decoration: none;
-   background: rgb(37, 36, 49);
-  
-   text-shadow: 0 0 40px #fff;
-  box-shadow: 0 5px 10px rgb(85, 81, 81);
+  line-height: 12px;
+  padding: 0.25em;
+  font-size:45px;
+  text-shadow: 0 0 20px #fff;
 }
 
 .command{

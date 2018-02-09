@@ -1,7 +1,7 @@
 <!--ici html du code-->
 <template>
   <div class="lvl2"><!-- contenu du niveau 2-->
-    <div class="bubble"  @click="showModal = true">?</div><!--contenu de la bulle info-->
+    <div class="bubble"  @click="showModal = true"><i class="fa fa-question-circle" aria-hidden="true"></i> </div><!--contenu de la bulle info-->
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
@@ -48,7 +48,7 @@ color (couleur) et border (bordure) de la même manière...</p>
                     <div class="col colorBackground2"><div class="codeColor" @click="getColorBackground('#59a0f2')"></div></div>
                     </div>
                 </div>
-                <div class="btn btn2" ref ="btn2"  v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
+                <div class="btn btn2" ref ="btn2" :style="btnStyle" v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
                     <div class="value" v-if="show2">
                     <div class="style"><h2 class="titleCss">Style</h2>
                         <div class="sty style1" @click="getBorderStyle('solid')"></div>
@@ -63,7 +63,7 @@ color (couleur) et border (bordure) de la même manière...</p>
                     <div class="width">
                         <h2 class="titleCss">Width</h2></div>
                         <div class="rangeValue">
-                        <input id="valueBorder" type="range" min="1" max="7" step="1" @click="getWidthBorder()" @touchmove="getWidthBorder()">
+                        <input id="valueBorder" type="range" min="1" max="7" step="1" v-model="borderWidth">
                         
                         </div>
                     </div>
@@ -130,6 +130,13 @@ export default {
           'modal':  Modal,
           'victory': Victory
         },
+        computed: {
+  btnStyle: function() {
+    return 'border: ' + this.borderWidth+'px '+this.borderStyle+' '+this.borderColor;
+  }
+
+  },
+
   methods:{
     updateTextInput:function(val) {
           document.getElementById('textInput').value=val; 
@@ -149,18 +156,9 @@ export default {
     
     getBorderColor: function(value){
         this.borderColor=value;
-        this.border();
     },
     getBorderStyle: function (value){
       this.borderStyle=value;
-      this.border();
-    },
-    getWidthBorder: function (){
-      this.borderWidth=document.getElementById('valueBorder').value;
-      this.border();
-    },
-    border:function(){
-       this.$refs.btn2.style.border=this.borderWidth+'px '+this.borderStyle+' '+this.borderColor;
     },
     backgroundColor:function(){
       this.$refs.btn1.style.background=this.couleur;
@@ -245,13 +243,11 @@ export default {
   beforeUpdate: function(){
     if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundColor();
-        this.border();
     }
   },
   updated: function(){
     if (!document.getElementsByClassName('page-cmd1')){
         this.backgroundColor();
-        this.border();
     }
   
   }

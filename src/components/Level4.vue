@@ -1,7 +1,7 @@
 <!--ici html du code-->
 <template>
   <div class="lvl4"><!-- contenu du niveau 2-->
-    <div class="bubble"  @click="showModal = true">?</div><!--contenu de la bulle info-->
+    <div class="bubble"  @click="showModal = true"><i class="fa fa-question-circle" aria-hidden="true"></i></div><!--contenu de la bulle info-->
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
@@ -325,24 +325,6 @@ label {
 }
 .btn-command i{
     padding: 2%;
-}
-.bubble{
-  cursor: pointer;
-  position : absolute;
-  bottom: 0;
-  left: 0;
-  padding:10px;
-  font-size: 25px;
-  color:white;
-  background: #1761b0;
-  background-image: -webkit-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -moz-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -ms-linear-gradient(top, #1761b0, #9421c2);
-  background-image: -o-linear-gradient(top, #1761b0, #9421c2);
-  background-image: linear-gradient(to bottom, #1761b0, #9421c2);
-  font-family: 'Play', sans-serif;
-  border-radius: 50%;
-  margin:1%;
 }
 .lvl4{
        background-image: url("../assets/images/img_stack.png");

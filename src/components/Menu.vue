@@ -2,15 +2,15 @@
 <template>
   <div class="menu">
     <h1><img id="title_logo" src="../assets/images/logo_titre.png"/></h1>
+    <div>
+      <div class="border">
 
-    <div class="border">
+      </div>
+      <div class="border blur">
 
+      </div>
+      <router-link to="/niveau"><span id="play">&#9655;</span></router-link>
     </div>
-    <div class="border blur">
-
-    </div>
-    <router-link to="/niveau"><span id="play">&#9655;</span></router-link>
-
   </div>
 </template>
 <script>
@@ -97,6 +97,7 @@ a{
   filter:blur(6px);
   top:44.25%;
   left:44.5%;
+  margin-left:-7px;
 }
 @keyframes neon1 {
   from {
