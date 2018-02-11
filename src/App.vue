@@ -32,16 +32,55 @@ export default {
   padding:0;
  
 }
+
 body {
    overflow:hidden;
 }
 .selected {
   transform: scale(1.1);
 }
+.labelArrow {
+  font-size: 0.8em;
+  font-family:  'Barlow Condensed',sans-serif;
+  padding-bottom: 1%;
+}
 .textField {
   background-color: transparent;
   color:white;
-  width:30%;
+  width:70%;
+  height:50px;
+  font-size: 1.3em;
+  font-family: 'Play', sans-serif;
+  border: 3px solid rgb(231, 241, 255);
+  border-radius: 25px;
+   -webkit-transition: box-shadow .35s ease-in-out;
+  transition: box-shadow .35s ease-in-out;
+  text-align: center;
+  margin-top: 5%;
+}
+.textField[type=text]:focus {
+    border: 3px solid rgb(255, 255, 255);
+  box-shadow: 0 0 30px rgb(255, 255, 255);
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(242, 209, 248);
+    opacity: 1; /* Firefox */
+    font-family: 'Play', sans-serif;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(242, 209, 248);
+    font-family: 'Play', sans-serif;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(242, 209, 248);
+    font-family: 'Play', sans-serif;
+}
+@media (max-height:770px) {
+  .btn {
+    font-size: 30px!important;
+  }
   
 }
 .settings {
