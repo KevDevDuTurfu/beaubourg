@@ -22,7 +22,7 @@ color (couleur) et border (bordure) de la même manière...</p>
     <div class="command">
       <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
       <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
-        <div class="btn btn1 " ref="btn1"  v-draggable="{color1:couleur,color2:couleur2 }">Background</div>
+        <div class="btn btn1 " ref="btn1"  v-bind:style="{ backgroundImage: 'linear-gradient( ' + couleur + ', ' + couleur2 + ')'}"  v-draggable="{color1:couleur,color2:couleur2 }">Background</div>
       </div><!--les options -->
       <div class="value"  v-if="show"><!--contenu de valeurs-->
         <div class="color"><!--si les valeurs sont des couleurs=>utilisez class color-->
@@ -33,7 +33,7 @@ color (couleur) et border (bordure) de la même manière...</p>
           <div class="col colorGradient2"><div v-bind:style="{ 'background-color':gradientBottom }" class="codeColor" @click="getColorGradientBottom(gradientBottom)"></div><p class="option">bottom</p></div>
         </div>
       </div>
-      <div class="btn btn2" ref ="btn2"  v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
+      <div class="btn btn2" ref ="btn2" :style="btnStyle"  v-draggable="{victory:showVictory,color:borderColor,width:borderWidth,style:borderStyle}">Border</div>
         <div class="value" v-if="show2">
           <div class="style"><h2 class="titleCss">Style</h2>
             <div class="sty style1" @click="getBorderStyle('solid')"></div>
@@ -48,7 +48,7 @@ color (couleur) et border (bordure) de la même manière...</p>
           <div class="width">
             <h2 class="titleCss">Width</h2></div>
             <div class="rangeValue">
-              <input id="valueBorder" type="range" min="1" max="7" step="1" @click="getWidthBorder()" @touchmove="getWidthBorder()">
+              <input id="valueBorder" type="range" min="1" max="10" step="1" v-model="borderWidth">
               
             </div>
         </div>
@@ -90,33 +90,28 @@ export default {
    
     getColorGradientTop: function(value){
     this.couleur=value;
-    this.gradient();
+    // this.gradient();
     },
     getColorGradientBottom: function(value){
     this.couleur2=value;
-    this.gradient();
+    // this.gradient();
     },
-    getBorderColor: function(value){
-        this.borderColor=value;
-        this.border();
+  
+    getBorderColor: function(value) {
+
+      this.borderColor = value;
+
     },
-    getBorderStyle: function (value){
-      this.borderStyle=value;
-      this.border();
+
+    getBorderStyle: function(value) {
+
+      this.borderStyle = value;
+
     },
-    getWidthBorder: function (){
-      this.borderWidth=document.getElementById('valueBorder').value;
-      console.log(document.getElementById('valueBorder').value  )
-      this.border();
-    },
-    border:function(){
-      console.log(this.borderWidth+'px '+this.borderStyle+' '+this.borderColor);
-       this.$refs.btn2.style.border=this.borderWidth+'px '+this.borderStyle+' '+this.borderColor;
-    },
-    gradient:function(){
-       this.$refs.btn1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
+    // gradient:function(){
+    //    this.$refs.btn1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
        
-    },
+    // },
     victory: function() {
       if ((document.getElementById("artwork1").style.background=='linear-gradient(rgb(40, 142, 153), rgb(24, 84, 94))')
       && (document.getElementById("artwork1").style.border=='70px solid rgb(24, 84, 94)')) {
@@ -124,6 +119,14 @@ export default {
           this.showVictory=true;
       }
     }
+  },
+  computed: {
+  
+      btnStyle: function() {
+  
+        return 'border: ' + this.borderWidth + 'px ' + this.borderStyle + ' ' + this.borderColor;
+  
+      }
   },
 
   directives: {
@@ -145,14 +148,16 @@ export default {
       el.style.left=initialBoxX;
       el.style.top=initialBoxY;
       el.style='relative';
-      let borderArt=parseInt(binding.value.width)*10;
       document.removeEventListener('touchmove', mousemove);
       document.removeEventListener('touchend', mouseup);
+      let borderArt = parseInt(binding.value.width) * 10;
       if (el.classList.contains('btn1')){
           document.getElementById("artwork1").style.background='linear-gradient('+binding.value.color1+','+binding.value.color2+')';
+          vnode.context.couleur='transparent';
+          vnode.context.couleur2='transparent';
       }
       else {
-         document.getElementById("artwork1").style.border=borderArt+'px '+binding.value.style+' '+binding.value.color;
+         document.getElementById("artwork1").style.border= borderArt + 'px ' + binding.value.style + ' ' + binding.value.color;
       }
      vnode.context.victory();
 
@@ -175,23 +180,6 @@ export default {
     });
   }
   
-},
-  created:function(){
-  },
-  mounted: function(){
-    this.gradient();
-    this.border();
-     
-  },
-  beforeUpdate: function(){
-    this.gradient();
-    this.border();
-    
-  },
-  updated: function(){
-    this.gradient();
-    this.border();
-    
   }
 
 }

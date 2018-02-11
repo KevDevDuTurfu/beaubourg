@@ -431,12 +431,8 @@
             }
   
           } else if (el.classList.contains('btn3')) {
-  
-  
-  
+
             for (var i = 0; i < 4; i++) {
-  
-  
   
               document.getElementsByClassName("artwork2")[i].className = 'artwork2';
   

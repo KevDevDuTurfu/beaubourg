@@ -6,6 +6,8 @@ import Level1 from '@/components/Level1'
 import Level2 from '@/components/Level2'
 import Level3 from '@/components/Level3'
 import Level4 from '@/components/Level4'
+import VueIntro from 'vue-introjs';
+Vue.use(VueIntro)
 Vue.use(Router)
 
 export default new Router({
