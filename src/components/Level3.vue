@@ -10,8 +10,9 @@
         <victory  :niveau="niveauSuivant" v-if="showVictory" @close="showVictory=false"> </victory>
         <!--debut de l'aide en bas de page-->
      <div class="tips">
-     <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété
-color (couleur) et border (bordure) de la même manière...</p>
+     <p v-if="!cmd">Code css: {background-color:{{couleur}} {box-shadow: {{offsetX}}px {{offsetY}}px {{blur}}px {{shadowColor}}}</p>
+      <p v-if="cmd"> {animation:{{valueTransform}} {{valueDuration}}s linear infinite alternate}</p>
+  
      </div><!--fin de l'aide -->
      <!--contenu de l'oeuvre à composer-->
 
@@ -54,7 +55,7 @@ color (couleur) et border (bordure) de la même manière...</p>
                         <div class="col colorBackground4"><div class="codeColor" @click="getColorBackground('#d3093c')"></div></div>
                     </div>
                     </div>
-                    <div class="btn btn2" ref ="btn2" v-draggable="{shadow:shadowColor, offX:offsetX,offY:offsetY, b:blur}">Box-shadow</div>
+                    <div class="btn btn2" ref ="btn2" v-bind:style="{boxShadow:offsetX+'px '+offsetY+'px '+blur+' px '+shadowColor}" v-draggable="{shadow:shadowColor, offX:offsetX,offY:offsetY, b:blur}">Box-shadow</div>
                         <div class="value" v-if="show2">
                         <div class="color"> 
                             <h2 class="titleCss">Color</h2>
@@ -65,15 +66,15 @@ color (couleur) et border (bordure) de la même manière...</p>
                         <div class="width">
                             <div class="rangeValue">
                                 <h2 class="titleCss">Offset-x</h2>
-                            <input id="valueOffsetX" type="range" min="-20" max="20" step="2" @touchstart="getOffsetX()" @click="getOffsetX()">
+                            <input id="valueOffsetX" type="range" min="-20" max="20" step="2" v-model="offsetX">
                             </div>
                             <div class="rangeValue">
                                 <h2 class="titleCss">Offset-y</h2>
-                            <input id="valueOffsetY" type="range" min="-20" max="20" step="2" @touchstart="getOffsetY()" @click="getOffsetY()" >
+                            <input id="valueOffsetY" type="range" min="-20" max="20" step="2" v-model="offsetY" >
                             </div>
                             <div class="rangeValue">
                                 <h2 class="titleCss">Blur-radius</h2>
-                            <input id="valueBlur" type="range" min="0" max="40" step="2" @touchstart="getBlurRadius()" @click="getBlurRadius()">
+                            <input id="valueBlur" type="range" min="0" max="40" step="2" v-model="blur">
                             </div>
                         </div>
                     </div>
@@ -143,7 +144,8 @@ export default {
       leftBarSelected:false,
       leftBarShadow:'',
       bottomBarSelected:false,
-      bottomBarShadow:''
+      bottomBarShadow:'',
+      boxShadow:''
     }
   }, 
   components: {
@@ -200,20 +202,8 @@ export default {
         this.shadowColor=value;
         this.box();
     },
-    getOffsetX: function (){
-      this.offsetX=document.getElementById('valueOffsetX').value;
-      this.box();
-    },
-    getOffsetY: function (){
-      this.offsetY=document.getElementById('valueOffsetY').value;
-      this.box();
-    },
-    getBlurRadius: function (){
-      this.blur=document.getElementById('valueBlur').value;
-      this.box();
-    },
     box:function(){
-       this.$refs.btn2.style.boxShadow=this.offsetX+'px '+this.offsetY+'px '+this.blur+'px '+this.shadowColor;
+       this.boxShadow=this.offsetX+'px '+this.offsetY+'px '+this.blur+'px '+this.shadowColor;
     },
     backgroundColor:function(){
        this.$refs.btn1.style.background=this.couleur;
@@ -330,13 +320,13 @@ body{
   transition: transform 2s ease-out;
 }
  .artwork3v {
-    background-color:#fbff18;
+    background-color:white;
     width:65vh;
     height:5vh;
     margin-top: 0vh;
 }
 .artwork3v:last-child {
-    background-color: #fbff18;
+    background-color: white;
     width:65vh;
     height:5vh;
     margin-top: 60vh;
@@ -428,7 +418,7 @@ body{
   }
 }
  .artwork3h {
-    background-color: #252d33;
+    background-color: rgb(219, 219, 219);
     width:5vh;
     height:60vh;
     position: absolute;
@@ -436,7 +426,7 @@ body{
     margin-top: 0vh;
 } 
 .artwork3h:nth-child(1) {
-    background-color: #252d33;
+    background-color: rgb(236, 236, 236);
     width:5vh;
     height:60vh;
     margin-left: 60vh;

@@ -22,7 +22,8 @@
   
     <div class="tips">
   
-      <p>Bravo! Maintenant, il ne reste plus qu’à ajouter la propriété color (couleur) et border (bordure) de la même manière...</p>
+      <p v-if="!cmd">Code css: {background-color:{{couleur}} {border: {{borderWidth*10}}px {{borderStyle}} {{borderColor}}}</p>
+      <p v-if="cmd"> {animation:{{valueTransform}} {{valueDuration}}s linear infinite alternate}</p>
   
     </div>
   

@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueIntro from 'vue-introjs/dist/index.min.js';
+ 
+Vue.use(VueIntro);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
