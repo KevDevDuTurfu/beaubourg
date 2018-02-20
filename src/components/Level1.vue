@@ -128,7 +128,11 @@ export default {
           },
           {
             element: document.querySelector("#btn1"),
+<<<<<<< HEAD
             intro: "Lorsqu'une valeur d'attribut a correctement été affectée, le bouton de la propriété correspondante s'anime en conséquence, afin de donner un aperçu du résultat.<br><br>Tout ce qu'il nous reste maintenant à faire est de maintenir le doigt enfoncé sur le bouton 'Background' et de le faire glisser sur le plan de travail.<br><br>Abracadabra ! La couleur de fond a changé !",
+=======
+            intro: "Lorsqu'une valeur d'attribut a correctement été affectée, la bordure du bouton de la propriété correspondante s'anime en conséquence, afin de donner un aperçu du résultat.<br><br>Tout ce qu'il nous reste maintenant à faire est de maintenir le doigt enfoncé sur le bouton 'Background' et de le faire glisser sur le plan de travail.<br><br>Abracadabra ! La couleur de fond a changé !",
+>>>>>>> 331333648091e0ede14ad14fe26738cc1f429111
             position: "left"
           },
           {
