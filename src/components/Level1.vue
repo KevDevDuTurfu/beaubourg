@@ -21,7 +21,7 @@
       <div class="artwork1" id="artwork1" ref="artwork1" >
       </div>
     </div>
-    
+
     <!--debut du contenu des commandes (barre à droite) -->
     <div class="command" id="command">
       <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
@@ -43,7 +43,7 @@
             <div class="sty style1" @click="getBorderStyle('solid')"></div>
             <div class="sty style2" @click="getBorderStyle('dashed')"></div>
           </div>
-          <div class="color"> 
+          <div class="color">
             <h2 class="titleCss">Color</h2>
             <div class="col color1"><div class="codeColor" @click="getBorderColor('#18545e')"></div></div>
             <div class="col color2"><div class="codeColor" @click="getBorderColor('royalblue')"></div></div>
@@ -88,59 +88,64 @@ export default {
       borderStyle:'solid',
       intro : introJs()
     }
-  }, 
+  },
   components: {
           'modal':  Modal,
           'victory': Victory
         },
   mounted: function() {
-     
+
       this.intro.setOptions({
         steps: [
-          { 
-            intro: "Bienvenue dans Visuart Code! Voici le tutoriel du jeu!"
+          {
+            intro: "Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu."
           },
-          { 
-            intro: "Le but du jeu est de reconstruire des oeuvres à partir du code CSS, code qui permet de donner un style à un élément sur une page web"
+          {
+            intro: "Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !"
+          },
+          {
+            intro: "Le CSS est un langage de programmation permettant de styliser l'affichage d'une page web.<br>Son utilisation est indispensable dans la conception de n'importe quelle application ou site internet !<br><br>Maintenant, voyons comment s'organise l'interface du jeu."
           },
           {
             element:document.querySelector("#artwork1"),
-            intro: "Voici l'oeuvre à reconstituer",
-            
+            intro: "Voici le plan de travail. Sur cet écran, tu peux voir le résultat visuel des propriétés CSS que tu as appliqué.<br><br>Pour remporter la partie, ce qui est affiché ici doit ressembler le plus possible à l'oeuvre originale, que tu peux visionner à tout moment en touchant la bulle d'info (i) un peu plus bas.<br><br>Près de la bulle d'info, tu trouveras également une transcription littérale du code utilisé.",
             position:'top'
           },
-          { 
+          {
             element: document.querySelector("#command"),
-            intro: "Voici la liste du code CSS à remplir",
-            position: "left"
-            
-          },
-          {
-            element: document.querySelector("#btn1"),
-            intro: "Voici un bouton qui est une propriété CSS 'background', permet de donner un fond à l'oeuvre",
+            intro: "Voici l'interface de jeu. C'est ici que la magie prend forme !<br><br>Cette zone contient tous les éléments de CSS dont tu as besoin pour reconstituer l'oeuvre et compléter le niveau.<br><br>Chaque bouton correspond à une propriété, dont les valeurs des attributs peuvent être modifiées juste en dessous.<br><br>Un peu perdu(e) ? Examinons tout ça plus en détail :",
             position: "left"
           },
           {
             element: document.querySelector("#btn1"),
-            intro: "Le principe est que cette propriété ait des valeurs remplies se situant juste en dessous du bouton",
+            intro: "Voici un bouton. Comme nous l'avons vu précédemment, chaque bouton porte le nom d'une propriété CSS dont les valeurs d'attributs sont définies juste en dessous.<br><br>Par exemple ici, 'Background' permet de définir l'arrière plan de l'oeuvre.<br><br> Mais comment fonctionne-t'il, ce bouton 'Background' ? C'est très simple, jettes donc un oeil un peu plus bas.",
             position: "left"
           },
           {
             element: document.querySelectorAll(".codeColor")[0],
-            intro: "Ces valeurs doivent être sélectionnées afin de remplir la propriété CSS 'Background', cela va permettre de reconstituer l'oeuvre",
+            intro: "Première étape : Choisir une valeur pour l'un des attributs de la propriété.<br><br>Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercle de couleur au dessus de 'top' pour sélectionner la valeur.",
             position: "left"
           },
           {
             element: document.querySelector("#btn1"),
-            intro: "Première étape: attribuer des valeurs au background, il suffit de cliquer sur les valeurs",
-          }
+            intro: "Lorsqu'une valeur d'attribut a correctement été affectée, la bordure du bouton de la propriété correspondante s'anime en conséquence, afin de donner un aperçu du résultat.<br><br>Tout ce qu'il nous reste maintenant à faire est de maintenir le doigt enfoncé sur le bouton 'Background' et de le faire glisser sur le plan de travail.<br><br>Abracadabra ! La couleur de fond a changé !",
+            position: "left"
+          },
+          {
+            element: document.querySelectorAll(".codeColor")[1],
+            intro: "Nous avons affecté un background coloré uni en fixant la première couleur de 'Gradient'. Il nous suffit maintenant de répéter le même processus pour ajouter la couleur de 'bottom' et ainsi compléter notre dégradé !<br><br>Et voilà, le fond de l'oeuvre a été reproduit à la perfection !",
+            position: "left"
+          },
+          {
+            intro: "Ce tutoriel est désormais terminé ! C'est maintenant à toi de jouer !<br><br>Parviendras-tu à relever le challenge et à compléter les quatre niveaux ?<br><br>Bonne chance !"
+          },
         ]
       });
     this.intro.start();
-   
+
   },
   methods:{
-   
+
     getColorGradientTop: function(value){
     this.couleur=value;
     // this.gradient();
@@ -149,7 +154,7 @@ export default {
     this.couleur2=value;
     // this.gradient();
     },
-  
+
     getBorderColor: function(value) {
 
       this.borderColor = value;
@@ -167,7 +172,7 @@ export default {
     },
     // gradient:function(){
     //    this.$refs.btn1.style.background='linear-gradient('+this.couleur+','+this.couleur2+')';
-       
+
     // },
     victory: function() {
       if ((document.getElementById("artwork1").style.background=='linear-gradient(rgb(40, 142, 153), rgb(24, 84, 94))')
@@ -178,18 +183,18 @@ export default {
     }
   },
   computed: {
-  
+
       btnStyle: function() {
-  
+
         return 'border: ' + this.borderWidth + 'px ' + this.borderStyle + ' ' + this.borderColor;
-  
+
       }
   },
 
   directives: {
-    
+
    draggable: function (el, binding, vnode) {
-    
+
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY;
 
     function mousemove(e) {
@@ -221,7 +226,7 @@ export default {
     }
 
     el.addEventListener('touchstart', function(e) {
-      
+
       var touch=event.touches[0];
       el.style.position = 'absolute';
       el.style.margin=0;
@@ -236,7 +241,7 @@ export default {
       return false;
     });
   }
-  
+
   }
 
 }
@@ -283,6 +288,6 @@ body{
   }
   .rangeValue{
     margin-top: 10%;
-  }  
+  }
 
 </style>
