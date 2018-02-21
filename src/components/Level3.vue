@@ -5,6 +5,7 @@
     <div class="bubble"  @click="showModal = true"><i class="fa fa-question-circle" aria-hidden="true"></i></div><!--contenu de la bulle info-->
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
+        <errorselector v-if="showErrorSelect" @close="showErrorSelect = false"></errorselector>
     <!--fin du modal -->
     <!--condition de victoire pas encore présente-->
         <victory  :niveau="niveauSuivant" v-if="showVictory" @close="showVictory=false"> </victory>
@@ -114,7 +115,11 @@
 </template>
 <script>
 import Modal from './Modal.vue';
-import Victory from './Victory.vue'
+import ErrorSelector from './ErrorSelector.vue';
+import Victory from './Victory.vue';
+import { introJs } from 'intro.js';
+import 'intro.js/introjs.css';
+import ErrorSelectorVue from './ErrorSelector.vue';
 export default {
   name: 'Level3',
   data () {
@@ -126,6 +131,7 @@ export default {
       artist:'Dan FLAVIN',
       titre: 'Untitled (to Donna)',
       showModal: false,
+      showErrorSelect: false,
       show: true,
       show2: true,
       couleur:'transparent',
@@ -145,11 +151,13 @@ export default {
       leftBarShadow:'',
       bottomBarSelected:false,
       bottomBarShadow:'',
-      boxShadow:''
+      boxShadow:'',
+      intro2 : introJs()
     }
   }, 
   components: {
-          'modal':  Modal
+          'modal':  Modal,
+          'errorselector' : ErrorSelector
         },
   methods:{
     selectedTrigger(bar)  {
@@ -231,26 +239,37 @@ export default {
       let borderArt=parseInt(binding.value.width)*2;
       document.removeEventListener('touchmove', mousemove);
       document.removeEventListener('touchend', mouseup);
-      if (el.classList.contains('btn1')){
-        document.getElementsByClassName("selected")[0].style.backgroundColor=binding.value.color;  
+      
+           if ((!(document.getElementsByClassName('artwork3')[0].classList.contains('selected')) &&
+                  (!(document.getElementsByClassName('artwork3')[1].classList.contains('selected'))) &&
+                   (!(document.getElementsByClassName('artwork3')[2].classList.contains('selected'))) &&
+                   (!(document.getElementsByClassName('artwork3')[3].classList.contains('selected'))))) {
+              vnode.context.showErrorSelect=true;
+          }
+          else {
+            if (el.classList.contains('btn1')){
+            document.getElementsByClassName("selected")[0].style.backgroundColor=binding.value.color;  
+          }
+          else if(el.classList.contains('btn2')) {
+            document.getElementsByClassName("selected")[0].style.boxShadow=binding.value.offX+"px "+binding.value.offY+"px "+binding.value.b+"px "+binding.value.shadow;
+          }
+          else {
+            if ( vnode.context.rightBarSelected) {
+              vnode.context.rightBarShadow=binding.value.transform+binding.value.duration;
+            }
+            else if ( vnode.context.topBarSelected) {
+              vnode.context.topBarShadow=binding.value.transform+binding.value.duration;
+            }
+            else if ( vnode.context.leftBarSelected) {
+              vnode.context.leftBarShadow=binding.value.transform+binding.value.duration;
+            }
+            else {
+              vnode.context.bottomBarShadow=binding.value.transform+binding.value.duration;
+            }
+          }
+        
       }
-      else if(el.classList.contains('btn2')) {
-        document.getElementsByClassName("selected")[0].style.boxShadow=binding.value.offX+"px "+binding.value.offY+"px "+binding.value.b+"px "+binding.value.shadow;
-      }
-      else {
-        if ( vnode.context.rightBarSelected) {
-          vnode.context.rightBarShadow=binding.value.transform+binding.value.duration;
-        }
-        else if ( vnode.context.topBarSelected) {
-          vnode.context.topBarShadow=binding.value.transform+binding.value.duration;
-        }
-        else if ( vnode.context.leftBarSelected) {
-          vnode.context.leftBarShadow=binding.value.transform+binding.value.duration;
-        }
-        else {
-          vnode.context.bottomBarShadow=binding.value.transform+binding.value.duration;
-        }
-      }
+      
     }
 
     el.addEventListener('touchstart', function(e) {
@@ -270,28 +289,22 @@ export default {
   }
   
 },
-  created:function(){
-  },
-  mounted: function(){
-    if (!document.getElementsByClassName('page-cmd1')){
-        this.backgroundColor();
-        this.box();
-    }
+   mounted: function() {
 
-  },
-  beforeUpdate: function(){
-    if (!document.getElementsByClassName('page-cmd1')){
-        this.backgroundColor();
-        this.box();
+this.intro2.setOptions({
+  steps: [
+    {
+      intro: "Particularité des niveaux 3 et 4, il faut sélectionner un élément de l'oeuvre avant de mettre la propriété css"
+    },
+    {
+      element: document.querySelector("#artwork3hd"),
+      intro: "Pour le sélectionner il suffit juste d'appuyer sur un élément"
     }
-  },
-  updated: function(){
-    if (!document.getElementsByClassName('page-cmd1')){
-        this.backgroundColor();
-        this.box();
-    }
+  ]
+  });
+  this.intro2.start();
+
   }
-
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -396,21 +396,7 @@
   
     padding: 2%;
   
-    margin-left: 6%;
-  
-    background: #1F1C2C;
-  
-    /* fallback for old browsers */
-  
-    background: #606c88;
-  
-    /* fallback for old browsers */
-  
-    background: -webkit-linear-gradient(to top, #3f4c6b, #606c88);
-  
-    /* Chrome 10-25, Safari 5.1-6 */
-  
-    background: linear-gradient(to top, #3f4c6b, #606c88);
+    margin-left: 10%;
   
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
@@ -421,7 +407,10 @@
     border-radius: 15px;
   
     color: white;
-  
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-box-shadow: 0px 6px 29px 5px rgba(82,55,82,1);
+-moz-box-shadow: 0px 6px 29px 5px rgba(82,55,82,1);
+box-shadow: 0px 6px 29px 5px rgba(82,55,82,1);
   }
   
   

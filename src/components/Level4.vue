@@ -3,14 +3,14 @@
   <div class="lvl4">
   
     <!-- contenu du niveau 2-->
-  
+
     <div class="bubble" @click="showModal = true">
       <i class="fa fa-question-circle" aria-hidden="true"></i></div>
   
     <!--contenu de la bulle info-->
   
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
-  
+     <errorselector v-if="showErrorSelect" @close="showErrorSelect = false"></errorselector>
     <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
   
     <!--fin du modal -->
@@ -37,11 +37,11 @@
   
       <div id="img-block">
   
-        <div :class="['artwork4img', { selected: imageOneSelected }]" id="artwork4img1" ref="artwork4img1"  @click="selectedTrigger('imgOne')">
+        <div :class="['artwork4','artwork4img', { selected: imageOneSelected }]" id="artwork4img1" ref="artwork4img1"  @click="selectedTrigger('imgOne')">
   
         </div>
   
-        <div :class="['artwork4img', { selected: imageTwoSelected }]" id="artwork4img2" ref="artwork4img2"  @click="selectedTrigger('imgTwo')">
+        <div :class="['artwork4','artwork4img', { selected: imageTwoSelected }]" id="artwork4img2" ref="artwork4img2"  @click="selectedTrigger('imgTwo')">
   
         </div>
   
@@ -49,7 +49,7 @@
   
       <div id="desc-block">
   
-        <div :class="['artwork4desc', { selected: descOneSelected }]" id="artwork4desc1" ref="artwork4desc1"  @click="selectedTrigger('descOne')">
+        <div :class="['artwork4','artwork4desc', { selected: descOneSelected }]" id="artwork4desc1" ref="artwork4desc1"  @click="selectedTrigger('descOne')">
   
           <p>En 1984, le ministère des Affaires étrangères m’a accordé une bourse d’étude de trois mois au Japon.</p>
   
@@ -59,7 +59,7 @@
     
         </div>
   
-        <div :class="['artwork4desc', { selected: descTwoSelected }]" id="artwork4desc2" ref="artwork4desc2" @click="selectedTrigger('descTwo')">
+        <div :class="['artwork4','artwork4desc', { selected: descTwoSelected }]" id="artwork4desc2" ref="artwork4desc2" @click="selectedTrigger('descTwo')">
   
           <p>En contrepartie, j’ai demandé à mes interlocuteurs, amis ou rencontres de fortune : « Quand avez-vous le plus souffert ? » </p>
   
@@ -219,6 +219,7 @@
 <script>
   import Modal from './Modal.vue';
   
+import ErrorSelector from './ErrorSelector.vue';
   import Victory from './Victory.vue'
   
   export default {
@@ -238,7 +239,8 @@
         artist: 'Sophie CALLE',
   
         titre: 'Douleur exquise',
-  
+
+      showErrorSelect: false,
         showModal: false,
   
         show: true,
@@ -279,7 +281,8 @@
   
     components: {
   
-      'modal': Modal
+      'modal': Modal,
+      'errorselector' : ErrorSelector
   
     },
   
@@ -339,7 +342,7 @@
   
     directives: {
   
-      draggable: function(el, binding) {
+      draggable: function(el, binding, vnode) {
   
         var startX, startY, initialMouseX, initialMouseY, initialBoxX, initialBoxY;
   
@@ -372,29 +375,39 @@
           document.removeEventListener('touchmove', mousemove);
   
           document.removeEventListener('touchend', mouseup);
+           
+              if ((!(document.getElementsByClassName('artwork4')[0].classList.contains('selected')) &&
+                  (!(document.getElementsByClassName('artwork4')[1].classList.contains('selected'))) &&
+                   (!(document.getElementsByClassName('artwork4')[2].classList.contains('selected'))) &&
+                   (!(document.getElementsByClassName('artwork4')[3].classList.contains('selected'))))) {
+                  vnode.context.showErrorSelect=true;
+              }
+              else {
+                vnode.context.showErrorSelect=false;
+                      if (el.classList.contains('btn1')) {
+                  console.log(document.getElementsByClassName("selected")[0].classList.contains('artwork4img'))
+                    document.getElementsByClassName("selected artwork4img")[0].style.backgroundImage = 'url(src/assets/images/' + binding.value.image + ')';
+                  binding.value.image='';
+                }
+                else if (el.classList.contains('btn2')) {
+                      document.getElementsByClassName("selected")[0].style.border = binding.value.border;
+                      binding.value.border='';
+                } else if (el.classList.contains('btn3')) {
+                    document.getElementsByClassName("selected")[0].style.backgroundColor = binding.value.backgroundColor;
+                    binding.value.backgroundColor='transparent';
+                } else if (el.classList.contains('btn4')) {
+                  document.getElementsByClassName("selected")[0].style.fontSize = binding.value.fontSize +'px';
+                  binding.value.fontSize='0';
+                } else if (el.classList.contains('btn5')) {
+                  document.getElementsByClassName("selected")[0].style.fontFamily = binding.value.fontFamily;
+                  binding.value.fontFamily='Play';
+                } else {
+                  document.getElementsByClassName("selected")[0].style.color = binding.value.color;
+                  binding.value.color='black';
+                }
   
-          if (el.classList.contains('btn1')) {
-            console.log(document.getElementsByClassName("selected")[0].classList.contains('artwork4img'))
-              document.getElementsByClassName("selected artwork4img")[0].style.backgroundImage = 'url(src/assets/images/' + binding.value.image + ')';
-             binding.value.image='';
-          }
-          else if (el.classList.contains('btn2')) {
-                document.getElementsByClassName("selected")[0].style.border = binding.value.border;
-                binding.value.border='';
-          } else if (el.classList.contains('btn3')) {
-              document.getElementsByClassName("selected")[0].style.backgroundColor = binding.value.backgroundColor;
-              binding.value.backgroundColor='transparent';
-          } else if (el.classList.contains('btn4')) {
-            document.getElementsByClassName("selected")[0].style.fontSize = binding.value.fontSize +'px';
-            binding.value.fontSize='0';
-          } else if (el.classList.contains('btn5')) {
-            document.getElementsByClassName("selected")[0].style.fontFamily = binding.value.fontFamily;
-            binding.value.fontFamily='Play';
-          } else {
-             document.getElementsByClassName("selected")[0].style.color = binding.value.color;
-             binding.value.color='black';
-          }
-  
+              }
+          
         }
   
   
