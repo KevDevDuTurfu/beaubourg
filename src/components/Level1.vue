@@ -12,7 +12,7 @@
         <!--debut de l'aide en bas de page-->
         <div class="tips" >
      <p v-intro-hint="'Style CSS actuellement appliqué'">Code css: <br>
-     <code>{background-color: 'linear-gradient( '{{couleur}}','{{couleur2}}')} {border: {{borderWidth}}px {{borderStyle}} {{borderColor}}}</code>  </p>
+     <code>{background-color: 'linear-gradient( '{{couleur}}','{{couleur2}}')} {border: {{borderWidth*10}}px {{borderStyle}} {{borderColor}}}</code>  </p>
      </div><!--fin de l'aide -->
 
      <!--contenu de l'oeuvre à composer-->
@@ -52,6 +52,7 @@
           <div class="width">
             <h2 class="titleCss">Width</h2></div>
             <div class="rangeValue">
+              <p>Value: {{borderWidth*10}}</p>
               <input id="valueBorder" type="range" min="1" max="10" step="1" v-model="borderWidth">
             </div>
         </div>
@@ -175,8 +176,12 @@ export default {
 
     // },
     victory: function() {
-      if ((document.getElementById("artwork1").style.background=='linear-gradient(rgb(40, 142, 153), rgb(24, 84, 94))')
-      && (document.getElementById("artwork1").style.border=='70px solid rgb(24, 84, 94)')) {
+      
+      if (((document.getElementById("artwork1").style.background=='linear-gradient(rgb(40, 142, 153), rgb(24, 84, 94))') )&& (
+       (document.getElementById("artwork1").style.border=='50px solid rgb(24, 84, 94)')
+      || (document.getElementById("artwork1").style.border=='60px solid rgb(24, 84, 94)')
+      || (document.getElementById("artwork1").style.border=='70px solid rgb(24, 84, 94)')
+      || (document.getElementById("artwork1").style.border=='40px solid rgb(24, 84, 94)'))) {
         console.log('ok');
           this.showVictory=true;
       }

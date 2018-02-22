@@ -67,14 +67,17 @@
                         <div class="width">
                             <div class="rangeValue">
                                 <h2 class="titleCss">Offset-x</h2>
+                                <p>Value: {{offsetX}}</p>
                             <input id="valueOffsetX" type="range" min="-20" max="20" step="2" v-model="offsetX">
                             </div>
                             <div class="rangeValue">
                                 <h2 class="titleCss">Offset-y</h2>
+                                <p>Value: {{offsetY}}</p>
                             <input id="valueOffsetY" type="range" min="-20" max="20" step="2" v-model="offsetY" >
                             </div>
                             <div class="rangeValue">
                                 <h2 class="titleCss">Blur-radius</h2>
+                                <p>Value: {{blur}}</p>
                             <input id="valueBlur" type="range" min="0" max="40" step="2" v-model="blur">
                             </div>
                         </div>
@@ -157,6 +160,7 @@ export default {
   }, 
   components: {
           'modal':  Modal,
+          'victory' : Victory,
           'errorselector' : ErrorSelector
         },
   methods:{
@@ -191,7 +195,41 @@ export default {
       }
     },
     victory: function(){
-      this.showVictory=true;
+      if (
+          ((document.getElementById("artwork3hd").style.backgroundColor=='rgb(37, 45, 51)')
+          &&(document.getElementById("artwork3vh").style.backgroundColor=='rgb(251, 255, 24)')
+          &&(document.getElementById("artwork3hg").style.backgroundColor=='rgb(37, 45, 51)')
+          &&(document.getElementById("artwork3vb").style.backgroundColor=='rgb(251, 255, 24)')
+           )
+           && (
+             
+              (
+                (document.getElementById("artwork3vh").classList.contains('yellow1'))
+                || (document.getElementById("artwork3vh").classList.contains('yellow3'))
+                || (document.getElementById("artwork3vh").classList.contains('yellow10'))
+                ) &&
+                ((document.getElementById("artwork3vb").classList.contains('yellow1'))
+                || (document.getElementById("artwork3vb").classList.contains('yellow3'))
+                || (document.getElementById("artwork3vb").classList.contains('yellow10'))
+                ) &&
+               ((document.getElementById("artwork3hd").classList.contains('red1'))
+                || (document.getElementById("artwork3hd").classList.contains('red3'))
+                || (document.getElementById("artwork3hd").classList.contains('red10'))
+                ) &&
+                ((document.getElementById("artwork3hg").classList.contains('blue1'))
+                || (document.getElementById("artwork3hg").classList.contains('blue3'))
+                || (document.getElementById("artwork3hg").classList.contains('blue10'))
+                ) ))
+             
+             
+              {
+                console.log('ici')
+              this.showVictory=true;
+           }
+           {
+             console.log('iciiii')
+           }
+      
     },
     getTransform: function(value){
       this.valueTransform=value;
@@ -269,7 +307,7 @@ export default {
           }
         
       }
-      
+      vnode.context.victory();
     }
 
     el.addEventListener('touchstart', function(e) {

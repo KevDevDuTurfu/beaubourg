@@ -164,7 +164,7 @@
             </div>
   
             <div class="rangeValue">
-  
+              <p>Value: {{borderWidth*10}}</p>
               <input id="valueBorder" type="range" min="1" max="7" step="1" v-model="borderWidth">
   
   
@@ -372,9 +372,13 @@ import 'intro.js/introjs.css';
   
         if ((document.getElementById("artwork2").style.background == 'rgb(244, 14, 60)') &&
   
-          (document.getElementById("artwork2").style.border == '20px solid black') &&
-  
-          (document.getElementsByClassName("artwork2")[0].classList.contains('translate10'))) {
+         ( (document.getElementById("artwork2").style.border == '20px solid black') 
+         ||(document.getElementById("artwork2").style.border == '10px solid black')
+         || (document.getElementById("artwork2").style.border == '30px solid black'))&&
+          ((document.getElementsByClassName("artwork2")[0].classList.contains('translate1'))
+          ||(document.getElementsByClassName("artwork2")[0].classList.contains('translate3'))
+          ||(document.getElementsByClassName("artwork2")[0].classList.contains('translate10')) )
+          ) {
   
           this.showVictory = true;
   
