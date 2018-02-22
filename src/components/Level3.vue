@@ -294,11 +294,11 @@ export default {
 this.intro2.setOptions({
   steps: [
     {
-      intro: "Particularité des niveaux 3 et 4, il faut sélectionner un élément de l'oeuvre avant de mettre la propriété css"
+      intro: "Astuce : A partir de maintenant, les oeuvres sont composées de plusieurs parties."
     },
     {
       element: document.querySelector("#artwork3hd"),
-      intro: "Pour le sélectionner il suffit juste d'appuyer sur un élément"
+      intro: "Touches l'élément que tu souhaites modifier pour le sélectionner. De cette manière, tu peux appliquer des propriétés différentes à chaque morceau de l'oeuvre."
     }
   ]
   });

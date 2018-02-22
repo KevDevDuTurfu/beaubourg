@@ -520,6 +520,8 @@ box-shadow: 0px 6px 29px 5px rgba(82,55,82,1);
   color:white;
   font-family:  'Play', Arial, Helvetica, sans-serif;
   font-size: 1.5em;
+  max-width: 500px;
+  min-width: 400px;
   }
   .introjs-helperNumberLayer {
     background: #000046;  /* fallback for old browsers */

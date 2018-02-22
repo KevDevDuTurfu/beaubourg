@@ -123,13 +123,13 @@ export default {
           },
           {
             element: document.querySelectorAll(".codeColor")[0],
-            intro: "Première étape : Choisir une valeur pour l'un des attributs de la propriété.<br><br>Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercle de couleur au dessus de 'top' pour sélectionner la valeur.",
-            position: "left"
+            intro: "Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercle de couleur au dessus de 'top' pour sélectionner la valeur.",
+            position: "bottom"
           },
           {
             element: document.querySelector("#btn1"),
             intro: "Lorsqu'une valeur d'attribut a correctement été affectée, le bouton de la propriété correspondante s'anime en conséquence, afin de donner un aperçu du résultat.<br><br>Tout ce qu'il nous reste maintenant à faire est de maintenir le doigt enfoncé sur le bouton 'Background' et de le faire glisser sur le plan de travail.<br><br>Abracadabra ! La couleur de fond a changé !",
-            position: "bottom"
+            position: "left"
           },
           {
             element: document.querySelectorAll(".codeColor")[1],

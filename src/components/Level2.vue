@@ -20,11 +20,11 @@
   
     <!--debut de l'aide en bas de page-->
   
-    <div class="tips">
-  
+    <div class="tips" id="tips">
+
       <p v-if="!cmd">Code css: {background-color:{{couleur}} {border: {{borderWidth*10}}px {{borderStyle}} {{borderColor}}}</p>
       <p v-if="cmd"> {animation:{{valueTransform}} {{valueDuration}}s linear infinite alternate}</p>
-  
+    
     </div>
   
     <!--fin de l'aide -->
@@ -247,7 +247,8 @@
 </template>
 <script>
   import Modal from './Modal.vue';
-  
+  import { introJs } from 'intro.js';
+import 'intro.js/introjs.css';
   import Victory from './Victory.vue'
   
   export default {
@@ -286,7 +287,8 @@
   
         valueDuration: '',
   
-        cmd: false
+        cmd: false,
+        intro : introJs()
   
       }
   
@@ -493,31 +495,19 @@
   
     },
   
-    created: function() {},
-  
-    mounted: function() {},
-  
-    beforeUpdate: function() {
-  
-      if (!document.getElementsByClassName('page-cmd1')) {
-  
-        this.backgroundColor();
-  
-      }
-  
-    },
-  
-    updated: function() {
-  
-      if (!document.getElementsByClassName('page-cmd1')) {
-  
-        this.backgroundColor();
-  
-      }
-  
-  
-  
+    mounted: function() {
+
+this.intro.setOptions({
+  steps: [
+    {
+      element: document.querySelector("#tips p"),
+      intro: "Astuce : Prends bien le temps lire la version écrite de ton code CSS dans la console en bas de page...<br><br> Cela pourrait te servir plus tard ;)"
     }
+  ]
+  });
+  this.intro.start();
+
+  }
   
   }
 </script>
