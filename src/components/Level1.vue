@@ -97,34 +97,32 @@ export default {
         },
         
   mounted: function() {
-          this.$translate.setLang('fr_FR');
+      this.$translate.setLang('fr_FR');
       this.intro.setOptions({
         steps: [
+          
           {
-            intro: this.t('Hello World')
+            intro: this.t("Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.")
           },
           {
-            intro: "Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu."
+            intro: this.t("Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !")
           },
           {
-            intro: "Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !"
-          },
-          {
-            intro: "Le CSS est un langage de programmation permettant de styliser l'affichage d'une page web.<br>Son utilisation est indispensable dans la conception de n'importe quelle application ou site internet !<br><br>Maintenant, voyons comment s'organise l'interface du jeu."
+            intro: this.t("Le CSS est un langage de programmation permettant de styliser l'affichage d'une page web.<br>Son utilisation est indispensable dans la conception de n'importe quelle application ou site internet !<br><br>Maintenant, voyons comment s'organise l'interface du jeu.")
           },
           {
             element:document.querySelector("#artwork1"),
-            intro: "Voici le plan de travail. Sur cet écran, tu peux voir le résultat visuel des propriétés CSS que tu as appliqué.<br><br>Pour remporter la partie, ce qui est affiché ici doit ressembler le plus possible à l'oeuvre originale, que tu peux visionner à tout moment en touchant la bulle d'info (i) un peu plus bas.<br><br>Près de la bulle d'info, tu trouveras également une transcription littérale du code utilisé.",
+            intro: this.t("Voici le plan de travail. Sur cet écran, tu peux voir le résultat visuel des propriétés CSS que tu as appliqué.<br><br>Pour remporter la partie, ce qui est affiché ici doit ressembler le plus possible à l'oeuvre originale, que tu peux visionner à tout moment en touchant la bulle d'info (i) un peu plus bas.<br><br>Près de la bulle d'info, tu trouveras également une transcription littérale du code utilisé."),
             position:'top'
           },
           {
             element: document.querySelector("#command"),
-            intro: "Voici l'interface de jeu. C'est ici que la magie prend forme !<br><br>Cette zone contient tous les éléments de CSS dont tu as besoin pour reconstituer l'oeuvre et compléter le niveau.<br><br>Chaque bouton correspond à une propriété, dont les valeurs des attributs peuvent être modifiées juste en dessous.<br><br>Un peu perdu(e) ? Examinons tout ça plus en détail :",
+            intro: this.t("Voici l'interface de jeu. C'est ici que la magie prend forme !<br><br>Cette zone contient tous les éléments de CSS dont tu as besoin pour reconstituer l'oeuvre et compléter le niveau.<br><br>Chaque bouton correspond à une propriété, dont les valeurs des attributs peuvent être modifiées juste en dessous.<br><br>Un peu perdu(e) ? Examinons tout ça plus en détail :"),
             position: "left"
           },
           {
             element: document.querySelector("#btn1"),
-            intro: "Voici un bouton. Comme nous l'avons vu précédemment, chaque bouton porte le nom d'une propriété CSS dont les valeurs d'attributs sont définies juste en dessous.<br><br>Par exemple ici, 'Background' permet de définir l'arrière plan de l'oeuvre.<br><br> Mais comment fonctionne-t'il, ce bouton 'Background' ? C'est très simple, jettes donc un oeil un peu plus bas.",
+            intro: this.t("Voici un bouton. Comme nous l'avons vu précédemment, chaque bouton porte le nom d'une propriété CSS dont les valeurs d'attributs sont définies juste en dessous.<br><br>Par exemple ici, 'Background' permet de définir l'arrière plan de l'oeuvre.<br><br> Mais comment fonctionne-t'il, ce bouton 'Background' ? C'est très simple, jettes donc un oeil un peu plus bas."),
             position: "left"
           },
           {
@@ -150,12 +148,25 @@ export default {
     this.intro.start();
   },
    locales: {
-    	es_DO: {
-        	Hello_World: 'Hola Mundo',
-        	'How are you?': 'Como estás?'
+    	en_UK: {
+          "Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.":"Hi there ! Welcome to Visuart Code !<br><br>This short tutorial will explain you the basics of the game.",
+          "Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !":"Your objective in every level is to reconstruct an artwork from the museum as precisely as possible to its original state.<br><br>To do so, you will have to play around with CSS properties.<br> Don't creep out, it is actually not that hard !",
+          "Le CSS est un langage de programmation permettant de styliser l'affichage d'une page web.<br>Son utilisation est indispensable dans la conception de n'importe quelle application ou site internet !<br><br>Maintenant, voyons comment s'organise l'interface du jeu.":" CSS is a programming language used to define styles for web pages.<br>Using this technology is mandatory in the developping process of any application or website !<br><br>Now, let's see how this game works.",
+           "Voici le plan de travail. Sur cet écran, tu peux voir le résultat visuel des propriétés CSS que tu as appliqué.<br><br>Pour remporter la partie, ce qui est affiché ici doit ressembler le plus possible à l'oeuvre originale, que tu peux visionner à tout moment en touchant la bulle d'info (i) un peu plus bas.<br><br>Près de la bulle d'info, tu trouveras également une transcription littérale du code utilisé.": "This is the workbench. On this screen, you can check the visual render of all CSS properties you applied.<br><br>To win the game, what is displayed here must look as close as possible to the original artwork, which you can view at any moment by touching the bio icon (i) below.<br><br>Next to the bio icon, you will also find the litteral transcription of the code you used.",
+           "Voici l'interface de jeu. C'est ici que la magie prend forme !<br><br>Cette zone contient tous les éléments de CSS dont tu as besoin pour reconstituer l'oeuvre et compléter le niveau.<br><br>Chaque bouton correspond à une propriété, dont les valeurs des attributs peuvent être modifiées juste en dessous.<br><br>Un peu perdu(e) ? Examinons tout ça plus en détail :":"This is the game's dashboard. That is where the magic happens !<br><br>This section contains all CSS elements you need to reconstruct the artwork and complete the level.<br><br>Each button assimilates to a property, with attribute's values that can be edited just down below.<br><br>A bit confused ? Let's take a more detailed look.",
+           "Voici un bouton. Comme nous l'avons vu précédemment, chaque bouton porte le nom d'une propriété CSS dont les valeurs d'attributs sont définies juste en dessous.<br><br>Par exemple ici, 'Background' permet de définir l'arrière plan de l'oeuvre.<br><br> Mais comment fonctionne-t'il, ce bouton 'Background' ? C'est très simple, jettes donc un oeil un peu plus bas.":"This a button. As stated previously, each button bears the name of a CSS property which attribute's values can be edited just down below.<br><br>Here for instance, 'Background' allows you to define the background of the artwork.<br><br>But how exactly can you use this button ? Well, let's see how it works.",
+           "Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercle de couleur au dessus de 'top' pour sélectionner la valeur.": "First step : Pick a value of a property's attribute.<br><br>In the case of the'Background' property, we only get one attribute to look at : 'Gradient',  which has two sub-attributes, 'top' and 'bottom'.<br><br>To make things easier as it is a first example, there is only one possible value for both 'top' and 'bottom', so you can't get it wrong !<br><br>Anyway, let's touch the colored circle above 'top' to select the value."
         },
         fr_FR: {
-          HELLO_WORLD: 'Bonjour le monde'
+          "Hi there ! Welcome to Visuart Code !<br><br>This short tutorial will explain you the basics of the game.":"Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.",
+          "Your objective in every level is to reconstruct an artwork from the museum as precisely as possible to its original state.<br><br>To do so, you will have to play around with CSS properties.<br> Don't creep out, it is actually not that hard !":"Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !",
+           "CSS is a programming language used to define styles for web pages.<br>Using this technology is mandatory in the developping process of any application or website !<br><br>Now, let's see how this game works.":"Le CSS est un langage de programmation permettant de styliser l'affichage d'une page web.<br>Son utilisation est indispensable dans la conception de n'importe quelle application ou site internet !<br><br>Maintenant, voyons comment s'organise l'interface du jeu.",
+          "This is the workbench. On this screen, you can check the visual render of all CSS properties you applied.<br><br>To win the game, what is displayed here must look as close as possible to the original artwork, which you can view at any moment by touching the bio icon (i) below.<br><br>Next to the bio icon, you will also find the litteral transcription of the code you used.":"Voici le plan de travail. Sur cet écran, tu peux voir le résultat visuel des propriétés CSS que tu as appliqué.<br><br>Pour remporter la partie, ce qui est affiché ici doit ressembler le plus possible à l'oeuvre originale, que tu peux visionner à tout moment en touchant la bulle d'info (i) un peu plus bas.<br><br>Près de la bulle d'info, tu trouveras également une transcription littérale du code utilisé.",
+          "This is the game's dashboard. That is where the magic happens !<br><br>This section contains all CSS elements you need to reconstruct the artwork and complete the level.<br><br>Each button assimilates to a property, with attribute's values that can be edited just down below.<br><br>A bit confused ? Let's take a more detailed look.":"Voici l'interface de jeu. C'est ici que la magie prend forme !<br><br>Cette zone contient tous les éléments de CSS dont tu as besoin pour reconstituer l'oeuvre et compléter le niveau.<br><br>Chaque bouton correspond à une propriété, dont les valeurs des attributs peuvent être modifiées juste en dessous.<br><br>Un peu perdu(e) ? Examinons tout ça plus en détail :",
+          "This a button. As stated previously, each button bears the name of a CSS property which attribute's values can be edited just down below.<br><br>Here for instance, 'Background' allows you to define the background of the artwork.<br><br>But how exactly can you use this button ? Well, let's see how it works.":"Voici un bouton. Comme nous l'avons vu précédemment, chaque bouton porte le nom d'une propriété CSS dont les valeurs d'attributs sont définies juste en dessous.<br><br>Par exemple ici, 'Background' permet de définir l'arrière plan de l'oeuvre.<br><br> Mais comment fonctionne-t'il, ce bouton 'Background' ? C'est très simple, jettes donc un oeil un peu plus bas.",
+          "First step : Pick a value of a property's attribute.<br><br>In the case of the'Background' property, we only get one attribute to look at : 'Gradient',  which has two sub-attributes, 'top' and 'bottom'.<br><br>To make things easier as it is a first example, there is only one possible value for both 'top' and 'bottom', so you can't get it wrong !<br><br>Anyway, let's touch the colored circle above 'top' to select the value.":"Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercle de couleur au dessus de 'top' pour sélectionner la valeur."
+       
+           
         }
 
     },
