@@ -350,6 +350,9 @@ this.intro2.setOptions({
 body{
   overflow:hidden;
 }
+.btn {
+  margin:6%;
+}
 
 .lvl3{
   background-image: url("../assets/images/img_stack.png");

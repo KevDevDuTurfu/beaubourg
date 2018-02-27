@@ -16,12 +16,12 @@
                </div>
                <div class="block">
             <div class="labelIcones">Menu-----</div>
-            <div class="icones"><router-link  @click="$emit('close')" to="/niveau"><span class="icone"><i class="fa fa-home" aria-hidden="true"></i></span></router-link></div>
+            <div class="icones"><router-link   to="/niveau"><span @click="$emit('close')" class="icone"><i class="fa fa-home" aria-hidden="true"></i></span></router-link></div>
             </div>
-               <div class="block">
-            <div class="labelIcones">Langues-----</div>
+               <!-- <div class="block">
+            <div class="labelIcones">Langues-</div>
             <div class="icones"><span class="icone"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/britain.png" alt=""> </span></div>
-               </div>
+               </div> -->
                <div class="block">
             <div class="labelIcones">Sons-----</div>
             <div class="icones"><span class="icone"><i class="fa fa-volume-up" aria-hidden="true"></i></span></div>

@@ -45,6 +45,7 @@
           </div>
           <div class="color">
             <h2 class="titleCss">Color</h2>
+            <div>{{t('Hello World')}}</div>
             <div class="col color1"><div class="codeColor" @click="getBorderColor('#18545e')"></div></div>
             <div class="col color2"><div class="codeColor" @click="getBorderColor('royalblue')"></div></div>
             <div class="col color3"><div class="codeColor" @click="getBorderColor('yellowgreen')"></div></div>
@@ -94,10 +95,14 @@ export default {
           'modal':  Modal,
           'victory': Victory
         },
+        
   mounted: function() {
-
+          this.$translate.setLang('fr_FR');
       this.intro.setOptions({
         steps: [
+          {
+            intro: this.t('Hello World')
+          },
           {
             intro: "Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu."
           },
@@ -143,10 +148,18 @@ export default {
         ]
       });
     this.intro.start();
-
   },
-  methods:{
+   locales: {
+    	es_DO: {
+        	Hello_World: 'Hola Mundo',
+        	'How are you?': 'Como estás?'
+        },
+        fr_FR: {
+          HELLO_WORLD: 'Bonjour le monde'
+        }
 
+    },
+  methods:{
     getColorGradientTop: function(value){
     this.couleur=value;
     // this.gradient();
@@ -203,7 +216,7 @@ export default {
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY;
 
     function mousemove(e) {
-      var touch=event.touches[0];
+      var touch=e.touches[0];
       var dx = touch.pageX - initialMouseX;
       var dy = touch.pageY - initialMouseY;
       el.style.top = startY + dy + 'px';
@@ -211,7 +224,7 @@ export default {
       return false;
     }
 
-    function mouseup() {
+    function mouseup(event) {
       el.style.left=initialBoxX;
       el.style.top=initialBoxY;
       el.style='relative';
@@ -231,8 +244,7 @@ export default {
     }
 
     el.addEventListener('touchstart', function(e) {
-
-      var touch=event.touches[0];
+      var touch=e.touches[0];
       el.style.position = 'absolute';
       el.style.margin=0;
       startX = el.offsetLeft;

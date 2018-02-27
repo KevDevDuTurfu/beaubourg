@@ -234,8 +234,8 @@ La cabine n'existe plus. Le rouge non plus, tout est blanc maintenant.
 <script>
   import Modal from './Modal.vue';
   import { introJs } from 'intro.js';
-import 'intro.js/introjs.css';
-import ErrorSelector from './ErrorSelector.vue';
+  import 'intro.js/introjs.css';
+  import ErrorSelector from './ErrorSelector.vue';
   import Victory from './Victory.vue'
   
   export default {
@@ -256,7 +256,7 @@ import ErrorSelector from './ErrorSelector.vue';
   
         titre: 'Douleur exquise',
 
-      showErrorSelect: false,
+        showErrorSelect: false,
         showModal: false,
   
         show: true,
@@ -336,8 +336,28 @@ import ErrorSelector from './ErrorSelector.vue';
       }
     },
       victory: function() {
-  
-        this.showVictory = true;
+        if((document.getElementById('artwork4img1').style.backgroundImage=='url("src/assets/images/imagegauche.png")')
+        &&(document.getElementById('artwork4img2').style.backgroundImage=='url("src/assets/images/imagedroite.png")')
+         &&((document.getElementById('artwork4img1').style.border=="7px solid black") || (document.getElementById('artwork4img1').style.border=="8px solid black") || (document.getElementById('artwork4img1').style.border=="9px solid black") || (document.getElementById('artwork4img1').style.border=="10px solid black") || (document.getElementById('artwork4img1').style.border=="11px solid black") || (document.getElementById('artwork4img1').style.border=="12px solid black") ||(document.getElementById('artwork4img1').style.border=="13px solid black"))
+         &&((document.getElementById('artwork4img2').style.border=="7px solid black") || (document.getElementById('artwork4img2').style.border=="8px solid black") || (document.getElementById('artwork4img2').style.border=="9px solid black") || (document.getElementById('artwork4img2').style.border=="10px solid black") || (document.getElementById('artwork4img2').style.border=="11px solid black") || (document.getElementById('artwork4img2').style.border=="12px solid black") ||(document.getElementById('artwork4img2').style.border=="13px solid black"))
+         &&((document.getElementById('artwork4desc1').style.border=="7px solid black") || (document.getElementById('artwork4desc1').style.border=="8px solid black") || (document.getElementById('artwork4desc1').style.border=="9px solid black") || (document.getElementById('artwork4desc1').style.border=="10px solid black") || (document.getElementById('artwork4desc1').style.border=="11px solid black") || (document.getElementById('artwork4desc1').style.border=="12px solid black") ||(document.getElementById('artwork4desc1').style.border=="13px solid black"))        
+         &&((document.getElementById('artwork4desc2').style.border=="7px solid black") || (document.getElementById('artwork4desc2').style.border=="8px solid black") || (document.getElementById('artwork4desc2').style.border=="9px solid black") || (document.getElementById('artwork4desc2').style.border=="10px solid black") || (document.getElementById('artwork4desc2').style.border=="11px solid black") || (document.getElementById('artwork4desc2').style.border=="12px solid black") ||(document.getElementById('artwork4desc2').style.border=="13px solid black"))       
+        ((document.getElementById('artwork4desc1').style.backgroundColor=="black") || document.getElementById('artwork4desc1').style.backgroundColor=="#000" || document.getElementById('artwork4desc1').style.backgroundColor=="rgb(0,0,0)")
+        &&((document.getElementById('artwork4desc2').style.backgroundColor=="white") || document.getElementById('artwork4desc2').style.backgroundColor=="#fff" || document.getElementById('artwork4desc2').style.backgroundColor=="rgb(255,255,255)")
+        &&((document.getElementById('artwork4desc1').style.fontSize=="10px") || (document.getElementById('artwork4desc1').style.fontSize=="11px") || (document.getElementById('artwork4desc1').style.fontSize=="12px"))
+        &&((document.getElementById('artwork4desc2').style.fontSize=="10px") || (document.getElementById('artwork4desc2').style.fontSize=="11px") || (document.getElementById('artwork4desc2').style.fontSize=="12px"))
+         &&((document.getElementById('artwork4desc2').style.color=="black") || (document.getElementById('artwork4desc2').style.color=="#000" )|| (document.getElementById('artwork4desc2').style.color=="rgb(0,0,0)"))
+         &&((document.getElementById('artwork4desc1').style.color=="white") || (document.getElementById('artwork4desc1').style.color=="#fff") || (document.getElementById('artwork4desc1').style.color=="rgb(255,255,255)"))
+        
+        )
+        {
+             console.log('jai gagné ');
+             
+        }
+        else {
+          console.log(document.getElementById('artwork4desc1').style.fontFamily);
+        }
+        
     },
   
       getImgBackground: function(value) {
@@ -425,7 +445,7 @@ import ErrorSelector from './ErrorSelector.vue';
                 }
   
               }
-          
+          vnode.context.victory();
         }
   
   
@@ -486,7 +506,14 @@ this.intro2.setOptions({
     overflow: hidden;
   
   }
-  
+
+  .labelArrow {
+    margin-left: 12%;
+    font-size: 0.5em;
+  }
+  .artwork4 {
+    overflow:hidden;
+  }
   
   .artwork4desc, .artwork4img {
   transition: transform 2s ease-out;
@@ -574,7 +601,7 @@ this.intro2.setOptions({
   
   
   .btn-command i {
-  
+    width: 50%;
     padding: 2%;
   
   }
@@ -634,6 +661,10 @@ this.intro2.setOptions({
     border: 5px solid white;
   
     vertical-align: bottom;
+
+    font-family:'Play', Arial, sans-serif;
+
+    font-size:13px; 
   
   }
   

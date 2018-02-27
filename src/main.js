@@ -4,7 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueIntro from 'vue-introjs/dist/index.min.js';
- 
+import VueTranslate from 'vue-translate-plugin';
+
+Vue.use(VueTranslate);
 Vue.use(VueIntro);
 Vue.config.productionTip = false
 

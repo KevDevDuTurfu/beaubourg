@@ -312,7 +312,7 @@
   
     border-radius: 50%;
   
-    margin-bottom: 2%;
+    margin-bottom: 4%;
   
     margin-left: 1%;
   
