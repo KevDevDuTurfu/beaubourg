@@ -128,8 +128,7 @@
   
   }
   
-  
-  
+
    ::placeholder {
   
     /* Chrome, Firefox, Opera, Safari 10.1+ */
