@@ -20,17 +20,34 @@
 
 <script>
   import Settings from './components/Settings.vue';
-  
+  import Bus from './components/Bus.js'
   export default {
   
     name: 'app',
   
     data() {
       return {
-        showOptions: false
+        
+      hey_lang:'fr_FR',
+      showOptions: false
   
     }
-    },components: { 'settings': Settings }
+    },components: { 'settings': Settings },
+    
+    created: function() {
+     
+    Bus.$on('click', function (lang) {
+        this.$translate.setLang();
+        this.hey_lang=lang;
+       }.bind(this));
+   
+    },
+     watch: {
+     hey_lang: function(val) {
+      this.$translate.setLang(val);
+
+     }
+    },
 }
 </script>
 

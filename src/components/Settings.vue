@@ -18,10 +18,14 @@
             <div class="labelIcones">Menu-----</div>
             <div class="icones"><router-link   to="/niveau"><span @click="$emit('close')" class="icone"><i class="fa fa-home" aria-hidden="true"></i></span></router-link></div>
             </div>
-               <!-- <div class="block">
+               <div class="block">
             <div class="labelIcones">Langues-</div>
-            <div class="icones"><span class="icone"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/britain.png" alt=""> </span></div>
-               </div> -->
+            <div class="icones"><span class="icone" @click="emitMethodEn ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/britain.png" alt=""> </span></div>
+               </div>
+               <div class="block">
+            <div class="labelIcones">Langues-</div>
+            <div class="icones"><span class="icone" @click="emitMethodFr ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/france.png" alt=""> </span></div>
+               </div>
                <div class="block">
             <div class="labelIcones">Sons-----</div>
             <div class="icones"><span class="icone"><i class="fa fa-volume-up" aria-hidden="true"></i></span></div>
@@ -39,10 +43,30 @@
   </transition>
 </template>
 <script>
-
+import Bus from './Bus.js'
 export default {
   name: 'settings',
-  props:['niveau']
+  props:['niveau'],
+  data(){
+     return{
+      langen:'en_UK',
+      langfr:'fr_FR'
+  }
+  },
+    created () {
+        
+    },
+    methods: {
+     
+    emitMethodEn () {
+      Bus.$emit('click', this.langen);
+      this.$emit('close');
+    },
+    emitMethodFr () {
+      Bus.$emit('click', this.langfr);
+      this.$emit('close');
+    }
+  }
 }
 </script>
 <style>

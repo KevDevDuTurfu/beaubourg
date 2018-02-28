@@ -1,11 +1,11 @@
 
 <template>
   <div class="menu">
-    <h1>{{title}}</h1>
+    <h1>{{t('Choisssez votre niveau')}}</h1>
     <div class="carroussel">
       <div class="left-car" @click="counterPrev()"><transition name="fade" mode="out-in"><img :key="sourceMid" v-bind:src="sourceLeft" alt="" class="left-img"></transition></div>
       <div class="arrow-left arrow" @click="counterPrev()"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
-      <div class="middle-car"><a v-bind:href="'#/niveau'+counter"><transition name="fade" mode="out-in"><img :key="sourceMid" v-bind:src="sourceMid" alt="" class="mid-img"></transition><h2 class="title-mid">{{subtitle}} {{counter}}</h2></a></div>
+      <div class="middle-car"><a v-bind:href="'#/niveau'+counter"><transition name="fade" mode="out-in"><img :key="sourceMid" v-bind:src="sourceMid" alt="" class="mid-img"></transition><h2 class="title-mid">{{t('Niveau')}} {{counter}}</h2></a></div>
       <div class="arrow-right arrow"  @click="counterNext()"><i class="fa fa-caret-right" aria-hidden="true"></i></div>
       <div class="right-car" @click="counterNext()"><transition name="fade" mode="out-in"><img :key="sourceMid" v-bind:src="sourceRight" alt="" class="right-img"></transition></div>
     </div>
@@ -17,11 +17,11 @@ export default {
   name: 'Menu',
   data () {
     return {
-      title: '< Choisissez votre niveau />',
+      
       sourceMid: "src/assets/images/miniaturelvl1.png",
       sourceLeft: "src/assets/images/miniaturelvl4.png",
       sourceRight: "src/assets/images/miniaturelvl2.png",
-      subtitle: 'Niveau ',
+
       counter: 1
     }
   },
@@ -47,6 +47,16 @@ export default {
       console.log(this.counter)
     }
       
+  },
+  locales: {
+    	en_UK: {
+        'Choisssez votre niveau': 'Choose ',
+        'Niveau': 'Level'
+      },
+      fr_FR: {
+        'Choose ' : 'Choisssez votre niveau',
+        'Level' : 'Niveau'
+      }
   }
 }
 </script>
