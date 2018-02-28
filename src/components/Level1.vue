@@ -1,7 +1,7 @@
 <!--ici html du code-->
 <template>
 
-  <div class="lvl lvl1"><!-- contenu du niveau 1--> 
+  <div class="lvl lvl1"><!-- contenu du niveau 1-->
     <div v-intro-hint-position="'top'"   class="bubble"  @click="showModal=true"><i class="fa fa-info-circle  " aria-hidden="true"></i></div><!--contenu de la bulle info-->
      <div v-intro-hint-position="'top'" class="help"  @click="showHint()"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
@@ -11,7 +11,7 @@
         <victory  :niveau="niveauSuivant" v-if="showVictory" @close="showVictory=false"> </victory>
         <!--debut de l'aide en bas de page-->
         <div class="tips" >
-     <p >Code css: <br>
+     <p>{{t('Code CSS:')}} <br>
      <code>{background-color: 'linear-gradient( '{{couleur}}','{{couleur2}}')} {border: {{borderWidth*10}}px {{borderStyle}} {{borderColor}}}</code>  </p>
      </div><!--fin de l'aide -->
 
@@ -52,7 +52,7 @@
           <div class="width">
             <h2 class="titleCss">Width</h2></div>
             <div class="rangeValue">
-              <p>Value: {{borderWidth*10}}</p><div>{{t('salut')}}</div>
+              <p>Value: {{borderWidth*10}}</p>
               <input id="valueBorder" type="range" min="1" max="10" step="1" v-model="borderWidth">
             </div>
         </div>
@@ -102,12 +102,12 @@ export default {
           'modal':  Modal,
           'victory': Victory
         },
-    
+
   mounted: function() {
-      
+
       this.intro.setOptions({
         steps: [
-          
+
           {
             intro: this.t("Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.")
           },
@@ -134,7 +134,7 @@ export default {
           },
           {
             element: document.querySelectorAll(".codeColor")[0],
-            intro: this.t("Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercle de couleur au dessus de 'top' pour sélectionner la valeur."),
+            intro: this.t("Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc les cercles de couleur au dessus de 'top' et de 'bottom' pour sélectionner les valeurs."),
             position: "bottom"
           },
           {
@@ -143,39 +143,33 @@ export default {
             position: "left"
           },
           {
-            element: document.querySelectorAll(".codeColor")[1],
-            intro: this.t("Nous avons affecté un background coloré uni en fixant la première couleur de 'Gradient'. Il nous suffit maintenant de répéter le même processus pour ajouter la couleur de 'bottom' et ainsi compléter notre dégradé !<br><br>Et voilà, le fond de l'oeuvre a été reproduit à la perfection !"),
-            position: "left"
-          },
-          {
             intro: this.t("Ce tutoriel est désormais terminé ! C'est maintenant à toi de jouer !<br><br>Parviendras-tu à relever le challenge et à compléter les quatre niveaux ?<br><br>Bonne chance !")
           },
         ]
-      });  
+      });
 
     this.intro.start();
-    
 
-    
+
+
   },
    locales: {
-     
+
     	en_UK: {
-        'salut':'hello',
           // "Apparitions bulles d'aide":"Enable hints",
           // 'Maintenir et faire glisser le bouton sur le plan de travail pour appliquer la propriété CSS':'Drag and drop the button on the workbench to apply CSS property',
           // 'Toucher la valeur d\'attribut pour la sélectionner':'Touch the value to select it',
           // 'Style CSS actuellement appliqué': 'CSS style currently applied',
           // 'Informations sur l\'oeuvre':'Artwork\'s bio',
+          "Code CSS:":"CSS code",
           "Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.":"Hi there ! Welcome to Visuart Code !<br><br>This short tutorial will explain you the basics of the game.",
           "Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !":"Your objective in every level is to reconstruct an artwork from the museum as precisely as possible to its original state.<br><br>To do so, you will have to play around with CSS properties.<br> Don't creep out, it is actually not that hard !",
           "Le CSS est un langage de programmation permettant de styliser l'affichage d'une page web.<br>Son utilisation est indispensable dans la conception de n'importe quelle application ou site internet !<br><br>Maintenant, voyons comment s'organise l'interface du jeu.":" CSS is a programming language used to define styles for web pages.<br>Using this technology is mandatory in the developping process of any application or website !<br><br>Now, let's see how this game works.",
            "Voici le plan de travail. Sur cet écran, tu peux voir le résultat visuel des propriétés CSS que tu as appliqué.<br><br>Pour remporter la partie, ce qui est affiché ici doit ressembler le plus possible à l'oeuvre originale, que tu peux visionner à tout moment en touchant la bulle d'info (i) un peu plus bas.<br><br>Près de la bulle d'info, tu trouveras également une transcription littérale du code utilisé.": "This is the workbench. On this screen, you can check the visual render of all CSS properties you applied.<br><br>To win the game, what is displayed here must look as close as possible to the original artwork, which you can view at any moment by touching the bio icon (i) below.<br><br>Next to the bio icon, you will also find the litteral transcription of the code you used.",
            "Voici l'interface de jeu. C'est ici que la magie prend forme !<br><br>Cette zone contient tous les éléments de CSS dont tu as besoin pour reconstituer l'oeuvre et compléter le niveau.<br><br>Chaque bouton correspond à une propriété, dont les valeurs des attributs peuvent être modifiées juste en dessous.<br><br>Un peu perdu(e) ? Examinons tout ça plus en détail :":"This is the game's dashboard. That is where the magic happens !<br><br>This section contains all CSS elements you need to reconstruct the artwork and complete the level.<br><br>Each button assimilates to a property, with attribute's values that can be edited just down below.<br><br>A bit confused ? Let's take a more detailed look.",
            "Voici un bouton. Comme nous l'avons vu précédemment, chaque bouton porte le nom d'une propriété CSS dont les valeurs d'attributs sont définies juste en dessous.<br><br>Par exemple ici, 'Background' permet de définir l'arrière plan de l'oeuvre.<br><br> Mais comment fonctionne-t'il, ce bouton 'Background' ? C'est très simple, jettes donc un oeil un peu plus bas.":"This a button. As stated previously, each button bears the name of a CSS property which attribute's values can be edited just down below.<br><br>Here for instance, 'Background' allows you to define the background of the artwork.<br><br>But how exactly can you use this button ? Well, let's see how it works.",
-           "Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercle de couleur au dessus de 'top' pour sélectionner la valeur.": "First step : Pick a value of a property's attribute.<br><br>In the case of the'Background' property, we only get one attribute to look at : 'Gradient',  which has two sub-attributes, 'top' and 'bottom'.<br><br>To make things easier as it is a first example, there is only one possible value for both 'top' and 'bottom', so you can't get it wrong !<br><br>Anyway, let's touch the colored circle above 'top' to select the value.",
+           "Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc les cercles de couleur au dessus de 'top' et de 'bottom' pour sélectionner les valeurs.": "First step : Pick a value of a property's attribute.<br><br>In the case of the'Background' property, we only get one attribute to look at : 'Gradient',  which has two sub-attributes, 'top' and 'bottom'.<br><br>To make things easier as it is a first example, there is only one possible value for both 'top' and 'bottom', so you can't get it wrong !<br><br>Anyway, let's touch the colored circles above 'top' and 'bottom' to select the values.",
            "Lorsqu'une valeur d'attribut a correctement été affectée, le bouton de la propriété correspondante s'anime en conséquence, afin de donner un aperçu du résultat.<br><br>Tout ce qu'il nous reste maintenant à faire est de maintenir le doigt enfoncé sur le bouton 'Background' et de le faire glisser sur le plan de travail.<br><br>Abracadabra ! La couleur de fond a changé !":"When a value has been successfully applied, the corresponding property's button animates itself accordingly, giving you a glimpse of the result.<br><br>All that we have left to do now is to drag and drop the 'Background' button on the workbench.<br><br>Hocus Pocus ! The background's color changed !",
-           "Nous avons affecté un background coloré uni en fixant la première couleur de 'Gradient'. Il nous suffit maintenant de répéter le même processus pour ajouter la couleur de 'bottom' et ainsi compléter notre dégradé !<br><br>Et voilà, le fond de l'oeuvre a été reproduit à la perfection !":"We have successfully set the first color of our 'Gradient' property. To complete our color gradient, we simply need to repeat the same process for the 'bottom' sub-attribute !<br><br>There we go, the background of our artwork is now all good !",
            "Ce tutoriel est désormais terminé ! C'est maintenant à toi de jouer !<br><br>Parviendras-tu à relever le challenge et à compléter les quatre niveaux ?<br><br>Bonne chance !":"This tutorial is now over ! Everything is up to you now !<br><br>Will you be up to the challenge and succeed to get through all four levels ?<br><br>Good luck !"
         },
         fr_FR: {
@@ -184,17 +178,16 @@ export default {
         //   'Touch the value to select it':'Toucher la valeur d\'attribut pour la sélectionner',
         //    'CSS style currently applied':'Style CSS actuellement appliqué',
         //    'Artwork\'s bio':'Informations sur l\'oeuvre',
-         'hello':'salut',
+          "CSS code:":"Code CSS:",
           "Hi there ! Welcome to Visuart Code !<br><br>This short tutorial will explain you the basics of the game.":"Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.",
           "Your objective in every level is to reconstruct an artwork from the museum as precisely as possible to its original state.<br><br>To do so, you will have to play around with CSS properties.<br> Don't creep out, it is actually not that hard !":"Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !",
            "CSS is a programming language used to define styles for web pages.<br>Using this technology is mandatory in the developping process of any application or website !<br><br>Now, let's see how this game works.":"Le CSS est un langage de programmation permettant de styliser l'affichage d'une page web.<br>Son utilisation est indispensable dans la conception de n'importe quelle application ou site internet !<br><br>Maintenant, voyons comment s'organise l'interface du jeu.",
           "This is the workbench. On this screen, you can check the visual render of all CSS properties you applied.<br><br>To win the game, what is displayed here must look as close as possible to the original artwork, which you can view at any moment by touching the bio icon (i) below.<br><br>Next to the bio icon, you will also find the litteral transcription of the code you used.":"Voici le plan de travail. Sur cet écran, tu peux voir le résultat visuel des propriétés CSS que tu as appliqué.<br><br>Pour remporter la partie, ce qui est affiché ici doit ressembler le plus possible à l'oeuvre originale, que tu peux visionner à tout moment en touchant la bulle d'info (i) un peu plus bas.<br><br>Près de la bulle d'info, tu trouveras également une transcription littérale du code utilisé.",
           "This is the game's dashboard. That is where the magic happens !<br><br>This section contains all CSS elements you need to reconstruct the artwork and complete the level.<br><br>Each button assimilates to a property, with attribute's values that can be edited just down below.<br><br>A bit confused ? Let's take a more detailed look.":"Voici l'interface de jeu. C'est ici que la magie prend forme !<br><br>Cette zone contient tous les éléments de CSS dont tu as besoin pour reconstituer l'oeuvre et compléter le niveau.<br><br>Chaque bouton correspond à une propriété, dont les valeurs des attributs peuvent être modifiées juste en dessous.<br><br>Un peu perdu(e) ? Examinons tout ça plus en détail :",
           "This a button. As stated previously, each button bears the name of a CSS property which attribute's values can be edited just down below.<br><br>Here for instance, 'Background' allows you to define the background of the artwork.<br><br>But how exactly can you use this button ? Well, let's see how it works.":"Voici un bouton. Comme nous l'avons vu précédemment, chaque bouton porte le nom d'une propriété CSS dont les valeurs d'attributs sont définies juste en dessous.<br><br>Par exemple ici, 'Background' permet de définir l'arrière plan de l'oeuvre.<br><br> Mais comment fonctionne-t'il, ce bouton 'Background' ? C'est très simple, jettes donc un oeil un peu plus bas.",
-          "First step : Pick a value of a property's attribute.<br><br>In the case of the'Background' property, we only get one attribute to look at : 'Gradient',  which has two sub-attributes, 'top' and 'bottom'.<br><br>To make things easier as it is a first example, there is only one possible value for both 'top' and 'bottom', so you can't get it wrong !<br><br>Anyway, let's touch the colored circle above 'top' to select the value.":"Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercle de couleur au dessus de 'top' pour sélectionner la valeur.",
+          "First step : Pick a value of a property's attribute.<br><br>In the case of the'Background' property, we only get one attribute to look at : 'Gradient',  which has two sub-attributes, 'top' and 'bottom'.<br><br>To make things easier as it is a first example, there is only one possible value for both 'top' and 'bottom', so you can't get it wrong !<br><br>Anyway, let's touch the colored circles above 'top' and 'bottom' to select the value.":"Pour la propriété 'Background', nous n'avons qu'à paramétrer un seul attribut : 'Gradient', dont les sous-attributs sont 'top' et 'bottom'.<br><br>Pour faciliter les choses dans ce premier exemple, il n'y a qu'une seule valeur de couleur possible pour 'top' et pour 'bottom', donc impossible de se tromper !<br><br>Touchons donc le cercles de couleur au dessus de 'top' et de 'bottom' pour sélectionner la valeur.",
           "When a value has been successfully applied, the corresponding property's button animates itself accordingly, giving you a glimpse of the result.<br><br>All that we have left to do now is to drag and drop the 'Background' button on the workbench.<br><br>Hocus Pocus ! The background's color changed !":"Lorsqu'une valeur d'attribut a correctement été affectée, le bouton de la propriété correspondante s'anime en conséquence, afin de donner un aperçu du résultat.<br><br>Tout ce qu'il nous reste maintenant à faire est de maintenir le doigt enfoncé sur le bouton 'Background' et de le faire glisser sur le plan de travail.<br><br>Abracadabra ! La couleur de fond a changé !",
-          "We have successfully set the first color of our 'Gradient' property. To complete our color gradient, we simply need to repeat the same process for the 'bottom' sub-attribute !<br><br>There we go, the background of our artwork is now all good !":"Nous avons affecté un background coloré uni en fixant la première couleur de 'Gradient'. Il nous suffit maintenant de répéter le même processus pour ajouter la couleur de 'bottom' et ainsi compléter notre dégradé !<br><br>Et voilà, le fond de l'oeuvre a été reproduit à la perfection !",
-           "This tutorial is now over ! Everything is up to you now !<br><br>Will you be up to the challenge and succeed to get through all four levels ?<br><br>Good luck !":  "Ce tutoriel est désormais terminé ! C'est maintenant à toi de jouer !<br><br>Parviendras-tu à relever le challenge et à compléter les quatre niveaux ?<br><br>Bonne chance !"
+          "This tutorial is now over ! Everything is up to you now !<br><br>Will you be up to the challenge and succeed to get through all four levels ?<br><br>Good luck !":  "Ce tutoriel est désormais terminé ! C'est maintenant à toi de jouer !<br><br>Parviendras-tu à relever le challenge et à compléter les quatre niveaux ?<br><br>Bonne chance !"
         }
 
     },
@@ -234,11 +227,11 @@ export default {
     showHint: function() {
       //this.translate();
       this.intro.showHints();
-        
+
     },
-    
+
     victory: function() {
-      
+
       if (((document.getElementById("artwork1").style.background=='linear-gradient(rgb(40, 142, 153), rgb(24, 84, 94))') )&& (
        (document.getElementById("artwork1").style.border=='50px solid rgb(24, 84, 94)')
       || (document.getElementById("artwork1").style.border=='60px solid rgb(24, 84, 94)')
@@ -248,7 +241,7 @@ export default {
       }
     }
   },
-  
+
   computed: {
       btnStyle: function() {
 

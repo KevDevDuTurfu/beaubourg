@@ -11,34 +11,36 @@
         <victory  :niveau="niveauSuivant" v-if="showVictory" @close="showVictory=false"> </victory>
         <!--debut de l'aide en bas de page-->
      <div class="tips">
-     <p v-if="!cmd">Code css: {background-color:{{couleur}} {box-shadow: {{offsetX}}px {{offsetY}}px {{blur}}px {{shadowColor}}}</p>
+     <p v-if="!cmd">{{t('Code CSS')}} : {background-color:{{couleur}} {box-shadow: {{offsetX}}px {{offsetY}}px {{blur}}px {{shadowColor}}}</p>
       <p v-if="cmd"> {animation:{{valueTransform}} {{valueDuration}}s linear infinite alternate}</p>
-  
+
      </div><!--fin de l'aide -->
      <!--contenu de l'oeuvre à composer-->
 
     <div class="artwork" ref="artwork">
       <!-- oeuvre en lui même -->
       <div :class="['artwork3h artwork3', { selected: rightBarSelected }, rightBarShadow]" id="artwork3hd" ref="artwork3h" @click="selectedTrigger('rightBarSelected')">
-          
+
       </div>
       <div :class="['artwork3v artwork3', { selected: topBarSelected }, topBarShadow]"  id="artwork3vh" ref="artwork3v" @click=" selectedTrigger('topBarSelected')">
-          
+
       </div>
       <div :class="['artwork3h artwork3', { selected: leftBarSelected }, leftBarShadow]" id="artwork3hg" ref="artwork3h" @click="selectedTrigger('leftBarSelected')">
-          
+
       </div>
-      <div :class="['artwork3v artwork3', { selected: bottomBarSelected }, bottomBarShadow]" id="artwork3vb" ref="artwork3v" @click=" selectedTrigger('bottomBarSelected')">         
+      <div :class="['artwork3v artwork3', { selected: bottomBarSelected }, bottomBarShadow]" id="artwork3vb" ref="artwork3v" @click=" selectedTrigger('bottomBarSelected')">
       </div>
     </div>
     <!--debut du contenu des commandes (barre à droite) -->
     <!-- <div class="overlay" ></div> -->
     <div class="command">
-        
+
        <transition name="fade" >
             <div class="page1-cmd"  v-if="!cmd" >
               <div class='btn-command'>
-                <i class="fa fa-caret-right" aria-hidden="true" v-on:click="cmd = !cmd" ></i>
+                <i class="fa fa-caret-right" aria-hidden="true" v-on:click="cmd = !cmd" >
+                  <span class="labelArrow">{{t('Animations')}}</span>
+                </i>
                 </div>
                 <div id="position1"><!-- emplacement du bouton permettant de la remettre à sa place-->
                 <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
@@ -51,14 +53,14 @@
                         </div>
                         <!--pareil pour la couleur 2 -->
                         <div class="col colorBackground2"><div class="codeColor" @click="getColorBackground('#252d33')"></div></div>
-                    
+
                         <div class="col colorBackground3"><div class="codeColor" @click="getColorBackground('#476cef')"></div></div>
                         <div class="col colorBackground4"><div class="codeColor" @click="getColorBackground('#d3093c')"></div></div>
                     </div>
                     </div>
                     <div class="btn btn2" ref ="btn2" v-bind:style="{boxShadow:offsetX+'px '+offsetY+'px '+blur+' px '+shadowColor}" v-draggable="{shadow:shadowColor, offX:offsetX,offY:offsetY, b:blur}">Box-shadow</div>
                         <div class="value" v-if="show2">
-                        <div class="color"> 
+                        <div class="color">
                             <h2 class="titleCss">Color</h2>
                             <div class="col color1"><div class="codeColor" @click="getShadowColor('#fbff18')"></div></div>
                             <div class="col color2"><div class="codeColor" @click="getShadowColor('#476cef')"></div></div>
@@ -87,7 +89,9 @@
                  <transition name="fade" mode="in-out">
                 <div  class="page2-cmd" v-if="cmd"  >
                   <div class='btn-command'>
-                <i class="fa fa-caret-left"  aria-hidden="true" v-on:click="cmd = !cmd" ></i>
+                <i class="fa fa-caret-left"  aria-hidden="true" v-on:click="cmd = !cmd" >
+                  <span class="labelArrow">{{t('Couleurs')}}</span>
+                </i>
                 </div>
                 <div id="position3"><!-- emplacement du bouton permettant de la remettre à sa place-->
             <!--le bouton "draggable" apres v-draggable on met les valeurs qui se changent dynamiquement par les options en bas -->
@@ -114,7 +118,7 @@
                 </div>
           </transition>
                 </div>
-            </div>  
+            </div>
 </template>
 <script>
 import Modal from './Modal.vue';
@@ -143,7 +147,7 @@ export default {
       offsetY:10,
       blur:5,
       valueTransform:'',
-      valueDuration:'', 
+      valueDuration:'',
       borderStyle:'solid',
       selected:false,
       rightBarSelected:false,
@@ -157,7 +161,7 @@ export default {
       boxShadow:'',
       intro2 : introJs()
     }
-  }, 
+  },
   components: {
           'modal':  Modal,
           'victory' : Victory,
@@ -202,7 +206,7 @@ export default {
           &&(document.getElementById("artwork3vb").style.backgroundColor=='rgb(251, 255, 24)')
            )
            && (
-             
+
               (
                 (document.getElementById("artwork3vh").classList.contains('yellow1'))
                 || (document.getElementById("artwork3vh").classList.contains('yellow3'))
@@ -220,8 +224,8 @@ export default {
                 || (document.getElementById("artwork3hg").classList.contains('blue3'))
                 || (document.getElementById("artwork3hg").classList.contains('blue10'))
                 ) ))
-             
-             
+
+
               {
                 console.log('ici')
               this.showVictory=true;
@@ -229,7 +233,7 @@ export default {
            {
              console.log('iciiii')
            }
-      
+
     },
     getTransform: function(value){
       this.valueTransform=value;
@@ -237,13 +241,13 @@ export default {
     },
     getDuration: function(value){
       this.valueDuration=value;
-       
+
     },
     getColorBackground: function(value){
     this.couleur=value;
     this.backgroundColor();
     },
-    
+
     getShadowColor: function(value){
         this.shadowColor=value;
         this.box();
@@ -258,7 +262,7 @@ export default {
 
   directives: {
    draggable: function (el, binding, vnode) {
-    
+
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY, lastClass;
 
     function mousemove(e) {
@@ -277,7 +281,7 @@ export default {
       let borderArt=parseInt(binding.value.width)*2;
       document.removeEventListener('touchmove', mousemove);
       document.removeEventListener('touchend', mouseup);
-      
+
            if ((!(document.getElementsByClassName('artwork3')[0].classList.contains('selected')) &&
                   (!(document.getElementsByClassName('artwork3')[1].classList.contains('selected'))) &&
                    (!(document.getElementsByClassName('artwork3')[2].classList.contains('selected'))) &&
@@ -286,7 +290,7 @@ export default {
           }
           else {
             if (el.classList.contains('btn1')){
-            document.getElementsByClassName("selected")[0].style.backgroundColor=binding.value.color;  
+            document.getElementsByClassName("selected")[0].style.backgroundColor=binding.value.color;
           }
           else if(el.classList.contains('btn2')) {
             document.getElementsByClassName("selected")[0].style.boxShadow=binding.value.offX+"px "+binding.value.offY+"px "+binding.value.b+"px "+binding.value.shadow;
@@ -305,7 +309,7 @@ export default {
               vnode.context.bottomBarShadow=binding.value.transform+binding.value.duration;
             }
           }
-        
+
       }
       vnode.context.victory();
     }
@@ -325,23 +329,39 @@ export default {
       return false;
     });
   }
-  
+
 },
    mounted: function() {
 
 this.intro2.setOptions({
   steps: [
     {
-      intro: "Astuce : A partir de maintenant, les oeuvres sont composées de plusieurs parties."
+      intro: this.t("Astuce : A partir de maintenant, les oeuvres sont composées de plusieurs parties.")
     },
     {
       element: document.querySelector("#artwork3hd"),
-      intro: "Touches l'élément que tu souhaites modifier pour le sélectionner. De cette manière, tu peux appliquer des propriétés différentes à chaque morceau de l'oeuvre."
+      intro: this.t("Touches l'élément que tu souhaites modifier pour le sélectionner. De cette manière, tu peux appliquer des propriétés différentes à chaque morceau de l'oeuvre.")
     }
   ]
   });
   this.intro2.start();
 
+  },
+  locales: {
+      en_UK: {
+        "Code CSS":"CSS code",
+        "Animations":"Animations",
+        "Couleurs":"Colors",
+        "Astuce : A partir de maintenant, les oeuvres sont composées de plusieurs parties.":"Tip: From now on, the artworks are divided in several parts.",
+        "Touches l'élément que tu souhaites modifier pour le sélectionner. De cette manière, tu peux appliquer des propriétés différentes à chaque morceau de l'oeuvre.":"Touch the area you wish to edit in order to select it. That way, you can apply different properties for each piece of the artwork."
+      },
+      fr_FR: {
+        "CSS code":"Code CSS",
+        "Animations":"Animations",
+        "Colors":"Couleurs",
+        "Tip: From now on, the artworks are divided in several parts.":"Astuce : A partir de maintenant, les oeuvres sont composées de plusieurs parties.",
+        "Touch the area you wish to edit in order to select it. That way, you can apply different properties for each piece of the artwork.":"Touches l'élément que tu souhaites modifier pour le sélectionner. De cette manière, tu peux appliquer des propriétés différentes à chaque morceau de l'oeuvre."
+      }
   }
 }
 </script>
@@ -368,7 +388,7 @@ body{
   height: 95vh;
   width:50%;
   margin-top:45px;
-  
+
 }
 .artwork3 {
   transition: transform 2s ease-out;
@@ -385,7 +405,7 @@ body{
     height:5vh;
     margin-top: 60vh;
     /*animation: neon 1s linear infinite alternate;*/
-} 
+}
 .yellow1 {
   animation: neon 1s linear infinite alternate;
 }
@@ -478,7 +498,7 @@ body{
     position: absolute;
     z-index: 5;
     margin-top: 0vh;
-} 
+}
 .artwork3h:nth-child(1) {
     background-color: rgb(236, 236, 236);
     width:5vh;
@@ -522,8 +542,13 @@ body{
   }
   .rangeValue{
     margin-top: 10%;
-  }  
+  }
 .valueTransform, .valueDuration {
   font-size:2em;
+}
+
+.labelArrow {
+  margin-left: 12%;
+  font-size: 0.8em;
 }
 </style>

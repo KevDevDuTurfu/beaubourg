@@ -5,29 +5,29 @@
         <div class="settings-container">
 
           <div class="settings-header">
-            <p> Options </p>
+            <p>{{t('Options')}}</p>
           </div>
 
           <div class="settings-body">
             <slot name="body">
                 <div class="block">
-            <div class="labelIcones">Reprendre le jeu-----</div>
+            <div class="labelIcones">{{t('Reprendre le jeu -----')}}</div>
             <div class="icones"><span class="icone" @click="$emit('close')"><i class="fa fa-play" aria-hidden="true"></i></span></div>
                </div>
                <div class="block">
-            <div class="labelIcones">Menu-----</div>
+            <div class="labelIcones">{{t('Menu -----')}}</div>
             <div class="icones"><router-link   to="/niveau"><span @click="$emit('close')" class="icone"><i class="fa fa-home" aria-hidden="true"></i></span></router-link></div>
             </div>
                <div class="block">
-            <div class="labelIcones">Langues-</div>
+            <div class="labelIcones">{{t('English -----')}}</div>
             <div class="icones"><span class="icone" @click="emitMethodEn ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/britain.png" alt=""> </span></div>
                </div>
                <div class="block">
-            <div class="labelIcones">Langues-</div>
+            <div class="labelIcones">{{t('Français -----')}}</div>
             <div class="icones"><span class="icone" @click="emitMethodFr ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/france.png" alt=""> </span></div>
                </div>
                <div class="block">
-            <div class="labelIcones">Sons-----</div>
+            <div class="labelIcones">{{t('Sons -----')}}</div>
             <div class="icones"><span class="icone"><i class="fa fa-volume-up" aria-hidden="true"></i></span></div>
             </div>
             </slot>
@@ -54,10 +54,10 @@ export default {
   }
   },
     created () {
-        
+
     },
     methods: {
-     
+
     emitMethodEn () {
       Bus.$emit('click', this.langen);
       this.$emit('close');
@@ -65,6 +65,24 @@ export default {
     emitMethodFr () {
       Bus.$emit('click', this.langfr);
       this.$emit('close');
+    }
+  },
+  locales: {
+    en_UK: {
+      'Options':'Settings',
+      'Reprendre le jeu -----':'Resume game -----',
+      'Menu -----':'Menu -----',
+      'English -----':'English -----',
+      'Français -----':'Français -----',
+      'Sons -----':'Sounds -----'
+    },
+    fr_FR: {
+      'Settings':'Options',
+      'Resume game -----':'Reprendre le jeu -----',
+      'Menu -----':'Menu -----',
+      'English -----':'English -----',
+      'Français -----':'Français -----',
+      'Sounds -----':'Sons -----'
     }
   }
 }
@@ -82,7 +100,7 @@ export default {
   text-decoration: none;
   padding-left: 10px;
    text-shadow: 0 0 20px #fff;
-   
+
 
 }
 i{
@@ -97,8 +115,8 @@ i{
   height:50px;
   text-align: center;
   text-shadow: 0 0 20px #fff;
-  box-shadow: 0 0 10px rgb(255, 255, 255);  
-} 
+  box-shadow: 0 0 10px rgb(255, 255, 255);
+}
 .icones .fa-home {
     margin-right:8px;
 }
@@ -113,7 +131,7 @@ i{
   background-color: rgba(0, 0, 0, .5);
   display: table;
   transition: opacity .3s ease;
-  
+
 }
 
 .settings-wrapper {

@@ -1,7 +1,7 @@
 
 <template>
   <div class="menu">
-    <h1>{{t('Choisssez votre niveau')}}</h1>
+    <h1>{{t('Choix du niveau')}}</h1>
     <div class="carroussel">
       <div class="left-car" @click="counterPrev()"><transition name="fade" mode="out-in"><img :key="sourceMid" v-bind:src="sourceLeft" alt="" class="left-img"></transition></div>
       <div class="arrow-left arrow" @click="counterPrev()"><i class="fa fa-caret-left" aria-hidden="true"></i></div>
@@ -17,7 +17,7 @@ export default {
   name: 'Menu',
   data () {
     return {
-      
+
       sourceMid: "src/assets/images/miniaturelvl1.png",
       sourceLeft: "src/assets/images/miniaturelvl4.png",
       sourceRight: "src/assets/images/miniaturelvl2.png",
@@ -35,27 +35,27 @@ export default {
       this.sourceChange();
     },
     sourceChange: function() {
-      if(this.counter<=0){this.counter=4} 
+      if(this.counter<=0){this.counter=4}
       if (this.counter>=5) {this.counter=1}
      let counterLeft=this.counter-1;
       let counterRight=this.counter+1;
-      if(counterLeft<=0){counterLeft=4} 
+      if(counterLeft<=0){counterLeft=4}
       if (counterRight>=5) {counterRight=1}
       this.sourceLeft= "src/assets/images/miniaturelvl"+counterLeft+".png";
       this.sourceMid= "src/assets/images/miniaturelvl"+this.counter+".png";
       this.sourceRight="src/assets/images/miniaturelvl"+counterRight+".png";
       console.log(this.counter)
     }
-      
+
   },
   locales: {
     	en_UK: {
-        'Choisssez votre niveau': 'Choose ',
-        'Niveau': 'Level'
+        'Choix du niveau':'Select a level',
+        'Niveau':'Level'
       },
       fr_FR: {
-        'Choose ' : 'Choisssez votre niveau',
-        'Level' : 'Niveau'
+        'Select a level':'Choix du niveau',
+        'Level':'Niveau'
       }
   }
 }
@@ -94,11 +94,11 @@ img {
   padding:4%;
  margin:1%;
   text-shadow: 0 0 20px #fff;
-  box-shadow: 0 0 10px rgb(255, 255, 255);  
+  box-shadow: 0 0 10px rgb(255, 255, 255);
 }
 .left-car, .right-car {
   width: 13%;
- 
+
 
 }
 .middle-car {
@@ -112,6 +112,6 @@ img {
     padding: 0.25em;
     font-size: 4em;
     text-shadow: 0 0 20px #fff;
- 
+
 }
 </style>
