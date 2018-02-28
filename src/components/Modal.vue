@@ -6,9 +6,9 @@
 
           <div class="modal-header">
             <slot name="header">
-            <p> Oeuvre du niveau</p>
-             <p>Nom de l'artiste {{nom}}</p>
-             <p>Nom de l'oeuvre {{titre}}</p>
+            <p>{{t('A reproduire dans ce niveau :')}}</p>
+             <p>{{t('L\'artiste')}} : {{nom}}</p>
+             <p>{{t('L\'oeuvre')}} : {{titre}}</p>
             </slot>
           </div>
 
@@ -20,9 +20,9 @@
 
           <div class="modal-footer">
             <slot name="footer">
-           
+
               <button  class="modal-default-button fermer" @click="$emit('close')">
-                Fermer
+                {{t('Fermer')}}
               </button>
             </slot>
           </div>
@@ -35,7 +35,21 @@
 
 export default {
   name: 'modal',
-  props:['source', 'nom', 'titre']
+  props:['source', 'nom', 'titre'],
+  locales: {
+      en_UK: {
+        "A reproduire dans ce niveau :":"To reconstruct in this level :",
+        "L\'artiste":"Artist",
+        "L\'oeuvre":"Artwork",
+        "Fermer":"Close"
+      },
+      fr_FR: {
+        "To reconstruct in this level :":"A reproduire dans ce niveau :",
+        "Artist":"L\'artiste",
+        "Artwork":"L\'oeuvre",
+        "Close":"Fermer"
+      }
+  }
 }
 </script>
 <style>

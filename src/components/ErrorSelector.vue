@@ -6,22 +6,22 @@
 
           <div class="errorSelect-header">
             <slot name="header">
-            Attention!
+            {{t('Attention !')}}
             </slot>
           </div>
 
           <div class="errorSelect-body">
             <slot name="body">
-               <p>Il ne faut pas oublier de sélectionner un élément de l'oeuvre:</p>
-               <p>il suffit juste d'appuyer sur l'un des éléments, et il va se rapprocher de vous.</p>
+               <p>{{t('Il ne faut pas oublier de sélectionner un élément de l\'oeuvre !')}}</p>
+               <p>{{t('Touches l\'un des éléments pour le modifier.')}}</p>
             </slot>
           </div>
 
           <div class="errorSelect-footer">
             <slot name="footer">
-           
+
               <button  class="errorSelect-default-button fermer" @click="$emit('close')">
-                Fermer
+                {{t('Fermer')}}
               </button>
             </slot>
           </div>
@@ -33,7 +33,21 @@
 <script>
 
 export default {
-  name: 'errorSelect'
+  name: 'errorSelect',
+  locales: {
+      en_UK: {
+        "Attention !":"Warning !",
+        "Il ne faut pas oublier de sélectionner un élément de l\'oeuvre !":"Don\'t forget to select a piece of the artwork !",
+        "Touches l\'un des éléments pour le modifier.":"Touch an element to edit it.",
+        "Fermer":"Close"
+      },
+      fr_FR: {
+        "Warning !":"Attention !",
+        "Don\'t forget to select a piece of the artwork !":"Il ne faut pas oublier de sélectionner un élément de l\'oeuvre !",
+        "Touch an element to edit it.":"Touches l\'un des éléments pour le modifier.",
+        "Close":"Fermer"
+      }
+  }
 }
 </script>
 <style>

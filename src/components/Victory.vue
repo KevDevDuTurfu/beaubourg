@@ -5,18 +5,18 @@
         <div class="victory-container">
 
           <div class="victory-header">
-            <p> Bravo! </p>
+            <p>{{t('Bravo !')}}</p>
           </div>
 
           <div class="victory-body">
             <slot name="body">
-               <p>Tu as réussi le  niveau</p>
+               <p>{{t('Niveau complété ! Bien joué ;)')}}</p>
             </slot>
           </div>
 
           <div class="victory-footer">
             <slot name="footer">
-              <div class="lvlNext">Niveau suivant-----</div>
+              <div class="lvlNext">{{t('Niveau suivant -----')}}</div>
               <div class="closeNext"><router-link v-bind:to="niveau" @click="$emit('close')"><span id="play">&#9655;</span></router-link></div>
             </slot>
           </div>
@@ -29,7 +29,19 @@
 
 export default {
   name: 'victory',
-  props:['niveau']
+  props:['niveau'],
+  locales: {
+      en_UK: {
+        'Bravo !':'Congrats !',
+        'Niveau complété ! Bien joué ;)':'Level completed ! Well done ;)',
+        'Niveau suivant -----':'Next level -----'
+      },
+      fr_FR: {
+        'Congrats !':'Bravo !',
+        'Level completed ! Well done ;)':'Niveau complété ! Bien joué ;)',
+        'Next level -----':'Niveau suivant -----'
+      }
+  }
 }
 </script>
 <style>
@@ -51,8 +63,8 @@ export default {
   width: 50px;
   height:50px;
   text-align: center;
-  
-  box-shadow: 0 0 10px rgb(255, 255, 255);  
+
+  box-shadow: 0 0 10px rgb(255, 255, 255);
 }
 .victory-mask {
   position: fixed;
@@ -64,7 +76,7 @@ export default {
   background-color: rgba(0, 0, 0, .5);
   display: table;
   transition: opacity .3s ease;
-  
+
 }
 
 .victory-wrapper {

@@ -1,9 +1,8 @@
 <!--ici html du code-->
 <template>
   <div class="lvl4">
-  
-  
-  
+
+
     <!-- contenu du niveau 2-->
   
   
@@ -11,9 +10,7 @@
     <div class="bubble" @click="showModal = true">
   
       <i class="fa fa-question-circle" aria-hidden="true"></i></div>
-  
-  
-  
+
     <!--contenu de la bulle info-->
   
   
@@ -23,6 +20,7 @@
     <errorselector v-if="showErrorSelect" @close="showErrorSelect = false"></errorselector>
   
     <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
+
   
   
   
@@ -1061,14 +1059,15 @@
   
   
   
+
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   body {
-  
+
     overflow: hidden;
-  
+
   }
   
   
@@ -1076,9 +1075,11 @@
   .labelArrow {
   
     margin-left: 12%;
+
   
     font-size: 0.5em;
   
+
   }
   
   
@@ -1098,16 +1099,19 @@
     transition: transform 2s ease-out;
   
   }
+
   
   
   
+
   .value {
-  
+
     margin-top: -6%;
-  
+
     color: white;
-  
+
   }
+
   
   
   
@@ -1131,331 +1135,334 @@
   
   
   
+
   ul {
-  
+
     list-style: none;
-  
+
   }
-  
-  
-  
+
+
+
   li {
-  
+
     margin-bottom: 4%;
-  
+
   }
-  
-  
-  
+
+
+
   label {
-  
+
     cursor: pointer;
-  
+
     font-size: 29px;
-  
+
   }
-  
-  
-  
+
+
+
   .colorBackground1 .codeColor {
-  
+
     background: #f40e3c;
-  
+
   }
-  
-  
-  
+
+
+
   .colorBackground2 .codeColor {
-  
+
     background: #59a0f2;
-  
+
   }
-  
-  
-  
+
+
+
   .img-block,
-  
+
   .desc-block {
-  
+
     display: block;
-  
+
   }
-  
-  
-  
+
+
+
   .artwork4desc,
-  
+
   .artwork4img {
-  
+
     display: inline-block;
-  
+
   }
-  
-  
-  
+
+
+
   .btn-command {
-  
+
     color: white;
-  
+
     font-size: 45px;
-  
+
   }
-  
-  
-  
+
+
+
   .btn-command i {
   
     width: 50%;
   
     padding: 2%;
-  
+
   }
-  
-  
-  
+
+
+
   .lvl4 {
-  
+
     background-image: url("../assets/images/img_stack.png");
-  
+
     background-image: url("../assets/images/fondniveau.png"), url("../assets/images/img_stack.png");
-  
+
     background-repeat: no-repeat;
-  
+
     background-attachment: fixed;
-  
+
     background-position: center;
-  
+
     background-size: cover;
-  
+
     text-align: center;
-  
+
   }
-  
-  
-  
+
+
+
   .artwork {
-  
+
     height: 100vh;
-  
+
     width: 70%;
-  
+
   }
-  
-  
-  
+
+
+
   .artwork,
-  
+
   .command {
-  
+
     display: inline-block;
-  
+
   }
-  
-  
-  
+
+
+
   .artwork4desc {
-  
+
     margin: 3%;
-  
+
     height: 50vh;
-  
+
     width: 30vh;
-  
+
     background: white;
-  
+
     border: 5px solid white;
-  
+
     vertical-align: bottom;
+
   
     font-family: 'Play', Arial, sans-serif;
   
     font-size: 13px;
   
+
   }
-  
-  
-  
+
+
+
   .artwork4img {
-  
+
     margin: 3%;
-  
+
     margin-bottom: 3%;
-  
+
     width: 30vh;
-  
+
     height: 20vh;
-  
+
     background: white;
-  
+
     border: 5px solid white;
-  
+
   }
-  
-  
-  
+
+
+
   .titleCss {
-  
+
     margin: 2%;
-  
+
   }
-  
-  
-  
+
+
+
   .codeImage {
-  
+
     width: 100px;
-  
+
     height: 100px;
-  
+
   }
-  
-  
-  
+
+
+
   .codeColor {
-  
+
     width: 50px;
-  
+
     height: 50px;
-  
+
     border-radius: 50px;
-  
+
   }
-  
-  
-  
+
+
+
   .col {
-  
+
     background-image: none;
-  
+
     display: inline-block;
-  
+
     font-size: 70px;
-  
+
     margin: 1%;
-  
+
   }
-  
-  
-  
+
+
+
   .imgBackground1 .codeImage {
-  
+
     background-image: url('../assets/images/imagedroite.png');
-  
+
     background-size: contain;
-  
+
     background-repeat: no-repeat;
-  
+
   }
-  
-  
-  
+
+
+
   .imgBackground2 .codeImage {
-  
+
     background-image: url('../assets/images/imagegauche.png');
-  
+
     background-size: contain;
-  
+
     background-repeat: no-repeat;
-  
+
   }
-  
-  
-  
+
+
+
   .imgBackground3 .codeImage {
-  
+
     background-image: url('../assets/images/imagefake1.png');
-  
+
     background-size: contain;
-  
+
     background-repeat: no-repeat;
-  
+
   }
-  
-  
-  
+
+
+
   .imgBackground4 .codeImage {
-  
+
     background-image: url('../assets/images/imagefake2.png');
-  
+
     background-size: contain;
-  
+
     background-repeat: no-repeat;
-  
+
   }
-  
-  
-  
+
+
+
   .color1 .codeColor {
-  
+
     background-color: #000000;
-  
+
   }
-  
-  
-  
+
+
+
   .color2>.codeColor {
-  
+
     background-color: grey;
-  
+
   }
-  
-  
-  
+
+
+
   .color3>.codeColor {
-  
+
     background-color: rgb(50, 156, 205);
-  
+
   }
-  
-  
-  
+
+
+
   .option {
-  
+
     font-size: 24px;
-  
+
     color: white;
-  
+
     font-family: 'Barlow Condensed', sans-serif;
-  
+
     font-weight: lighter;
-  
+
   }
-  
-  
-  
+
+
+
   .sty {
-  
+
     width: 50px;
-  
+
     height: 50px;
-  
+
     display: inline-block;
-  
+
     margin: 3%;
-  
+
   }
-  
-  
-  
+
+
+
   .style1 {
-  
+
     border: 4px solid white;
-  
+
   }
-  
-  
-  
+
+
+
   .style2 {
-  
+
     border: 4px dashed white;
-  
+
   }
-  
-  
-  
+
+
+
   .rangeValue {
-  
+
     margin-top: 10%;
-  
+
   }
 </style>
