@@ -132,7 +132,7 @@ export default {
   data () {
     return {
       niveauSuivant:'niveau4',
-      oeuvre: 'src/assets/images/danflavin.png',
+      oeuvre: require("../assets/images/danflavin.png"),
       cmd:false,
       showVictory:false,
       artist:'Dan FLAVIN',
@@ -227,12 +227,10 @@ export default {
 
 
               {
-                console.log('ici')
+          
               this.showVictory=true;
            }
-           {
-             console.log('iciiii')
-           }
+          
 
     },
     getTransform: function(value){
@@ -332,7 +330,10 @@ export default {
 
 },
    mounted: function() {
-
+this.intro2.setOption("nextLabel", " > ");
+      this.intro2.setOption("prevLabel", " < ");
+       this.intro2.setOption("doneLabel", this.t('Fini'));
+      this.intro2.setOption("skipLabel", this.t('Passer'));
 this.intro2.setOptions({
   steps: [
     {
@@ -349,6 +350,8 @@ this.intro2.setOptions({
   },
   locales: {
       en_UK: {
+         "Fini":"Done",
+          "Passer":"Skip",
         "Code CSS":"CSS code",
         "Animations":"Animations",
         "Couleurs":"Colors",
@@ -356,6 +359,8 @@ this.intro2.setOptions({
         "Touches l'élément que tu souhaites modifier pour le sélectionner. De cette manière, tu peux appliquer des propriétés différentes à chaque morceau de l'oeuvre.":"Touch the area you wish to edit in order to select it. That way, you can apply different properties for each piece of the artwork."
       },
       fr_FR: {
+         "Done":"Fini",
+          "Skip":"Passer",
         "CSS code":"Code CSS",
         "Animations":"Animations",
         "Colors":"Couleurs",

@@ -207,7 +207,7 @@
 
             <!--contenu de valeurs-->
 
-            <h2 class="titleCss">Choose transform:</h2>
+            <h2 class="titleCss">Transform</h2>
 
             <div class="tranform">
 
@@ -225,7 +225,7 @@
 
             <!--contenu de valeurs-->
 
-            <h2 class="titleCss">Choose duration:</h2>
+            <h2 class="titleCss">Duration</h2>
 
             <div class="duree">
 
@@ -263,7 +263,7 @@ import 'intro.js/introjs.css';
 
       return {
 
-        oeuvre: 'src/assets/images/donaldjudd.png',
+        oeuvre: require("../assets/images/donaldjudd.png"),
 
         showVictory: false,
 
@@ -504,7 +504,10 @@ import 'intro.js/introjs.css';
     },
 
     mounted: function() {
-
+        this.intro.setOption("nextLabel", " > ");
+      this.intro.setOption("prevLabel", " < ");
+       this.intro.setOption("doneLabel", this.t('Fini'));
+      this.intro.setOption("skipLabel", this.t('Passer'));
 this.intro.setOptions({
   steps: [
     {
@@ -518,12 +521,16 @@ this.intro.setOptions({
   },
   locales: {
       en_UK: {
+         "Fini":"Done",
+          "Passer":"Skip",
         "Code CSS:":"CSS code:",
         "Animations":"Animations",
         "Couleurs":"Colors",
         "Astuce : Prends bien le temps lire la version écrite de ton code CSS dans la console en bas de page...<br><br> Cela pourrait te servir plus tard ;)":"Tip : You should take take the time to read the written version of your CSS code in the console at the bottom of the page...<br><br> It could come in handy later ;)"
       },
       fr_FR: {
+         "Done":"Fini",
+          "Skip":"Passer",
         "CSS Code:":"Code CSS:",
         "Animations":"Animations",
         "Colors":"Couleurs",

@@ -20,7 +20,9 @@
 
 <script>
   import Settings from './components/Settings.vue';
-  import Bus from './components/Bus.js'
+  import Bus from './components/Bus.js';
+  import 'intro.js/introjs.css';
+  import './assets/css/intro.css';
   export default {
   
     name: 'app',
@@ -516,59 +518,5 @@ box-shadow: 0px 6px 29px 5px rgba(82,55,82,1);
     box-shadow: 0 0 10px rgb(255, 255, 255), inset 0 0 5px #fff;
   
   }
-  .introjs-hint-dot {
-    top: -18px;
-    left: -20px;
-    border: 10px solid rgba(255, 249, 249, 0.9);
-  }
-  .introjs-hint-pulse {
-    width: 20px;
-    height: 20px;
-    border: 5px solid rgba(255, 255, 255, 0.5);
-  }
-  .introjs-tooltip {
-      box-shadow: 0px 30px 40px rgba(0,0,0,.1);
-       background: -webkit-linear-gradient( left, mediumpurple , cornflowerblue);
-  background:    -moz-linear-gradient( left, mediumpurple, cornflowerblue);
-  background:     -ms-linear-gradient( left, mediumpurple, cornflowerblue);
-  background:      -o-linear-gradient( left, mediumpurple, cornflowerblue);
-  background:         linear-gradient( to right, mediumpurple,cornflowerblue);
-  color:white;
-  font-family:  'Play', Arial, Helvetica, sans-serif;
-  font-size: 1.5em;
-  max-width: 500px;
-  min-width: 400px;
-  }
-  .introjs-helperNumberLayer {
-    background: #000046;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-font-size: 20px;
-    width: 25px;
-    line-height: 27px;
-    height: 25px;
-  }
-  .introjs-button {
-    font-size: 20px;
-    background: #03001e;  /* fallback for old browsers */
-background: #56CCF2;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-text-shadow:none;
-color:rgb(243, 234, 234);
-  }
-  .introjs-bullets ul li a {
-        width: 27px;
-    height: 7px;
-  }
-  .introjs-bullets ul li a.active {
-    background-color: #47bef5;
-  }
-  .introjs-disabled, .introjs-disabled:hover, .introjs-disabled:focus {
-   background: #667db6;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-color:#e0dcdc;
-  }
 </style>

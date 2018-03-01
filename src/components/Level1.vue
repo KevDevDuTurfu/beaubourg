@@ -74,7 +74,7 @@ export default {
   data () {
     return {
       introJs,
-      oeuvre: 'src/assets/images/louiscane.png',
+      oeuvre: require("../assets/images/louiscane.png"),
       showVictory:false,
       artist:'Louis CANE',
       titre: 'Sol-Mur',
@@ -99,7 +99,10 @@ export default {
         },
 
   mounted: function() {
-
+      this.intro.setOption("nextLabel", " > ");
+      this.intro.setOption("prevLabel", " < ");
+       this.intro.setOption("doneLabel", this.t('Fini'));
+      this.intro.setOption("skipLabel", this.t('Passer'));
       this.intro.setOptions({
         steps: [
 
@@ -151,7 +154,8 @@ export default {
    locales: {
 
     	en_UK: {
-
+          "Fini":"Done",
+          "Passer":"Skip",
           "Code CSS:":"CSS code",
           "Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.":"Hi there ! Welcome to Visuart Code !<br><br>This short tutorial will explain you the basics of the game.",
           "Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !":"Your objective in every level is to reconstruct an artwork from the museum as precisely as possible to its original state.<br><br>To do so, you will have to play around with CSS properties.<br> Don't creep out, it is actually not that hard !",
@@ -164,7 +168,8 @@ export default {
            "Ce tutoriel est désormais terminé ! C'est maintenant à toi de jouer !<br><br>Parviendras-tu à relever le challenge et à compléter les quatre niveaux ?<br><br>Bonne chance !":"This tutorial is now over ! Everything is up to you now !<br><br>Will you be up to the challenge and succeed to get through all four levels ?<br><br>Good luck !"
         },
         fr_FR: {
-
+          "Done":"Fini",
+          "Skip":"Passer",
           "CSS code:":"Code CSS:",
           "Hi there ! Welcome to Visuart Code !<br><br>This short tutorial will explain you the basics of the game.":"Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.",
           "Your objective in every level is to reconstruct an artwork from the museum as precisely as possible to its original state.<br><br>To do so, you will have to play around with CSS properties.<br> Don't creep out, it is actually not that hard !":"Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !",

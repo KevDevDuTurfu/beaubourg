@@ -20,11 +20,11 @@
             </div>
                <div class="block">
             <div class="labelIcones">{{t('English -----')}}</div>
-            <div class="icones"><span class="icone" @click="emitMethodEn ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/britain.png" alt=""> </span></div>
+            <div class="icones"><span class="icone" @click="emitMethodEn ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="../assets/images/britain.png" alt=""> </span></div>
                </div>
                <div class="block">
             <div class="labelIcones">{{t('Français -----')}}</div>
-            <div class="icones"><span class="icone" @click="emitMethodFr ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/france.png" alt=""> </span></div>
+            <div class="icones"><span class="icone" @click="emitMethodFr ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="../assets/images/france.png" alt=""> </span></div>
                </div>
                <!-- <div class="block">
             <div class="labelIcones">{{t('Sons -----')}}</div>

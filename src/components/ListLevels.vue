@@ -18,9 +18,9 @@ export default {
   data () {
     return {
 
-      sourceMid: "src/assets/images/miniaturelvl1.png",
-      sourceLeft: "src/assets/images/miniaturelvl4.png",
-      sourceRight: "src/assets/images/miniaturelvl2.png",
+      sourceMid: require("../assets/images/miniaturelvl1.png"),
+      sourceLeft: require("../assets/images/miniaturelvl4.png"),
+      sourceRight: require("../assets/images/miniaturelvl2.png"),
 
       counter: 1
     }
@@ -41,9 +41,9 @@ export default {
       let counterRight=this.counter+1;
       if(counterLeft<=0){counterLeft=4}
       if (counterRight>=5) {counterRight=1}
-      this.sourceLeft= "src/assets/images/miniaturelvl"+counterLeft+".png";
-      this.sourceMid= "src/assets/images/miniaturelvl"+this.counter+".png";
-      this.sourceRight="src/assets/images/miniaturelvl"+counterRight+".png";
+      this.sourceLeft= require("../assets/images/miniaturelvl"+counterLeft+".png");
+      this.sourceMid= require("../assets/images/miniaturelvl"+this.counter+".png");
+      this.sourceRight= require("../assets/images/miniaturelvl"+counterRight+".png");
       console.log(this.counter)
     }
 

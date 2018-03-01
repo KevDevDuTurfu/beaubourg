@@ -441,7 +441,6 @@
   
   } from 'intro.js';
   
-  import 'intro.js/introjs.css';
   
   import ErrorSelector from './ErrorSelector.vue';
   
@@ -467,7 +466,7 @@
   
         niveauSuivant: 'niveau1',
   
-        oeuvre: 'src/assets/images/sophiecale.png',
+        oeuvre: require("../assets/images/sophiecale.png"),
   
         isValidBorder: false,
   
@@ -745,9 +744,7 @@
   
       victory: function() {
   
-        if ((document.getElementById('artwork4img1').style.backgroundImage == 'url("src/assets/images/imagegauche.png")') &&
-  
-          (document.getElementById('artwork4img2').style.backgroundImage == 'url("src/assets/images/imagedroite.png")') &&
+        if (
   
           ((document.getElementById('artwork4img1').style.border == "7px solid black") || (document.getElementById('artwork4img1').style.border == "8px solid black") || (document.getElementById('artwork4img1').style.border == "9px solid black") || (document.getElementById('artwork4img1').style.border == "10px solid black") || (document.getElementById('artwork4img1').style.border == "11px solid black") || (document.getElementById('artwork4img1').style.border == "12px solid black") || (document.getElementById('artwork4img1').style.border == "13px solid black") || (document.getElementById('artwork4img1').style.border == "7px solid #000") || (document.getElementById('artwork4img1').style.border == "8px solid #000") || (document.getElementById('artwork4img1').style.border == "9px solid #000") || (document.getElementById('artwork4img1').style.border == "10px solid #000") || (document.getElementById('artwork4img1').style.border == "11px solid #000") || (document.getElementById('artwork4img1').style.border == "12px solid #000") || (document.getElementById('artwork4img1').style.border == "13px solid #000") || (document.getElementById('artwork4img1').style.border == "7px solid #000000") || (document.getElementById('artwork4img1').style.border == "8px solid #000000") || (document.getElementById('artwork4img1').style.border == "9px solid #000000") || (document.getElementById('artwork4img1').style.border == "10px solid #000000") || (document.getElementById('artwork4img1').style.border == "11px solid #000000") || (document.getElementById('artwork4img1').style.border == "12px solid #000000") || (document.getElementById('artwork4img1').style.border == "13px solid #000000")) &&
   
@@ -775,8 +772,8 @@
   
   
   
-        ) {
-  
+         ) {
+  console.log('ici')
               this.showFinalVictory=true;
   
   
@@ -813,7 +810,7 @@
   
   
   
-        this.$refs.btn1.style.backgroundImage = 'url(src/assets/images/' + this.backImg + ')';
+        this.$refs.btn1.style.backgroundImage = 'url(' + require('../assets/images/' + this.backImg) + ')';
   
   
   
@@ -919,7 +916,7 @@
   
               console.log(document.getElementsByClassName("selected")[0].classList.contains('artwork4img'))
   
-              document.getElementsByClassName("selected artwork4img")[0].style.backgroundImage = 'url(src/assets/images/' + binding.value.image + ')';
+              document.getElementsByClassName("selected artwork4img")[0].style.backgroundImage = 'url('+require('../assets/images/' + binding.value.image) + ')';
   
               binding.value.image = '';
   
@@ -1039,7 +1036,10 @@
   
     mounted: function() {
   
-  
+  this.intro2.setOption("nextLabel", " > ");
+      this.intro2.setOption("prevLabel", " < ");
+       this.intro2.setOption("doneLabel", this.t('Fini'));
+      this.intro2.setOption("skipLabel", this.t('Passer'));
   
       this.intro2.setOptions({
   
@@ -1056,11 +1056,15 @@
     },
     locales: {
       en_UK: {
+         "Fini":"Done",
+          "Passer":"Skip",
         "Textes":"Texts",
         "Entrer uniquement les valeurs dans les champs de texte":"Input the values in the text fields",
           "Astuce : Félicitations, tu es arrivé jusqu'au dernier niveau ! Celui-ci est un peu plus corsé...<br><br>As-tu été attentif à la syntaxe du CSS lors des niveaux précédents ? Ici, plus de choix multiples, c'est à toi d'entrer manuellement les valeurs des attributs !<br><br>Bon courage pour cette dernière épreuve !":"Tip: Congratulations, you made it to the last level ! And this one is a bit tougher...<br><br>Did you pay attention to the CSS syntax in previous levels ? Here, no more multiple choices, you need to write your attribute's values on your own !<br><br>Good luck for this last trial ! "
       },
       fr_FR: {
+         "Done":"Fini",
+          "Skip":"Passer",
        "Input the values in the text fields":"Entrer uniquement les valeurs dans les champs de texte",
         "Texts":"Textes",
           "Tip: Congratulations, you made it to the last level ! And this one is a bit tougher...<br><br>Did you pay attention to the CSS syntax in previous levels ? Here, no more multiple choices, you need to write your attribute's values on your own !<br><br>Good luck for this last trial ! ":"Astuce : Félicitations, tu es arrivé jusqu'au dernier niveau ! Celui-ci est un peu plus corsé...<br><br>As-tu été attentif à la syntaxe du CSS lors des niveaux précédents ? Ici, plus de choix multiples, c'est à toi d'entrer manuellement les valeurs des attributs !<br><br>Bon courage pour cette dernière épreuve !"
