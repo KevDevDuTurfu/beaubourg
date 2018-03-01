@@ -26,10 +26,10 @@
             <div class="labelIcones">{{t('Français -----')}}</div>
             <div class="icones"><span class="icone" @click="emitMethodFr ()"><img style="width:40px;height:20px;margin-top:15px;" class="flag" src="src/assets/images/france.png" alt=""> </span></div>
                </div>
-               <div class="block">
+               <!-- <div class="block">
             <div class="labelIcones">{{t('Sons -----')}}</div>
             <div class="icones"><span class="icone"><i class="fa fa-volume-up" aria-hidden="true"></i></span></div>
-            </div>
+            </div> -->
             </slot>
           </div>
 

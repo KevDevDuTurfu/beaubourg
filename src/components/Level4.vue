@@ -44,7 +44,7 @@
   
   
   
-      <p>Entrer uniquement les valeurs dans les champs de texte</p>
+      <p>{{t('Entrer uniquement les valeurs dans les champs de texte')}}</p>
   
   
   
@@ -174,7 +174,7 @@
   
             <i class="fa fa-caret-right" aria-hidden="true" v-on:click="cmd = !cmd">
   
-                 <span class="labelArrow">Blocs textes</span>
+                 <span class="labelArrow">{{t('Textes')}}</span>
   
               </i>
   
@@ -326,7 +326,7 @@
   
             <i class="fa fa-caret-left" aria-hidden="true" v-on:click="cmd = !cmd">
   
-                <span class="labelArrow">Blocs images</span>
+                <span class="labelArrow">Images</span>
   
                 </i>
   
@@ -1045,16 +1045,26 @@
   
         steps: [{
   
-          intro: "Astuce : Félicitations, tu es arrivé jusqu'au dernier niveau ! Celui-ci est un peu plus corsé...<br><br>As-tu été attentif à la syntaxe du CSS lors des niveaux précédents ? Ici, plus de choix multiples, c'est à toi d'entrer manuellement les valeurs des attributs !<br><br>Bon courage pour cette dernière épreuve !"
+          intro: this.t("Astuce : Félicitations, tu es arrivé jusqu'au dernier niveau ! Celui-ci est un peu plus corsé...<br><br>As-tu été attentif à la syntaxe du CSS lors des niveaux précédents ? Ici, plus de choix multiples, c'est à toi d'entrer manuellement les valeurs des attributs !<br><br>Bon courage pour cette dernière épreuve !")
   
         }]
   
       });
   
       this.intro2.start();
-  
-  
-  
+
+    },
+    locales: {
+      en_UK: {
+        "Textes":"Texts",
+        "Entrer uniquement les valeurs dans les champs de texte":"Input the values in the text fields",
+          "Astuce : Félicitations, tu es arrivé jusqu'au dernier niveau ! Celui-ci est un peu plus corsé...<br><br>As-tu été attentif à la syntaxe du CSS lors des niveaux précédents ? Ici, plus de choix multiples, c'est à toi d'entrer manuellement les valeurs des attributs !<br><br>Bon courage pour cette dernière épreuve !":"Tip: Congratulations, you made it to the last level ! And this one is a bit tougher...<br><br>Did you pay attention to the CSS syntax in previous levels ? Here, no more multiple choices, you need to write your attribute's values on your own !<br><br>Good luck for this last trial ! "
+      },
+      fr_FR: {
+       "Input the values in the text fields":"Entrer uniquement les valeurs dans les champs de texte",
+        "Texts":"Textes",
+          "Tip: Congratulations, you made it to the last level ! And this one is a bit tougher...<br><br>Did you pay attention to the CSS syntax in previous levels ? Here, no more multiple choices, you need to write your attribute's values on your own !<br><br>Good luck for this last trial ! ":"Astuce : Félicitations, tu es arrivé jusqu'au dernier niveau ! Celui-ci est un peu plus corsé...<br><br>As-tu été attentif à la syntaxe du CSS lors des niveaux précédents ? Ici, plus de choix multiples, c'est à toi d'entrer manuellement les valeurs des attributs !<br><br>Bon courage pour cette dernière épreuve !"
+      }
     }
   
   
