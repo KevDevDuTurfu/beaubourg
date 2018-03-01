@@ -2,7 +2,7 @@
 <template>
   <div class="lvl3"><!-- contenu du niveau 2-->
 
-    <div class="bubble"  @click="showModal = true"><i class="fa fa-question-circle" aria-hidden="true"></i></div><!--contenu de la bulle info-->
+    <div class="bubble"  @click="showModal = true"><i class="fa fa-info-circle" aria-hidden="true"></i></div><!--contenu de la bulle info-->
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
         <errorselector v-if="showErrorSelect" @close="showErrorSelect = false"></errorselector>
@@ -265,7 +265,7 @@ export default {
 
     var startX, startY, initialMouseX, initialMouseY, initialBoxX,initialBoxY, lastClass;
 
-    function mousemove(e) {
+    function mousemove(event) {
        var touch=event.touches[0];
       var dx = touch.pageX - initialMouseX;
       var dy = touch.pageY - initialMouseY;
@@ -274,7 +274,7 @@ export default {
       return false;
     }
 
-    function mouseup() {
+    function mouseup(event) {
       el.style.left=initialBoxX;
       el.style.top=initialBoxY;
       el.style='relative';
@@ -314,7 +314,7 @@ export default {
       vnode.context.victory();
     }
 
-    el.addEventListener('touchstart', function(e) {
+    el.addEventListener('touchstart', function(event) {
        var touch=event.touches[0];
       el.style.position = 'absolute';
       el.style.margin=0;

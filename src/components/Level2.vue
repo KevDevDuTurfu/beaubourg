@@ -4,7 +4,7 @@
 
     <!-- contenu du niveau 2-->
 
-    <div class="bubble" @click="showModal = true"><i class="fa fa-question-circle" aria-hidden="true"></i> </div>
+    <div class="bubble" @click="showModal = true"><i class="fa fa-info-circle" aria-hidden="true"></i> </div>
 
     <!--contenu de la bulle info-->
 
@@ -401,7 +401,7 @@ import 'intro.js/introjs.css';
       draggable: function(el, binding, vnode) {
 
         var startX, startY, initialMouseX, initialMouseY, initialBoxX, initialBoxY;
-        function mousemove(e) {
+        function mousemove(event) {
 
           var touch = event.touches[0];
 
@@ -419,7 +419,7 @@ import 'intro.js/introjs.css';
 
 
 
-        function mouseup() {
+        function mouseup(event) {
 
           el.style.left = initialBoxX;
 
@@ -469,7 +469,7 @@ import 'intro.js/introjs.css';
 
 
 
-        el.addEventListener('touchstart', function(e) {
+        el.addEventListener('touchstart', function(event) {
 
           var touch = event.touches[0];
 

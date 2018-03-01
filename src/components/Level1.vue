@@ -3,7 +3,7 @@
 
   <div class="lvl lvl1"><!-- contenu du niveau 1-->
     <div v-intro-hint-position="'top'"   class="bubble"  @click="showModal=true"><i class="fa fa-info-circle  " aria-hidden="true"></i></div><!--contenu de la bulle info-->
-     <div v-intro-hint-position="'top'" class="help"  @click="showHint()"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
+     
     <!-- modal=popup ici pop up de la bulle info ainsi que ses caractéristiques -->
         <modal :nom="artist" :titre="titre" :source="oeuvre" v-if="showModal" @close="showModal = false"></modal>
     <!--fin du modal -->
@@ -91,11 +91,6 @@ export default {
       borderWidth:10,
       borderStyle:'solid',
       intro : introJs()
-      // bulle1:"Apparitions bulles d'aide",
-      // bulle2:'Maintenir et faire glisser le bouton sur le plan de travail pour appliquer la propriété CSS',
-      // bulle3:'Toucher la valeur d\'attribut pour la sélectionner',
-      // bulle4:'Style CSS actuellement appliqué',
-      // bulle5: 'Informations sur l\'oeuvre'
     }
   },
   components: {
@@ -156,11 +151,7 @@ export default {
    locales: {
 
     	en_UK: {
-          // "Apparitions bulles d'aide":"Enable hints",
-          // 'Maintenir et faire glisser le bouton sur le plan de travail pour appliquer la propriété CSS':'Drag and drop the button on the workbench to apply CSS property',
-          // 'Toucher la valeur d\'attribut pour la sélectionner':'Touch the value to select it',
-          // 'Style CSS actuellement appliqué': 'CSS style currently applied',
-          // 'Informations sur l\'oeuvre':'Artwork\'s bio',
+
           "Code CSS:":"CSS code",
           "Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.":"Hi there ! Welcome to Visuart Code !<br><br>This short tutorial will explain you the basics of the game.",
           "Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !":"Your objective in every level is to reconstruct an artwork from the museum as precisely as possible to its original state.<br><br>To do so, you will have to play around with CSS properties.<br> Don't creep out, it is actually not that hard !",
@@ -173,11 +164,7 @@ export default {
            "Ce tutoriel est désormais terminé ! C'est maintenant à toi de jouer !<br><br>Parviendras-tu à relever le challenge et à compléter les quatre niveaux ?<br><br>Bonne chance !":"This tutorial is now over ! Everything is up to you now !<br><br>Will you be up to the challenge and succeed to get through all four levels ?<br><br>Good luck !"
         },
         fr_FR: {
-        //  "Enable hints":"Apparitions bulles d'aide",
-        //  'Drag and drop the button on the workbench to apply CSS property':'Maintenir et faire glisser le bouton sur le plan de travail pour appliquer la propriété CSS',
-        //   'Touch the value to select it':'Toucher la valeur d\'attribut pour la sélectionner',
-        //    'CSS style currently applied':'Style CSS actuellement appliqué',
-        //    'Artwork\'s bio':'Informations sur l\'oeuvre',
+
           "CSS code:":"Code CSS:",
           "Hi there ! Welcome to Visuart Code !<br><br>This short tutorial will explain you the basics of the game.":"Bonjour et bienvenue dans Visuart Code !<br><br> Ce petit tutoriel est là pour t'expliquer les bases du jeu.",
           "Your objective in every level is to reconstruct an artwork from the museum as precisely as possible to its original state.<br><br>To do so, you will have to play around with CSS properties.<br> Don't creep out, it is actually not that hard !":"Ton objectif dans chaque niveau est de reconstituer une oeuvre du musée à son état d'origine.<br><br>Pour ce faire, tu vas devoir manipuler quelques propriétés CSS.<br>Pas de panique, c'est très simple !",
@@ -193,23 +180,15 @@ export default {
     },
   methods:{
     changeLang(langue) {
-        // this.$translate.setLang(langue);
         this.hey_lang=langue;
     },
-    // translate: function() {
-    //    this.bulle1= this.t(this.bulle1);
-    //    this.bulle2= this.t(this.bulle2);
-    //    this.bulle3= this.t(this.bulle3);
-    //    this.bulle4= this.t(this.bulle4);
-    //    this.bulle5= this.t(this.bulle5);
-    // },
+
     getColorGradientTop: function(value){
     this.couleur=value;
-    // this.gradient();
     },
     getColorGradientBottom: function(value){
     this.couleur2=value;
-    // this.gradient();
+
     },
 
     getBorderColor: function(value) {
@@ -224,11 +203,10 @@ export default {
 
     },
 
-    showHint: function() {
-      //this.translate();
-      this.intro.showHints();
+    // showHint: function() {
+    //   this.intro.showHints();
 
-    },
+    // },
 
     victory: function() {
 

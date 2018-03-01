@@ -5,15 +5,14 @@
         <div class="finalVictorySelect-container">
 
           <div class="finalVictorySelect-header">
-            <slot name="header">
-            {{t('salut')}}
-            </slot>
+                {{t('Félicitations, tu es venu à bout de Visuart Code !')}}
+           
           </div>
 
           <div class="finalVictorySelect-body">
-            <slot name="body">
-              {{t("Félicitations, tu es venu à bout de Visuart Code !<br><br>Toute l'équipe de NnT espère que tu as passé un bon moment, et surtout que notre application est parvenue à te faire découvrir (et peut-être à te faire aimer) le CSS !<br>br>Merci d'avoir joué ! ")}}
-            </slot>
+
+             {{t("Toute l'équipe de NnT espère que tu as passé un bon moment, et surtout que notre application est parvenue à te faire découvrir (et peut-être à te faire aimer) le CSS ! Merci d'avoir joué !  ")}}
+                <iframe src="https://giphy.com/embed/cQNRp4QA8z7B6" width="480" height="357" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/reasons-should-cQNRp4QA8z7B6">via GIPHY</a></p>
           </div>
 
           <div class="finalVictorySelect-footer">
@@ -35,17 +34,21 @@ export default {
   name: 'finalVictorySelect',
   locales: {
       en_UK: {
-          "salut":"hello",
-        "Félicitations, tu es venu à bout de Visuart Code !<br><br>Toute l'équipe de NnT espère que tu as passé un bon moment, et surtout que notre application est parvenue à te faire découvrir (et peut-être à te faire aimer) le CSS !<br>br>Merci d'avoir joué ! ":"Congratulations, you managed to complete Visuart Code !<br><br>The NnT Team hopes that you had fun, and more importantly that our app succeeded in making you discover (and maybe even enjoy) CSS !<br><br>Thanks for playing !"
+          "Félicitations, tu es venu à bout de Visuart Code !":"Congratulations, you managed to complete Visuart Code !",
+           "Toute l'équipe de NnT espère que tu as passé un bon moment, et surtout que notre application est parvenue à te faire découvrir (et peut-être à te faire aimer) le CSS ! Merci d'avoir joué !  ":"The NnT Team hopes that you had fun, and more importantly that our app succeeded in making you discover (and maybe even enjoy) CSS !Thanks for playing !"
       },
       fr_FR: {
-          "hello":"salut",
-       "Congratulations, you managed to complete Visuart Code !<br><br>The NnT Team hopes that you had fun, and more importantly that our app succeeded in making you discover (and maybe even enjoy) CSS !<br><br>Thanks for playing !":"Félicitations, tu es venu à bout de Visuart Code !<br><br>Toute l'équipe de NnT espère que tu as passé un bon moment, et surtout que notre application est parvenue à te faire découvrir (et peut-être à te faire aimer) le CSS !<br>br>Merci d'avoir joué ! "
+          "Congratulations, you managed to complete Visuart Code !":"Félicitations, tu es venu à bout de Visuart Code !",
+          "The NnT Team hopes that you had fun, and more importantly that our app succeeded in making you discover (and maybe even enjoy) CSS !Thanks for playing !":"Toute l'équipe de NnT espère que tu as passé un bon moment, et surtout que notre application est parvenue à te faire découvrir (et peut-être à te faire aimer) le CSS ! Merci d'avoir joué !  "
+      
       }
   }
 }
 </script>
 <style>
+.finalVictorySelect-header {
+    font-size:34px;
+}
 .finalVictorySelect-mask {
   position: fixed;
   z-index: 9998;
@@ -72,11 +75,11 @@ export default {
   background:      -o-linear-gradient( left, mediumpurple, cornflowerblue);
   background:         linear-gradient( to right, mediumpurple,cornflowerblue);
   border-radius: 2px;
-  box-shadow: 0px 30px 40px rgba(0,0,0,.1);
+  box-shadow: 0px 0px 50px rgba(250,250,250,.5);
   transition: all .3s ease;
   font-family: 'Play', Arial, Helvetica, sans-serif;
   color:#ffffff;
-  font-size: px;
+  font-size: 20px;
 }
 
 .finalVictorySelect-header h3 {

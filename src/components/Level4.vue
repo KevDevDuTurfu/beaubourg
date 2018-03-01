@@ -298,7 +298,7 @@
   
   
   
-            <input type="text" id="inputStyBorder" v-bind:class="{  valid: isValidBorder, error: !isValidBorder }" class="textField" v-model="btnStyleBorder" placeholder="Entrez une valeur">
+            <input type="text" id="inputStyBorder" v-bind:class="{  valid: isValidBorder, error: !isValidBorder }" class="textField" v-model="btnStyleBorder" placeholder="Ex: 1px solid black">
   
   
   
@@ -356,7 +356,7 @@
   
   
   
-            <input type="text" class="textField" v-bind:class="{  valid: isValidBack, error: !isValidBack }" v-model="btnStyleBack" placeholder="Entrez une valeur">
+            <input type="text" class="textField" v-bind:class="{  valid: isValidBack, error: !isValidBack }" v-model="btnStyleBack" placeholder="Ex: black | #fff">
   
   
   
@@ -374,7 +374,7 @@
   
   
   
-            <input type="text" class="textField" v-bind:class="{  valid: isValidFS, error: !isValidFS }" v-model="btnStyleFontSizeNumber" placeholder="Entrez une valeur">
+            <input type="text" class="textField" v-bind:class="{  valid: isValidFS, error: !isValidFS }" v-model="btnStyleFontSizeNumber" placeholder="12 |12px">
   
   
   
@@ -394,7 +394,7 @@
   
   
   
-            <input type="text" class="textField" v-bind:class="{  valid: isValidFF, error: !isValidFF }" v-model="btnStyleFontFamily" placeholder="Entrez une valeur">
+            <input type="text" class="textField" v-bind:class="{  valid: isValidFF, error: !isValidFF }" v-model="btnStyleFontFamily" placeholder="Times New Roman | Arial | Helvetica">
   
   
   
@@ -414,7 +414,7 @@
   
   
   
-            <input type="text" v-bind:class="{  valid: isValidColor, error: !isValidColor }" class="textField" v-model="btnStyleColor" placeholder="Entrez une valeur">
+            <input type="text" v-bind:class="{  valid: isValidColor, error: !isValidColor }" class="textField" v-model="btnStyleColor" placeholder="black | #000">
   
           </div>
   
@@ -479,7 +479,7 @@
   
         isValidFF: false,
   
-        showFinalVictory: true,
+        showFinalVictory: false,
   
   
   
@@ -777,7 +777,7 @@
   
         ) {
   
-  
+              this.showFinalVictory=true;
   
   
   
@@ -841,7 +841,7 @@
   
   
   
-        function mousemove(e) {
+        function mousemove(event) {
   
   
   
@@ -877,7 +877,7 @@
   
   
   
-        function mouseup() {
+        function mouseup(event) {
   
   
   
@@ -969,7 +969,7 @@
   
   
   
-        el.addEventListener('touchstart', function(e) {
+        el.addEventListener('touchstart', function(event) {
   
   
   
